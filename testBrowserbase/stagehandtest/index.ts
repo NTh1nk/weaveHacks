@@ -14,9 +14,9 @@ const stagehandConfig = (): ConstructorParams => {
   return {
     env: 'LOCAL',
     verbose: 1,
-    modelName: 'computer-use-preview',
+    modelName: 'GEMINI_FLASH',
     modelClientOptions: {
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: process.env.GEMINI_API_KEY,
     },
   };
 };
