@@ -59,17 +59,44 @@ class DataService {
   constructor() {
     // Path to the QA test results file in testBrowserbase
     this.qaResultsPath = path.join(process.cwd(), '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json');
+    
+    // Log the path for debugging
+    console.log('Looking for QA results at:', this.qaResultsPath);
+    console.log('Current working directory:', process.cwd());
   }
 
   async getQATestResults(): Promise<QATestResult | null> {
     try {
+      console.log('Checking if file exists at:', this.qaResultsPath);
       if (!fs.existsSync(this.qaResultsPath)) {
         console.warn('QA test results file not found:', this.qaResultsPath);
-        return null;
+        
+        // Try alternative paths
+        const alternativePaths = [
+          path.join(process.cwd(), 'testBrowserbase', 'stagehandtest', 'qa-test-results.json'),
+          path.join(process.cwd(), '..', '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json'),
+          path.join(process.cwd(), '..', '..', '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json')
+        ];
+        
+        for (const altPath of alternativePaths) {
+          console.log('Trying alternative path:', altPath);
+          if (fs.existsSync(altPath)) {
+            console.log('Found file at alternative path:', altPath);
+            this.qaResultsPath = altPath;
+            break;
+          }
+        }
+        
+        if (!fs.existsSync(this.qaResultsPath)) {
+          console.error('QA test results file not found at any location');
+          return null;
+        }
       }
 
+      console.log('Reading file from:', this.qaResultsPath);
       const fileContent = fs.readFileSync(this.qaResultsPath, 'utf-8');
       const data = JSON.parse(fileContent) as QATestResult;
+      console.log('Successfully loaded QA test results');
       return data;
     } catch (error) {
       console.error('Error reading QA test results:', error);
@@ -109,6 +136,9 @@ class DataService {
       impactBreakdown[error.userImpact]++;
     });
 
+    console.log('Processed error breakdown:', errorBreakdown);
+    console.log('Processed impact breakdown:', impactBreakdown);
+
     // Calculate success rate
     const successRate = qaResults.summary.totalTests > 0 
       ? (qaResults.summary.passed / qaResults.summary.totalTests) * 100 
@@ -127,7 +157,7 @@ class DataService {
         timestamp: error.timestamp
       }));
 
-    return {
+    const metrics = {
       totalTests: qaResults.summary.totalTests,
       passedTests: qaResults.summary.passed,
       failedTests: qaResults.summary.failed,
@@ -140,6 +170,9 @@ class DataService {
       impactBreakdown,
       recentErrors
     };
+
+    console.log('Final metrics:', metrics);
+    return metrics;
   }
 
   async getTestHistory(): Promise<Array<{ timestamp: string; status: string; score: number }>> {
