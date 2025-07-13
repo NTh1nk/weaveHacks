@@ -14,7 +14,7 @@ const stagehandConfig = (): ConstructorParams => {
   return {
     env: 'LOCAL',
     verbose: 1,
-    modelName: 'GEMINI_FLASH',
+    modelName: 'gemini-flash',
     modelClientOptions: {
       apiKey: process.env.GEMINI_API_KEY,
     },
