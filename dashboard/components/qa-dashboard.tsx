@@ -173,6 +173,7 @@ export function QADashboard() {
       </div>
 
       {/* Session Recording Dropdown */}
+      {/*
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <DropdownMenu>
@@ -261,6 +262,7 @@ export function QADashboard() {
           </Button>
         </div>
       </div>
+      */}
 
       {/* Session Info */}
       {selectedSessionId && data && (
@@ -378,6 +380,7 @@ export function QADashboard() {
       {/* Middle Section - Interactive Workflow Graph with Video */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Video Section */}
+        {/*
         <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle>Session Recording</CardTitle>
@@ -410,9 +413,10 @@ export function QADashboard() {
             </div>
           </CardContent>
         </Card>
+        */}
 
         {/* Interactive Workflow Canvas */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-3">
           <CardHeader>
             <CardTitle>Interactive Test Workflow</CardTitle>
           </CardHeader>
