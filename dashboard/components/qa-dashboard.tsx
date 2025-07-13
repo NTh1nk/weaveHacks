@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -19,7 +20,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
-import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle } from "lucide-react"
+import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
 import {
   DropdownMenu,
@@ -31,11 +32,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useQAData } from "@/hooks/use-qa-data"
 import { Skeleton } from "@/components/ui/skeleton"
+import { RawJsonModal } from "@/components/ui/modal"
 
 
 
 export function QADashboard() {
   const { data, loading, error, refetch } = useQAData();
+  const [showRawJson, setShowRawJson] = useState(false);
 
   if (loading) {
     return (
@@ -111,6 +114,10 @@ export function QADashboard() {
           <Button variant="outline" size="sm" onClick={refetch}>
             <Filter className="w-4 h-4 mr-2" />
             Refresh Data
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setShowRawJson(true)}>
+            <Code className="w-4 h-4 mr-2" />
+            Show Raw
           </Button>
           <Button variant="outline" size="sm">
             <Settings className="w-4 h-4 mr-2" />
@@ -445,6 +452,14 @@ export function QADashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Raw JSON Modal */}
+      <RawJsonModal
+        isOpen={showRawJson}
+        onClose={() => setShowRawJson(false)}
+        data={data}
+        title="QA Test Raw Data"
+      />
     </div>
   )
 }
