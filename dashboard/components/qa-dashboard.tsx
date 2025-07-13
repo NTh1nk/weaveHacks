@@ -79,6 +79,7 @@ export function QADashboard() {
   const metrics = data?.metrics;
   const testHistory = data?.testHistory || [];
   const errorDetails = data?.errorDetails || [];
+  const screenshots = data?.screenshots || [];
 
   // Prepare chart data from real metrics
   const statusData = [
@@ -92,12 +93,6 @@ export function QADashboard() {
     { name: "Medium Impact", value: metrics?.impactBreakdown.medium || 0, color: "#f59e0b" },
     { name: "Low Impact", value: metrics?.impactBreakdown.low || 0, color: "#10b981" },
   ];
-
-  const errorCategoryData = Object.entries(metrics?.errorBreakdown || {}).map(([category, count]) => ({
-    name: category,
-    value: count,
-    color: "#3b82f6"
-  }));
 
   return (
     <div className="p-6 space-y-6">
@@ -335,7 +330,7 @@ export function QADashboard() {
             <CardTitle>Interactive Test Workflow</CardTitle>
           </CardHeader>
           <CardContent>
-            <WorkflowCanvas />
+            <WorkflowCanvas workflows={{}} />
           </CardContent>
         </Card>
 
@@ -372,24 +367,49 @@ export function QADashboard() {
         </Card>
       </div>
 
-      {/* Bottom Section - Error Analysis and Test History */}
+      {/* Bottom Section - Screenshots and Test History */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Error Categories Chart */}
+        {/* Screenshots Gallery */}
         <Card>
           <CardHeader>
-            <CardTitle>Error Categories</CardTitle>
+            <CardTitle>Test Screenshots</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={errorCategoryData} layout="horizontal">
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" />
-                  <YAxis type="category" dataKey="name" width={100} />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="#3b82f6" />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {screenshots.length > 0 ? (
+                screenshots.map((screenshot) => (
+                  <div key={screenshot.id} className="border rounded-lg p-3 bg-gray-50">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-medium text-sm">{screenshot.featureName}</h4>
+                      <Badge 
+                        variant={screenshot.status === 'PASSED' ? 'default' : screenshot.status === 'FAILED' ? 'destructive' : 'outline'}
+                        className="text-xs"
+                      >
+                        {screenshot.status}
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-gray-600 mb-2">{screenshot.reason}</p>
+                    {screenshot.screenshotBase64 && (
+                      <div className="relative">
+                        <img 
+                          src={`data:image/png;base64,${screenshot.screenshotBase64}`}
+                          alt={`Screenshot for ${screenshot.featureName}`}
+                          className="w-full h-auto rounded border"
+                          style={{ maxHeight: '200px', objectFit: 'contain' }}
+                        />
+                        <div className="absolute top-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
+                          {new Date(screenshot.timestamp).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <AlertTriangle className="w-8 h-8 mx-auto mb-2" />
+                  <p>No screenshots available</p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

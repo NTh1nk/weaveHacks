@@ -15,6 +15,14 @@ interface QAData {
     timestamp: string;
     screenshot?: string;
   }>;
+  screenshots: Array<{
+    id: string;
+    featureName: string;
+    reason: string;
+    screenshotBase64: string;
+    status: string;
+    timestamp: string;
+  }>;
   timestamp: string;
 }
 

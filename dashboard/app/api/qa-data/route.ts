@@ -6,11 +6,13 @@ export async function GET() {
     const metrics = await dataService.getDashboardMetrics();
     const testHistory = await dataService.getTestHistory();
     const errorDetails = await dataService.getErrorDetails();
+    const screenshots = await dataService.getScreenshots();
     
     return NextResponse.json({
       metrics,
       testHistory,
       errorDetails,
+      screenshots,
       timestamp: new Date().toISOString()
     });
   } catch (error) {

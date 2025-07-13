@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useRef, useCallback } from "react"
 import type { JSX } from "react" // Import JSX to fix the undeclared variable error
 import { Button } from "@/components/ui/button"
-import { Play, RotateCcw, Settings, Zap } from "lucide-react"
+import { Play, RotateCcw, Settings, Zap, AlertCircle } from "lucide-react"
 
 interface WorkflowNode {
   id: string
@@ -300,23 +300,32 @@ const getStatusBgColor = (status: string) => {
   }
 }
 
-export function WorkflowCanvas() {
-  const [currentWorkflow, setCurrentWorkflow] = useState<"basic" | "performance">("basic")
-  const [nodes, setNodes] = useState<WorkflowNode[]>(basicWorkflow)
+interface WorkflowCanvasProps {
+  workflows?: Record<string, WorkflowNode[]>
+  defaultWorkflow?: string
+}
+
+export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: WorkflowCanvasProps) {
+  // Use provided workflows or fall back to default ones
+  const availableWorkflows = propWorkflows || {
+    basic: basicWorkflow,
+    performance: performanceWorkflow
+  }
+  
+  const workflowKeys = Object.keys(availableWorkflows)
+  const hasWorkflows = workflowKeys.length > 0
+  
+  const [currentWorkflow, setCurrentWorkflow] = useState<string>(defaultWorkflow || workflowKeys[0] || "")
+  const [nodes, setNodes] = useState<WorkflowNode[]>(hasWorkflows ? availableWorkflows[workflowKeys[0]] : [])
   const [draggedNode, setDraggedNode] = useState<string | null>(null)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [selectedNode, setSelectedNode] = useState<string | null>(null)
   const [isRunning, setIsRunning] = useState(false)
   const canvasRef = useRef<HTMLDivElement>(null)
 
-  const workflows = {
-    basic: basicWorkflow,
-    performance: performanceWorkflow
-  }
-
-  const handleWorkflowChange = (workflow: "basic" | "performance") => {
+  const handleWorkflowChange = (workflow: string) => {
     setCurrentWorkflow(workflow)
-    setNodes(workflows[workflow])
+    setNodes(availableWorkflows[workflow])
     setSelectedNode(null)
     setIsRunning(false)
   }
@@ -387,7 +396,7 @@ export function WorkflowCanvas() {
   }
 
   const resetWorkflow = () => {
-    setNodes(workflows[currentWorkflow])
+    setNodes(availableWorkflows[currentWorkflow])
     setIsRunning(false)
     setSelectedNode(null)
   }
@@ -437,25 +446,36 @@ export function WorkflowCanvas() {
 
   const selectedNodeData = nodes.find(n => n.id === selectedNode)
 
+  // Show "no workflow found" message if no workflows are available
+  if (!hasWorkflows) {
+    return (
+      <div className="relative">
+        <div className="flex items-center justify-center h-80 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+          <div className="text-center">
+            <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-600 mb-2">No Workflow Found</h3>
+            <p className="text-gray-500 text-sm">No workflows are currently available to display.</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative">
       {/* Workflow Controls */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Button
-            variant={currentWorkflow === "basic" ? "default" : "outline"}
-            size="sm"
-            onClick={() => handleWorkflowChange("basic")}
-          >
-            Basic QA
-          </Button>
-          <Button
-            variant={currentWorkflow === "performance" ? "default" : "outline"}
-            size="sm"
-            onClick={() => handleWorkflowChange("performance")}
-          >
-            Performance
-          </Button>
+          {workflowKeys.map((workflowKey) => (
+            <Button
+              key={workflowKey}
+              variant={currentWorkflow === workflowKey ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleWorkflowChange(workflowKey)}
+            >
+              {workflowKey.charAt(0).toUpperCase() + workflowKey.slice(1)}
+            </Button>
+          ))}
         </div>
         
         <div className="flex items-center gap-2">

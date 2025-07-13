@@ -90,6 +90,7 @@ class DataService {
   // Convert test system format to dashboard format
   private convertTestSystemToDashboard(testSystemData: TestSystemResult): QATestResult {
     const features = testSystemData.testResult.features || [];
+    const screenshots = testSystemData.testResult.screenshots || [];
     const totalFeatures = features.length;
     const passedFeatures = features.filter(f => f.status === 'PASSED').length;
     const failedFeatures = features.filter(f => f.status === 'FAILED').length;
@@ -103,31 +104,41 @@ class DataService {
     // Calculate user experience score (0-100)
     const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
     
-    // Convert features to errors format
+    // Convert features to errors format and include screenshots
     const errors = features
       .filter(f => f.status === 'FAILED')
-      .map(f => ({
-        type: 'error' as const,
-        category: 'Feature Test',
-        message: f.whatHappened,
-        location: f.featureName,
-        userImpact: 'medium' as const, // Default to medium impact
-        problemType: 'Functional Issue',
-        timestamp: testSystemData.timestamp
-      }));
+      .map(f => {
+        // Find matching screenshot for this feature
+        const matchingScreenshot = screenshots.find(s => s.featureName === f.featureName);
+        return {
+          type: 'error' as const,
+          category: 'Feature Test',
+          message: f.whatHappened,
+          location: f.featureName,
+          userImpact: 'medium' as const, // Default to medium impact
+          problemType: 'Functional Issue',
+          screenshot: matchingScreenshot?.screenshotBase64,
+          timestamp: testSystemData.timestamp
+        };
+      });
     
     // Add warnings for any issues
     const warnings = features
       .filter(f => f.status === 'WARNING')
-      .map(f => ({
-        type: 'warning' as const,
-        category: 'Feature Test',
-        message: f.whatHappened,
-        location: f.featureName,
-        userImpact: 'low' as const,
-        problemType: 'Usability Issue',
-        timestamp: testSystemData.timestamp
-      }));
+      .map(f => {
+        // Find matching screenshot for this feature
+        const matchingScreenshot = screenshots.find(s => s.featureName === f.featureName);
+        return {
+          type: 'warning' as const,
+          category: 'Feature Test',
+          message: f.whatHappened,
+          location: f.featureName,
+          userImpact: 'low' as const,
+          problemType: 'Usability Issue',
+          screenshot: matchingScreenshot?.screenshotBase64,
+          timestamp: testSystemData.timestamp
+        };
+      });
     
     const allErrors = [...errors, ...warnings];
     
@@ -329,6 +340,64 @@ class DataService {
       timestamp: error.timestamp,
       screenshot: error.screenshot
     }));
+  }
+
+  async getScreenshots(): Promise<Array<{
+    id: string;
+    featureName: string;
+    reason: string;
+    screenshotBase64: string;
+    status: string;
+    timestamp: string;
+  }>> {
+    try {
+      // Get the latest result from the test system
+      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      if (!summaryResponse.ok) {
+        console.error('Failed to fetch summary for screenshots:', summaryResponse.statusText);
+        return [];
+      }
+      
+      const summaryData = await summaryResponse.json();
+      if (!summaryData.success || !summaryData.summary || summaryData.summary.length === 0) {
+        return [];
+      }
+      
+      // Get the latest result
+      const latestResult = summaryData.summary[summaryData.summary.length - 1];
+      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      
+      if (!resultResponse.ok) {
+        console.error('Failed to fetch latest result for screenshots:', resultResponse.statusText);
+        return [];
+      }
+      
+      const resultData = await resultResponse.json();
+      if (!resultData.success) {
+        console.error('Failed to get result data for screenshots:', resultData.error);
+        return [];
+      }
+      
+      const screenshots = resultData.data.testResult.screenshots || [];
+      const features = resultData.data.testResult.features || [];
+      
+      // Combine screenshots with feature status
+      return screenshots.map((screenshot: any, index: number) => {
+        const feature = features.find((f: any) => f.featureName === screenshot.featureName);
+        return {
+          id: `screenshot-${index}`,
+          featureName: screenshot.featureName,
+          reason: screenshot.reason,
+          screenshotBase64: screenshot.screenshotBase64,
+          status: feature?.status || 'UNKNOWN',
+          timestamp: resultData.data.timestamp
+        };
+      });
+      
+    } catch (error) {
+      console.error('Error getting screenshots:', error);
+      return [];
+    }
   }
 }
 
