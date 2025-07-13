@@ -161,52 +161,55 @@ class QAContextAgents:
         print("generate_qa_context from agents.py")
         
         try:
-            # Extract actual changes from diff
-            
+            print("Starting QA context generation...")
+            print(f"PR Title: {pr_title}")
+            print(f"PR Description: {pr_description}")
+            print(f"README length: {len(readme_content) if readme_content else 0}")
             
             # Create tasks for the crew with SPECIFIC change information
             analysis_task = Task(
                 description=f"""
-                Analyze the following PR with SPECIFIC code changes and generate QA testing context:
+                Analyze the following PR and generate comprehensive QA testing context:
                 
                 PR Title: {pr_title}
                 PR Description: {pr_description or "No description provided"}
                 
-                # Repository README:
+                Repository README:
                 {readme_content}
                 
-                Focus on:
-                1. What SPECIFIC functionality changed based on the actual code changes
-                2. What UI/UX elements were modified and how
-                3. What user behaviors need to be tested based on the changes
-                4. Priority level for different testing areas based on impact
+                Generate a detailed QA analysis that includes:
+                1. Specific testing focus areas based on the PR changes
+                2. Detailed test scenarios with step-by-step instructions
+                3. Priority levels for different testing areas
+                4. Expected outcomes for each test scenario
+                5. Any special considerations or edge cases
                 
-                Be SPECIFIC about what changed, not generic.
+                Format your response as a comprehensive QA testing report.
                 """,
                 agent=self.qa_context_generator,
-                expected_output="Specific testing focus areas based on actual code changes"
+                expected_output="A comprehensive QA testing report with specific scenarios, priorities, and testing instructions"
             )
 
             comment_task = Task(
                 description=f"""
-                Generate a SHORT GitHub comment (2-3 sentences max) that explains what QA analysis will be performed for this PR:
+                Based on the PR information, generate a concise GitHub comment:
                 
                 PR Title: {pr_title}
                 PR Description: {pr_description or "No description provided"}
 
-                Repository README:
-                {readme_content}
+                Repository Context:
+                {readme_content[:200]}...
                 
-                The comment should:
-                1. Briefly mention what will be tested based on the changes
-                2. Indicate the scope of testing (UI, functionality, etc.)
-                3. Be friendly and helpful to developers
-                4. Be concise (under 100 words)
+                Create a GitHub comment that:
+                1. Is 2-3 sentences maximum
+                2. Explains what QA testing will cover
+                3. Is friendly and informative
+                4. Uses appropriate emoji if helpful
                 
-                Format as a GitHub comment that would be posted on the PR.
+                Output only the comment text, no extra formatting.
                 """,
                 agent=self.github_comment_generator,
-                expected_output="A short, friendly GitHub comment explaining the QA analysis scope"
+                expected_output="A concise GitHub comment explaining QA testing scope"
             )
 
             
@@ -266,7 +269,7 @@ class QAContextAgents:
             
             # Create and run the crew
             crew = Crew(
-                agents=[self.qa_context_generator, self.documentation_analyzer, self.github_comment_generator],
+                agents=[self.qa_context_generator, self.github_comment_generator],
                 tasks=[analysis_task, comment_task],
                 process=Process.sequential,
                 verbose=True
@@ -274,18 +277,97 @@ class QAContextAgents:
             
             result = crew.kickoff()
 
-            print("result: " + result)
+            # Extract the actual result from CrewAI output
+            if hasattr(result, 'raw'):
+                final_result = result.raw
+            elif hasattr(result, 'tasks_output'):
+                # Get outputs from all tasks
+                task_results = []
+                for task_output in result.tasks_output:
+                    if hasattr(task_output, 'raw'):
+                        task_results.append(task_output.raw)
+                    else:
+                        task_results.append(str(task_output))
+                final_result = "\n\n---\n\n".join(task_results)
+            else:
+                final_result = str(result)
+            
+            print("CrewAI Result:")
+            print(final_result)
             
             return AgentResult(
                 agent_name="QA Context Generator",
                 success=True,
-                data=result,
+                data=final_result,
                 execution_time=time.time() - start_time
             )
             
         except Exception as e:
             return AgentResult(
                 agent_name="QA Context Generator",
+                success=False,
+                error=str(e),
+                execution_time=time.time() - start_time
+            )
+    
+    @weave.op()
+    def create_readme_summary(self, readme_content: str) -> AgentResult:
+        """Simple function to create a README summary using CrewAI - for testing."""
+        start_time = time.time()
+        
+        try:
+            print("Creating README summary...")
+            
+            # Create a simple task to summarize the README
+            summary_task = Task(
+                description=f"""
+                Please create a concise summary of the following README content:
+                
+                {readme_content}
+                
+                Create a summary that includes:
+                1. What the project does
+                2. Key features
+                3. Main technologies used
+                4. How to get started
+                
+                Keep it concise but informative.
+                """,
+                agent=self.documentation_analyzer,
+                expected_output="A concise summary of the README content"
+            )
+            
+            # Create and run the crew with just one agent and one task
+            crew = Crew(
+                agents=[self.documentation_analyzer],
+                tasks=[summary_task],
+                process=Process.sequential,
+                verbose=True
+            )
+            
+            result = crew.kickoff()
+            
+            # Extract the result
+            if hasattr(result, 'raw'):
+                final_result = result.raw
+            elif hasattr(result, 'tasks_output') and result.tasks_output:
+                final_result = result.tasks_output[0].raw if hasattr(result.tasks_output[0], 'raw') else str(result.tasks_output[0])
+            else:
+                final_result = str(result)
+            
+            print("README Summary Result:")
+            print(final_result)
+            
+            return AgentResult(
+                agent_name="README Summarizer",
+                success=True,
+                data=final_result,
+                execution_time=time.time() - start_time
+            )
+            
+        except Exception as e:
+            return AgentResult(
+                agent_name="README Summarizer",
                 success=False,
                 error=str(e),
                 execution_time=time.time() - start_time
