@@ -1,0 +1,38 @@
+{
+  "name": "weavehacks-workspace",
+  "version": "1.0.0",
+  "description": "WeaveHacks workspace with multiple projects",
+  "private": true,
+  "scripts": {
+    "build-all": "npm run build-dashboard && npm run build-stagehandtest",
+    "build-dashboard": "cd dashboard && npm install && npm run build",
+    "build-code-turtle": "cd code-turtle && npm install && npm run build",
+    "build-stagehandtest": "cd testBrowserbase/stagehandtest && npm install && npm run build",
+    "build-browser-testing": "cd first-agent/browser_base_testing && npm install && npx tsc",
+    "start-all": "npm run start-dashboard && npm run start-stagehandtest",
+    "install-all": "npm run install-dashboard && npm run install-code-turtle && npm run install-stagehandtest && npm run install-browser-testing",
+    "install-dashboard": "cd dashboard && npm install",
+    "install-code-turtle": "cd code-turtle && npm install",
+    "install-stagehandtest": "cd testBrowserbase/stagehandtest && npm install",
+    "install-browser-testing": "cd first-agent/browser_base_testing && npm install",
+    "dev-dashboard": "cd dashboard && npm run dev",
+    "dev-code-turtle": "cd code-turtle && npm start",
+    "dev-stagehandtest": "cd testBrowserbase/stagehandtest && npm run dev",
+    "start-dashboard": "cd dashboard && npm start",
+    "start-code-turtle": "cd code-turtle && npm start",
+    "start-stagehandtest": "cd testBrowserbase/stagehandtest && npm start"
+  },
+  "workspaces": [
+    "dashboard",
+    "code-turtle",
+    "testBrowserbase/stagehandtest",
+    "first-agent/browser_base_testing"
+  ],
+  "keywords": [
+    "weavehacks",
+    "workspace",
+    "monorepo"
+  ],
+  "author": "",
+  "license": "ISC"
+} 
