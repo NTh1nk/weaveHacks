@@ -28,6 +28,7 @@ class QAContextAgents:
         self.deployment_monitor = self._create_deployment_monitor_agent()
         self.qa_context_generator = self._create_qa_context_generator_agent()
         self.output_formatter = self._create_output_formatter_agent()
+        self.github_comment_generator = self._create_github_comment_generator_agent()
     
     def _create_github_collector_agent(self) -> Agent:
         """Create the GitHub data collector agent."""
@@ -35,6 +36,17 @@ class QAContextAgents:
             role="GitHub Data Collector",
             goal="Extract relevant PR information and repository context for QA testing",
             backstory="You are an expert at analyzing GitHub pull requests and extracting the most relevant information for QA testing. You focus on changes that impact user experience and functionality.",
+            llm=self.llm,
+            verbose=True,
+            allow_delegation=False,
+        )
+    
+    def _create_github_comment_generator_agent(self) -> Agent:
+        """Create the GitHub comment generator agent."""
+        return Agent(
+            role="GitHub Comment Generator",
+            goal="Generate short, simple comments describing the QA analysis process for GitHub PRs",
+            backstory="You are an expert at creating concise, informative comments that explain what QA analysis will cover for a pull request. You focus on being clear and helpful to developers.",
             llm=self.llm,
             verbose=True,
             allow_delegation=False,
@@ -144,7 +156,7 @@ class QAContextAgents:
     @weave.op()
     def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
         """Generate comprehensive QA context using CrewAI."""
-        start_time = time.time()
+        start_time = time.time()    
         
         try:
             # Extract actual changes from diff
@@ -180,6 +192,29 @@ class QAContextAgents:
                 agent=self.qa_context_generator,
                 expected_output="Specific testing focus areas based on actual code changes"
             )
+
+            comment_task = Task(
+                description=f"""
+                Generate a SHORT GitHub comment (2-3 sentences max) that explains what QA analysis will be performed for this PR:
+                
+                PR Title: {pr_data.title}
+                PR Description: {pr_data.description or "No description provided"}
+                Files Changed: {pr_data.files_changed}
+                Lines Changed: {pr_data.additions + pr_data.deletions}
+                File Types: {', '.join(set(f.split('.')[-1] for f in pr_data.files_changed if '.' in f))}
+                
+                The comment should:
+                1. Briefly mention what will be tested based on the changes
+                2. Indicate the scope of testing (UI, functionality, etc.)
+                3. Be friendly and helpful to developers
+                4. Be concise (under 100 words)
+                
+                Format as a GitHub comment that would be posted on the PR.
+                """,
+                agent=self.github_comment_generator,
+                expected_output="A short, friendly GitHub comment explaining the QA analysis scope"
+            )
+
             
             scenario_task = Task(
                 description=f"""
@@ -237,8 +272,8 @@ class QAContextAgents:
             
             # Create and run the crew
             crew = Crew(
-                agents=[self.qa_context_generator, self.documentation_analyzer],
-                tasks=[analysis_task, scenario_task, context_task],
+                agents=[self.qa_context_generator, self.documentation_analyzer, self.github_comment_generator],
+                tasks=[analysis_task, scenario_task, context_task, comment_task],
                 process=Process.parallel,
                 verbose=True
             )
