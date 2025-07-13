@@ -1,0 +1,1776 @@
+{
+  "testUrl": "https://llmarena.ai/",
+  "testTimestamp": "2025-07-12T22:57:05.841Z",
+  "overallStatus": "failed",
+  "userExperienceScore": 0,
+  "summary": {
+    "totalTests": 40,
+    "passed": 0,
+    "failed": 80,
+    "warnings": 1,
+    "userBlockingIssues": 40,
+    "usabilityIssues": 1
+  },
+  "errors": [
+    {
+      "type": "warning",
+      "category": "App Problem",
+      "message": "Found 10 potentially broken UI elements",
+      "location": "Application level",
+      "userImpact": "medium",
+      "problemType": "confusing",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/broken-ui-2025-07-12T22-57-26-121Z.png",
+      "timestamp": "2025-07-12T22:57:26.181Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Navigate to the web pages containing tables.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Table Readability Enhancement Verification - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-1-error-2025-07-12T22-57-29-496Z.png",
+      "timestamp": "2025-07-12T22:57:29.582Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Verify that Yes/No values are displayed as emojis (✅/❌).\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Table Readability Enhancement Verification - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-2-error-2025-07-12T22-57-31-033Z.png",
+      "timestamp": "2025-07-12T22:57:31.109Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check that numeric values are right-aligned and use a monospaced font.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Table Readability Enhancement Verification - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-3-error-2025-07-12T22-57-32-559Z.png",
+      "timestamp": "2025-07-12T22:57:32.625Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test table formatting across various screen sizes.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Table Readability Enhancement Verification - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-4-error-2025-07-12T22-57-34-197Z.png",
+      "timestamp": "2025-07-12T22:57:34.277Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Compare the readability of tables before and after the changes.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Table Readability Enhancement Verification - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-5-error-2025-07-12T22-57-35-680Z.png",
+      "timestamp": "2025-07-12T22:57:35.756Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Locate sections where Yes/No values are displayed.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Emoji Replacement Functionality Test - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-1-error-2025-07-12T22-57-37-170Z.png",
+      "timestamp": "2025-07-12T22:57:37.242Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure Yes values are shown as ✅ or the appropriate emoji.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Emoji Replacement Functionality Test - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-2-error-2025-07-12T22-57-38-677Z.png",
+      "timestamp": "2025-07-12T22:57:38.742Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure No values are shown as ❌ or the appropriate emoji.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Emoji Replacement Functionality Test - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-3-error-2025-07-12T22-57-40-249Z.png",
+      "timestamp": "2025-07-12T22:57:40.326Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test emoji display across different web browsers.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Emoji Replacement Functionality Test - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-4-error-2025-07-12T22-57-41-770Z.png",
+      "timestamp": "2025-07-12T22:57:41.845Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check emoji accessibility with screen readers.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Emoji Replacement Functionality Test - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-5-error-2025-07-12T22-57-43-271Z.png",
+      "timestamp": "2025-07-12T22:57:43.342Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Navigate to sections displaying numeric data.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Numeric Value Formatting Verification - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-1-error-2025-07-12T22-57-44-756Z.png",
+      "timestamp": "2025-07-12T22:57:44.826Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Verify that numbers are displayed in a monospaced font.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Numeric Value Formatting Verification - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-2-error-2025-07-12T22-57-46-288Z.png",
+      "timestamp": "2025-07-12T22:57:46.359Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check that numbers are right-aligned.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Numeric Value Formatting Verification - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-3-error-2025-07-12T22-57-47-914Z.png",
+      "timestamp": "2025-07-12T22:57:47.991Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test with various number formats (integers, decimals, percentages).\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Numeric Value Formatting Verification - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-4-error-2025-07-12T22-57-49-380Z.png",
+      "timestamp": "2025-07-12T22:57:49.459Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure alignment consistency across different data sets.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Numeric Value Formatting Verification - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-5-error-2025-07-12T22-57-50-891Z.png",
+      "timestamp": "2025-07-12T22:57:50.961Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Capture screenshots of affected pages.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "UI Visual Regression Test - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-1-error-2025-07-12T22-57-52-385Z.png",
+      "timestamp": "2025-07-12T22:57:52.466Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Compare with previous versions if available.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "UI Visual Regression Test - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-2-error-2025-07-12T22-57-53-995Z.png",
+      "timestamp": "2025-07-12T22:57:54.056Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check for any layout breaks or misalignments.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "UI Visual Regression Test - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-3-error-2025-07-12T22-57-55-493Z.png",
+      "timestamp": "2025-07-12T22:57:55.557Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test on different screen sizes.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "UI Visual Regression Test - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-4-error-2025-07-12T22-57-57-042Z.png",
+      "timestamp": "2025-07-12T22:57:57.130Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Verify that no unintended style changes have occurred.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "UI Visual Regression Test - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-5-error-2025-07-12T22-57-58-935Z.png",
+      "timestamp": "2025-07-12T22:57:59.012Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Open the application in various web browsers (Chrome, Firefox, Safari, Edge).\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Cross-Browser Compatibility Test - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-1-error-2025-07-12T22-58-00-510Z.png",
+      "timestamp": "2025-07-12T22:58:00.576Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Navigate through the application to ensure all features work as expected.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Cross-Browser Compatibility Test - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-2-error-2025-07-12T22-58-02-153Z.png",
+      "timestamp": "2025-07-12T22:58:02.228Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check for any visual discrepancies or functionality issues.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Cross-Browser Compatibility Test - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-3-error-2025-07-12T22-58-03-636Z.png",
+      "timestamp": "2025-07-12T22:58:03.710Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test emoji and numeric formatting across browsers.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Cross-Browser Compatibility Test - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-4-error-2025-07-12T22-58-05-091Z.png",
+      "timestamp": "2025-07-12T22:58:05.158Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure consistent user experience across all browsers.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Cross-Browser Compatibility Test - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-5-error-2025-07-12T22-58-06-761Z.png",
+      "timestamp": "2025-07-12T22:58:06.846Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Open the application on various mobile devices and screen sizes.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Mobile Responsiveness Test - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-1-error-2025-07-12T22-58-08-293Z.png",
+      "timestamp": "2025-07-12T22:58:08.378Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Navigate through the application to ensure all features are accessible.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Mobile Responsiveness Test - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-2-error-2025-07-12T22-58-09-788Z.png",
+      "timestamp": "2025-07-12T22:58:09.858Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check table readability and formatting on mobile screens.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Mobile Responsiveness Test - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-3-error-2025-07-12T22-58-11-840Z.png",
+      "timestamp": "2025-07-12T22:58:11.908Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Verify that emojis and numeric values display correctly on mobile.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Mobile Responsiveness Test - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-4-error-2025-07-12T22-58-13-681Z.png",
+      "timestamp": "2025-07-12T22:58:13.757Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure no elements are cut off or misaligned.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Mobile Responsiveness Test - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-5-error-2025-07-12T22-58-15-153Z.png",
+      "timestamp": "2025-07-12T22:58:15.229Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Measure page load times before and after the changes.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Performance Impact Assessment - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-1-error-2025-07-12T22-58-16-647Z.png",
+      "timestamp": "2025-07-12T22:58:16.725Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check for any increase in resource usage (CPU, memory).\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Performance Impact Assessment - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-2-error-2025-07-12T22-58-18-279Z.png",
+      "timestamp": "2025-07-12T22:58:18.343Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test application responsiveness during high load conditions.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Performance Impact Assessment - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-3-error-2025-07-12T22-58-19-774Z.png",
+      "timestamp": "2025-07-12T22:58:19.842Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure no new performance bottlenecks have been introduced.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Performance Impact Assessment - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-4-error-2025-07-12T22-58-21-316Z.png",
+      "timestamp": "2025-07-12T22:58:21.393Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Compare performance metrics with previous versions.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Performance Impact Assessment - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-5-error-2025-07-12T22-58-22-958Z.png",
+      "timestamp": "2025-07-12T22:58:23.021Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Identify potential edge cases for table readability and emoji display.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Edge Case Handling Test - Step 1",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-1-error-2025-07-12T22-58-24-421Z.png",
+      "timestamp": "2025-07-12T22:58:24.488Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test with extreme numeric values (very large, very small, negative).\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132681 tokens (132525 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Edge Case Handling Test - Step 2",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-2-error-2025-07-12T22-58-26-114Z.png",
+      "timestamp": "2025-07-12T22:58:26.188Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Check emoji display with non-standard Yes/No values.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Edge Case Handling Test - Step 3",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-3-error-2025-07-12T22-58-27-679Z.png",
+      "timestamp": "2025-07-12T22:58:27.760Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Test table formatting with maximum and minimum data entries.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Edge Case Handling Test - Step 4",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-4-error-2025-07-12T22-58-29-462Z.png",
+      "timestamp": "2025-07-12T22:58:29.521Z"
+    },
+    {
+      "type": "error",
+      "category": "Scenario Execution",
+      "message": "Failed to execute step \"Ensure application stability under edge case conditions.\": StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+      "location": "Edge Case Handling Test - Step 5",
+      "userImpact": "high",
+      "problemType": "blocking",
+      "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-5-error-2025-07-12T22-58-31-163Z.png",
+      "timestamp": "2025-07-12T22:58:31.223Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "broken-ui",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/broken-ui-2025-07-12T22-57-25-930Z.png",
+      "description": "Broken UI elements detected",
+      "timestamp": "2025-07-12T22:57:26.013Z",
+      "type": "problem"
+    },
+    {
+      "name": "initial-problems",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/initial-problems-2025-07-12T22-57-26-029Z.png",
+      "description": "Initial page problems detected",
+      "timestamp": "2025-07-12T22:57:26.087Z",
+      "type": "problem"
+    },
+    {
+      "name": "broken-ui",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/broken-ui-2025-07-12T22-57-26-121Z.png",
+      "description": "Broken UI elements detected",
+      "timestamp": "2025-07-12T22:57:26.169Z",
+      "type": "problem"
+    },
+    {
+      "name": "table-readability-enhancement-verification-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-1-error-2025-07-12T22-57-29-496Z.png",
+      "description": "Error executing: Navigate to the web pages containing tables.",
+      "timestamp": "2025-07-12T22:57:29.582Z",
+      "type": "problem"
+    },
+    {
+      "name": "table-readability-enhancement-verification-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-2-error-2025-07-12T22-57-31-033Z.png",
+      "description": "Error executing: Verify that Yes/No values are displayed as emojis (✅/❌).",
+      "timestamp": "2025-07-12T22:57:31.109Z",
+      "type": "problem"
+    },
+    {
+      "name": "table-readability-enhancement-verification-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-3-error-2025-07-12T22-57-32-559Z.png",
+      "description": "Error executing: Check that numeric values are right-aligned and use a monospaced font.",
+      "timestamp": "2025-07-12T22:57:32.625Z",
+      "type": "problem"
+    },
+    {
+      "name": "table-readability-enhancement-verification-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-4-error-2025-07-12T22-57-34-197Z.png",
+      "description": "Error executing: Test table formatting across various screen sizes.",
+      "timestamp": "2025-07-12T22:57:34.277Z",
+      "type": "problem"
+    },
+    {
+      "name": "table-readability-enhancement-verification-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-5-error-2025-07-12T22-57-35-680Z.png",
+      "description": "Error executing: Compare the readability of tables before and after the changes.",
+      "timestamp": "2025-07-12T22:57:35.756Z",
+      "type": "problem"
+    },
+    {
+      "name": "emoji-replacement-functionality-test-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-1-error-2025-07-12T22-57-37-170Z.png",
+      "description": "Error executing: Locate sections where Yes/No values are displayed.",
+      "timestamp": "2025-07-12T22:57:37.242Z",
+      "type": "problem"
+    },
+    {
+      "name": "emoji-replacement-functionality-test-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-2-error-2025-07-12T22-57-38-677Z.png",
+      "description": "Error executing: Ensure Yes values are shown as ✅ or the appropriate emoji.",
+      "timestamp": "2025-07-12T22:57:38.742Z",
+      "type": "problem"
+    },
+    {
+      "name": "emoji-replacement-functionality-test-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-3-error-2025-07-12T22-57-40-249Z.png",
+      "description": "Error executing: Ensure No values are shown as ❌ or the appropriate emoji.",
+      "timestamp": "2025-07-12T22:57:40.326Z",
+      "type": "problem"
+    },
+    {
+      "name": "emoji-replacement-functionality-test-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-4-error-2025-07-12T22-57-41-770Z.png",
+      "description": "Error executing: Test emoji display across different web browsers.",
+      "timestamp": "2025-07-12T22:57:41.845Z",
+      "type": "problem"
+    },
+    {
+      "name": "emoji-replacement-functionality-test-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-5-error-2025-07-12T22-57-43-271Z.png",
+      "description": "Error executing: Check emoji accessibility with screen readers.",
+      "timestamp": "2025-07-12T22:57:43.342Z",
+      "type": "problem"
+    },
+    {
+      "name": "numeric-value-formatting-verification-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-1-error-2025-07-12T22-57-44-756Z.png",
+      "description": "Error executing: Navigate to sections displaying numeric data.",
+      "timestamp": "2025-07-12T22:57:44.826Z",
+      "type": "problem"
+    },
+    {
+      "name": "numeric-value-formatting-verification-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-2-error-2025-07-12T22-57-46-288Z.png",
+      "description": "Error executing: Verify that numbers are displayed in a monospaced font.",
+      "timestamp": "2025-07-12T22:57:46.359Z",
+      "type": "problem"
+    },
+    {
+      "name": "numeric-value-formatting-verification-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-3-error-2025-07-12T22-57-47-914Z.png",
+      "description": "Error executing: Check that numbers are right-aligned.",
+      "timestamp": "2025-07-12T22:57:47.991Z",
+      "type": "problem"
+    },
+    {
+      "name": "numeric-value-formatting-verification-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-4-error-2025-07-12T22-57-49-380Z.png",
+      "description": "Error executing: Test with various number formats (integers, decimals, percentages).",
+      "timestamp": "2025-07-12T22:57:49.459Z",
+      "type": "problem"
+    },
+    {
+      "name": "numeric-value-formatting-verification-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-5-error-2025-07-12T22-57-50-891Z.png",
+      "description": "Error executing: Ensure alignment consistency across different data sets.",
+      "timestamp": "2025-07-12T22:57:50.961Z",
+      "type": "problem"
+    },
+    {
+      "name": "ui-visual-regression-test-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-1-error-2025-07-12T22-57-52-385Z.png",
+      "description": "Error executing: Capture screenshots of affected pages.",
+      "timestamp": "2025-07-12T22:57:52.466Z",
+      "type": "problem"
+    },
+    {
+      "name": "ui-visual-regression-test-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-2-error-2025-07-12T22-57-53-995Z.png",
+      "description": "Error executing: Compare with previous versions if available.",
+      "timestamp": "2025-07-12T22:57:54.056Z",
+      "type": "problem"
+    },
+    {
+      "name": "ui-visual-regression-test-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-3-error-2025-07-12T22-57-55-493Z.png",
+      "description": "Error executing: Check for any layout breaks or misalignments.",
+      "timestamp": "2025-07-12T22:57:55.557Z",
+      "type": "problem"
+    },
+    {
+      "name": "ui-visual-regression-test-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-4-error-2025-07-12T22-57-57-042Z.png",
+      "description": "Error executing: Test on different screen sizes.",
+      "timestamp": "2025-07-12T22:57:57.130Z",
+      "type": "problem"
+    },
+    {
+      "name": "ui-visual-regression-test-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-5-error-2025-07-12T22-57-58-935Z.png",
+      "description": "Error executing: Verify that no unintended style changes have occurred.",
+      "timestamp": "2025-07-12T22:57:59.012Z",
+      "type": "problem"
+    },
+    {
+      "name": "cross-browser-compatibility-test-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-1-error-2025-07-12T22-58-00-510Z.png",
+      "description": "Error executing: Open the application in various web browsers (Chrome, Firefox, Safari, Edge).",
+      "timestamp": "2025-07-12T22:58:00.576Z",
+      "type": "problem"
+    },
+    {
+      "name": "cross-browser-compatibility-test-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-2-error-2025-07-12T22-58-02-153Z.png",
+      "description": "Error executing: Navigate through the application to ensure all features work as expected.",
+      "timestamp": "2025-07-12T22:58:02.228Z",
+      "type": "problem"
+    },
+    {
+      "name": "cross-browser-compatibility-test-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-3-error-2025-07-12T22-58-03-636Z.png",
+      "description": "Error executing: Check for any visual discrepancies or functionality issues.",
+      "timestamp": "2025-07-12T22:58:03.710Z",
+      "type": "problem"
+    },
+    {
+      "name": "cross-browser-compatibility-test-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-4-error-2025-07-12T22-58-05-091Z.png",
+      "description": "Error executing: Test emoji and numeric formatting across browsers.",
+      "timestamp": "2025-07-12T22:58:05.158Z",
+      "type": "problem"
+    },
+    {
+      "name": "cross-browser-compatibility-test-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-5-error-2025-07-12T22-58-06-761Z.png",
+      "description": "Error executing: Ensure consistent user experience across all browsers.",
+      "timestamp": "2025-07-12T22:58:06.846Z",
+      "type": "problem"
+    },
+    {
+      "name": "mobile-responsiveness-test-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-1-error-2025-07-12T22-58-08-293Z.png",
+      "description": "Error executing: Open the application on various mobile devices and screen sizes.",
+      "timestamp": "2025-07-12T22:58:08.378Z",
+      "type": "problem"
+    },
+    {
+      "name": "mobile-responsiveness-test-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-2-error-2025-07-12T22-58-09-788Z.png",
+      "description": "Error executing: Navigate through the application to ensure all features are accessible.",
+      "timestamp": "2025-07-12T22:58:09.858Z",
+      "type": "problem"
+    },
+    {
+      "name": "mobile-responsiveness-test-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-3-error-2025-07-12T22-58-11-840Z.png",
+      "description": "Error executing: Check table readability and formatting on mobile screens.",
+      "timestamp": "2025-07-12T22:58:11.908Z",
+      "type": "problem"
+    },
+    {
+      "name": "mobile-responsiveness-test-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-4-error-2025-07-12T22-58-13-681Z.png",
+      "description": "Error executing: Verify that emojis and numeric values display correctly on mobile.",
+      "timestamp": "2025-07-12T22:58:13.757Z",
+      "type": "problem"
+    },
+    {
+      "name": "mobile-responsiveness-test-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-5-error-2025-07-12T22-58-15-153Z.png",
+      "description": "Error executing: Ensure no elements are cut off or misaligned.",
+      "timestamp": "2025-07-12T22:58:15.229Z",
+      "type": "problem"
+    },
+    {
+      "name": "performance-impact-assessment-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-1-error-2025-07-12T22-58-16-647Z.png",
+      "description": "Error executing: Measure page load times before and after the changes.",
+      "timestamp": "2025-07-12T22:58:16.725Z",
+      "type": "problem"
+    },
+    {
+      "name": "performance-impact-assessment-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-2-error-2025-07-12T22-58-18-279Z.png",
+      "description": "Error executing: Check for any increase in resource usage (CPU, memory).",
+      "timestamp": "2025-07-12T22:58:18.343Z",
+      "type": "problem"
+    },
+    {
+      "name": "performance-impact-assessment-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-3-error-2025-07-12T22-58-19-774Z.png",
+      "description": "Error executing: Test application responsiveness during high load conditions.",
+      "timestamp": "2025-07-12T22:58:19.842Z",
+      "type": "problem"
+    },
+    {
+      "name": "performance-impact-assessment-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-4-error-2025-07-12T22-58-21-316Z.png",
+      "description": "Error executing: Ensure no new performance bottlenecks have been introduced.",
+      "timestamp": "2025-07-12T22:58:21.393Z",
+      "type": "problem"
+    },
+    {
+      "name": "performance-impact-assessment-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-5-error-2025-07-12T22-58-22-958Z.png",
+      "description": "Error executing: Compare performance metrics with previous versions.",
+      "timestamp": "2025-07-12T22:58:23.021Z",
+      "type": "problem"
+    },
+    {
+      "name": "edge-case-handling-test-step-1-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-1-error-2025-07-12T22-58-24-421Z.png",
+      "description": "Error executing: Identify potential edge cases for table readability and emoji display.",
+      "timestamp": "2025-07-12T22:58:24.488Z",
+      "type": "problem"
+    },
+    {
+      "name": "edge-case-handling-test-step-2-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-2-error-2025-07-12T22-58-26-114Z.png",
+      "description": "Error executing: Test with extreme numeric values (very large, very small, negative).",
+      "timestamp": "2025-07-12T22:58:26.188Z",
+      "type": "problem"
+    },
+    {
+      "name": "edge-case-handling-test-step-3-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-3-error-2025-07-12T22-58-27-679Z.png",
+      "description": "Error executing: Check emoji display with non-standard Yes/No values.",
+      "timestamp": "2025-07-12T22:58:27.760Z",
+      "type": "problem"
+    },
+    {
+      "name": "edge-case-handling-test-step-4-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-4-error-2025-07-12T22-58-29-462Z.png",
+      "description": "Error executing: Test table formatting with maximum and minimum data entries.",
+      "timestamp": "2025-07-12T22:58:29.521Z",
+      "type": "problem"
+    },
+    {
+      "name": "edge-case-handling-test-step-5-error",
+      "path": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-5-error-2025-07-12T22-58-31-163Z.png",
+      "description": "Error executing: Ensure application stability under edge case conditions.",
+      "timestamp": "2025-07-12T22:58:31.223Z",
+      "type": "problem"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Table Readability Enhancement Verification",
+      "description": "Ensure that the table readability improvements are correctly implemented and enhance user experience.",
+      "steps": [
+        {
+          "step": "Navigate to the web pages containing tables.",
+          "status": "failed",
+          "message": "Error executing: Navigate to the web pages containing tables. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-1-error-2025-07-12T22-57-29-496Z.png",
+          "timestamp": "2025-07-12T22:57:29.582Z"
+        },
+        {
+          "step": "Verify that Yes/No values are displayed as emojis (✅/❌).",
+          "status": "failed",
+          "message": "Error executing: Verify that Yes/No values are displayed as emojis (✅/❌). - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-2-error-2025-07-12T22-57-31-033Z.png",
+          "timestamp": "2025-07-12T22:57:31.109Z"
+        },
+        {
+          "step": "Check that numeric values are right-aligned and use a monospaced font.",
+          "status": "failed",
+          "message": "Error executing: Check that numeric values are right-aligned and use a monospaced font. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-3-error-2025-07-12T22-57-32-559Z.png",
+          "timestamp": "2025-07-12T22:57:32.625Z"
+        },
+        {
+          "step": "Test table formatting across various screen sizes.",
+          "status": "failed",
+          "message": "Error executing: Test table formatting across various screen sizes. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-4-error-2025-07-12T22-57-34-197Z.png",
+          "timestamp": "2025-07-12T22:57:34.277Z"
+        },
+        {
+          "step": "Compare the readability of tables before and after the changes.",
+          "status": "failed",
+          "message": "Error executing: Compare the readability of tables before and after the changes. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-5-error-2025-07-12T22-57-35-680Z.png",
+          "timestamp": "2025-07-12T22:57:35.756Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "Tables should display improved readability with emoji indicators and proper number formatting.",
+      "priority": "medium"
+    },
+    {
+      "name": "Emoji Replacement Functionality Test",
+      "description": "Validate that emojis correctly replace Yes/No values across the application.",
+      "steps": [
+        {
+          "step": "Locate sections where Yes/No values are displayed.",
+          "status": "failed",
+          "message": "Error executing: Locate sections where Yes/No values are displayed. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-1-error-2025-07-12T22-57-37-170Z.png",
+          "timestamp": "2025-07-12T22:57:37.242Z"
+        },
+        {
+          "step": "Ensure Yes values are shown as ✅ or the appropriate emoji.",
+          "status": "failed",
+          "message": "Error executing: Ensure Yes values are shown as ✅ or the appropriate emoji. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-2-error-2025-07-12T22-57-38-677Z.png",
+          "timestamp": "2025-07-12T22:57:38.742Z"
+        },
+        {
+          "step": "Ensure No values are shown as ❌ or the appropriate emoji.",
+          "status": "failed",
+          "message": "Error executing: Ensure No values are shown as ❌ or the appropriate emoji. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-3-error-2025-07-12T22-57-40-249Z.png",
+          "timestamp": "2025-07-12T22:57:40.326Z"
+        },
+        {
+          "step": "Test emoji display across different web browsers.",
+          "status": "failed",
+          "message": "Error executing: Test emoji display across different web browsers. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-4-error-2025-07-12T22-57-41-770Z.png",
+          "timestamp": "2025-07-12T22:57:41.845Z"
+        },
+        {
+          "step": "Check emoji accessibility with screen readers.",
+          "status": "failed",
+          "message": "Error executing: Check emoji accessibility with screen readers. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-5-error-2025-07-12T22-57-43-271Z.png",
+          "timestamp": "2025-07-12T22:57:43.342Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "Yes/No values should consistently display as the appropriate emojis across all sections and browsers.",
+      "priority": "medium"
+    },
+    {
+      "name": "Numeric Value Formatting Verification",
+      "description": "Ensure numeric values are formatted correctly for easy comparison and readability.",
+      "steps": [
+        {
+          "step": "Navigate to sections displaying numeric data.",
+          "status": "failed",
+          "message": "Error executing: Navigate to sections displaying numeric data. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-1-error-2025-07-12T22-57-44-756Z.png",
+          "timestamp": "2025-07-12T22:57:44.826Z"
+        },
+        {
+          "step": "Verify that numbers are displayed in a monospaced font.",
+          "status": "failed",
+          "message": "Error executing: Verify that numbers are displayed in a monospaced font. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-2-error-2025-07-12T22-57-46-288Z.png",
+          "timestamp": "2025-07-12T22:57:46.359Z"
+        },
+        {
+          "step": "Check that numbers are right-aligned.",
+          "status": "failed",
+          "message": "Error executing: Check that numbers are right-aligned. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-3-error-2025-07-12T22-57-47-914Z.png",
+          "timestamp": "2025-07-12T22:57:47.991Z"
+        },
+        {
+          "step": "Test with various number formats (integers, decimals, percentages).",
+          "status": "failed",
+          "message": "Error executing: Test with various number formats (integers, decimals, percentages). - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-4-error-2025-07-12T22-57-49-380Z.png",
+          "timestamp": "2025-07-12T22:57:49.459Z"
+        },
+        {
+          "step": "Ensure alignment consistency across different data sets.",
+          "status": "failed",
+          "message": "Error executing: Ensure alignment consistency across different data sets. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-5-error-2025-07-12T22-57-50-891Z.png",
+          "timestamp": "2025-07-12T22:57:50.961Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "Numeric values should be consistently monospaced and right-aligned, facilitating easy comparison.",
+      "priority": "medium"
+    },
+    {
+      "name": "UI Visual Regression Test",
+      "description": "Ensure that recent UI changes do not disrupt the existing layout and design.",
+      "steps": [
+        {
+          "step": "Capture screenshots of affected pages.",
+          "status": "failed",
+          "message": "Error executing: Capture screenshots of affected pages. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-1-error-2025-07-12T22-57-52-385Z.png",
+          "timestamp": "2025-07-12T22:57:52.466Z"
+        },
+        {
+          "step": "Compare with previous versions if available.",
+          "status": "failed",
+          "message": "Error executing: Compare with previous versions if available. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-2-error-2025-07-12T22-57-53-995Z.png",
+          "timestamp": "2025-07-12T22:57:54.056Z"
+        },
+        {
+          "step": "Check for any layout breaks or misalignments.",
+          "status": "failed",
+          "message": "Error executing: Check for any layout breaks or misalignments. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-3-error-2025-07-12T22-57-55-493Z.png",
+          "timestamp": "2025-07-12T22:57:55.557Z"
+        },
+        {
+          "step": "Test on different screen sizes.",
+          "status": "failed",
+          "message": "Error executing: Test on different screen sizes. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-4-error-2025-07-12T22-57-57-042Z.png",
+          "timestamp": "2025-07-12T22:57:57.130Z"
+        },
+        {
+          "step": "Verify that no unintended style changes have occurred.",
+          "status": "failed",
+          "message": "Error executing: Verify that no unintended style changes have occurred. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-5-error-2025-07-12T22-57-58-935Z.png",
+          "timestamp": "2025-07-12T22:57:59.012Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "UI changes should be isolated and should not cause any visual regressions or layout issues.",
+      "priority": "medium"
+    },
+    {
+      "name": "Cross-Browser Compatibility Test",
+      "description": "Verify that the application functions correctly across different web browsers.",
+      "steps": [
+        {
+          "step": "Open the application in various web browsers (Chrome, Firefox, Safari, Edge).",
+          "status": "failed",
+          "message": "Error executing: Open the application in various web browsers (Chrome, Firefox, Safari, Edge). - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-1-error-2025-07-12T22-58-00-510Z.png",
+          "timestamp": "2025-07-12T22:58:00.576Z"
+        },
+        {
+          "step": "Navigate through the application to ensure all features work as expected.",
+          "status": "failed",
+          "message": "Error executing: Navigate through the application to ensure all features work as expected. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-2-error-2025-07-12T22-58-02-153Z.png",
+          "timestamp": "2025-07-12T22:58:02.228Z"
+        },
+        {
+          "step": "Check for any visual discrepancies or functionality issues.",
+          "status": "failed",
+          "message": "Error executing: Check for any visual discrepancies or functionality issues. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-3-error-2025-07-12T22-58-03-636Z.png",
+          "timestamp": "2025-07-12T22:58:03.710Z"
+        },
+        {
+          "step": "Test emoji and numeric formatting across browsers.",
+          "status": "failed",
+          "message": "Error executing: Test emoji and numeric formatting across browsers. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-4-error-2025-07-12T22-58-05-091Z.png",
+          "timestamp": "2025-07-12T22:58:05.158Z"
+        },
+        {
+          "step": "Ensure consistent user experience across all browsers.",
+          "status": "failed",
+          "message": "Error executing: Ensure consistent user experience across all browsers. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-5-error-2025-07-12T22-58-06-761Z.png",
+          "timestamp": "2025-07-12T22:58:06.846Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "The application should function correctly and consistently across all tested web browsers.",
+      "priority": "high"
+    },
+    {
+      "name": "Mobile Responsiveness Test",
+      "description": "Ensure that the application is fully responsive and functions well on mobile devices.",
+      "steps": [
+        {
+          "step": "Open the application on various mobile devices and screen sizes.",
+          "status": "failed",
+          "message": "Error executing: Open the application on various mobile devices and screen sizes. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-1-error-2025-07-12T22-58-08-293Z.png",
+          "timestamp": "2025-07-12T22:58:08.378Z"
+        },
+        {
+          "step": "Navigate through the application to ensure all features are accessible.",
+          "status": "failed",
+          "message": "Error executing: Navigate through the application to ensure all features are accessible. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-2-error-2025-07-12T22-58-09-788Z.png",
+          "timestamp": "2025-07-12T22:58:09.858Z"
+        },
+        {
+          "step": "Check table readability and formatting on mobile screens.",
+          "status": "failed",
+          "message": "Error executing: Check table readability and formatting on mobile screens. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-3-error-2025-07-12T22-58-11-840Z.png",
+          "timestamp": "2025-07-12T22:58:11.908Z"
+        },
+        {
+          "step": "Verify that emojis and numeric values display correctly on mobile.",
+          "status": "failed",
+          "message": "Error executing: Verify that emojis and numeric values display correctly on mobile. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-4-error-2025-07-12T22-58-13-681Z.png",
+          "timestamp": "2025-07-12T22:58:13.757Z"
+        },
+        {
+          "step": "Ensure no elements are cut off or misaligned.",
+          "status": "failed",
+          "message": "Error executing: Ensure no elements are cut off or misaligned. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-5-error-2025-07-12T22-58-15-153Z.png",
+          "timestamp": "2025-07-12T22:58:15.229Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "The application should be fully responsive, with all features accessible and correctly displayed on mobile devices.",
+      "priority": "high"
+    },
+    {
+      "name": "Performance Impact Assessment",
+      "description": "Evaluate the performance impact of the recent changes on the application.",
+      "steps": [
+        {
+          "step": "Measure page load times before and after the changes.",
+          "status": "failed",
+          "message": "Error executing: Measure page load times before and after the changes. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-1-error-2025-07-12T22-58-16-647Z.png",
+          "timestamp": "2025-07-12T22:58:16.725Z"
+        },
+        {
+          "step": "Check for any increase in resource usage (CPU, memory).",
+          "status": "failed",
+          "message": "Error executing: Check for any increase in resource usage (CPU, memory). - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-2-error-2025-07-12T22-58-18-279Z.png",
+          "timestamp": "2025-07-12T22:58:18.343Z"
+        },
+        {
+          "step": "Test application responsiveness during high load conditions.",
+          "status": "failed",
+          "message": "Error executing: Test application responsiveness during high load conditions. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-3-error-2025-07-12T22-58-19-774Z.png",
+          "timestamp": "2025-07-12T22:58:19.842Z"
+        },
+        {
+          "step": "Ensure no new performance bottlenecks have been introduced.",
+          "status": "failed",
+          "message": "Error executing: Ensure no new performance bottlenecks have been introduced. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-4-error-2025-07-12T22-58-21-316Z.png",
+          "timestamp": "2025-07-12T22:58:21.393Z"
+        },
+        {
+          "step": "Compare performance metrics with previous versions.",
+          "status": "failed",
+          "message": "Error executing: Compare performance metrics with previous versions. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-5-error-2025-07-12T22-58-22-958Z.png",
+          "timestamp": "2025-07-12T22:58:23.021Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "The application should maintain or improve its performance metrics, with no new bottlenecks introduced.",
+      "priority": "medium"
+    },
+    {
+      "name": "Edge Case Handling Test",
+      "description": "Identify and test potential edge cases that could affect the new features.",
+      "steps": [
+        {
+          "step": "Identify potential edge cases for table readability and emoji display.",
+          "status": "failed",
+          "message": "Error executing: Identify potential edge cases for table readability and emoji display. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-1-error-2025-07-12T22-58-24-421Z.png",
+          "timestamp": "2025-07-12T22:58:24.488Z"
+        },
+        {
+          "step": "Test with extreme numeric values (very large, very small, negative).",
+          "status": "failed",
+          "message": "Error executing: Test with extreme numeric values (very large, very small, negative). - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132681 tokens (132525 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-2-error-2025-07-12T22-58-26-114Z.png",
+          "timestamp": "2025-07-12T22:58:26.188Z"
+        },
+        {
+          "step": "Check emoji display with non-standard Yes/No values.",
+          "status": "failed",
+          "message": "Error executing: Check emoji display with non-standard Yes/No values. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-3-error-2025-07-12T22-58-27-679Z.png",
+          "timestamp": "2025-07-12T22:58:27.760Z"
+        },
+        {
+          "step": "Test table formatting with maximum and minimum data entries.",
+          "status": "failed",
+          "message": "Error executing: Test table formatting with maximum and minimum data entries. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-4-error-2025-07-12T22-58-29-462Z.png",
+          "timestamp": "2025-07-12T22:58:29.521Z"
+        },
+        {
+          "step": "Ensure application stability under edge case conditions.",
+          "status": "failed",
+          "message": "Error executing: Ensure application stability under edge case conditions. - StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+          "userFrustration": "User frustrated by broken functionality",
+          "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-5-error-2025-07-12T22-58-31-163Z.png",
+          "timestamp": "2025-07-12T22:58:31.223Z"
+        }
+      ],
+      "overallStatus": "failed",
+      "expectedOutcome": "The application should handle edge cases gracefully, without errors or unexpected behavior.",
+      "priority": "high"
+    }
+  ],
+  "userSession": {
+    "interactions": [
+      {
+        "timestamp": "2025-07-12T22:57:29.582Z",
+        "action": "Navigate to the web pages containing tables.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-1-error-2025-07-12T22-57-29-496Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:31.109Z",
+        "action": "Verify that Yes/No values are displayed as emojis (✅/❌).",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-2-error-2025-07-12T22-57-31-033Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:32.625Z",
+        "action": "Check that numeric values are right-aligned and use a monospaced font.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-3-error-2025-07-12T22-57-32-559Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:34.277Z",
+        "action": "Test table formatting across various screen sizes.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-4-error-2025-07-12T22-57-34-197Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:35.756Z",
+        "action": "Compare the readability of tables before and after the changes.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/table-readability-enhancement-verification-step-5-error-2025-07-12T22-57-35-680Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:37.242Z",
+        "action": "Locate sections where Yes/No values are displayed.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-1-error-2025-07-12T22-57-37-170Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:38.742Z",
+        "action": "Ensure Yes values are shown as ✅ or the appropriate emoji.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-2-error-2025-07-12T22-57-38-677Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:40.326Z",
+        "action": "Ensure No values are shown as ❌ or the appropriate emoji.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-3-error-2025-07-12T22-57-40-249Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:41.845Z",
+        "action": "Test emoji display across different web browsers.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-4-error-2025-07-12T22-57-41-770Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:43.342Z",
+        "action": "Check emoji accessibility with screen readers.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/emoji-replacement-functionality-test-step-5-error-2025-07-12T22-57-43-271Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:44.826Z",
+        "action": "Navigate to sections displaying numeric data.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-1-error-2025-07-12T22-57-44-756Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:46.359Z",
+        "action": "Verify that numbers are displayed in a monospaced font.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-2-error-2025-07-12T22-57-46-288Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:47.991Z",
+        "action": "Check that numbers are right-aligned.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-3-error-2025-07-12T22-57-47-914Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:49.459Z",
+        "action": "Test with various number formats (integers, decimals, percentages).",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-4-error-2025-07-12T22-57-49-380Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:50.961Z",
+        "action": "Ensure alignment consistency across different data sets.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/numeric-value-formatting-verification-step-5-error-2025-07-12T22-57-50-891Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:52.466Z",
+        "action": "Capture screenshots of affected pages.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-1-error-2025-07-12T22-57-52-385Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:54.056Z",
+        "action": "Compare with previous versions if available.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-2-error-2025-07-12T22-57-53-995Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:55.557Z",
+        "action": "Check for any layout breaks or misalignments.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-3-error-2025-07-12T22-57-55-493Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:57.130Z",
+        "action": "Test on different screen sizes.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-4-error-2025-07-12T22-57-57-042Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:57:59.012Z",
+        "action": "Verify that no unintended style changes have occurred.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/ui-visual-regression-test-step-5-error-2025-07-12T22-57-58-935Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:00.576Z",
+        "action": "Open the application in various web browsers (Chrome, Firefox, Safari, Edge).",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-1-error-2025-07-12T22-58-00-510Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:02.228Z",
+        "action": "Navigate through the application to ensure all features work as expected.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-2-error-2025-07-12T22-58-02-153Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:03.710Z",
+        "action": "Check for any visual discrepancies or functionality issues.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-3-error-2025-07-12T22-58-03-636Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:05.158Z",
+        "action": "Test emoji and numeric formatting across browsers.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-4-error-2025-07-12T22-58-05-091Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:06.846Z",
+        "action": "Ensure consistent user experience across all browsers.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/cross-browser-compatibility-test-step-5-error-2025-07-12T22-58-06-761Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:08.378Z",
+        "action": "Open the application on various mobile devices and screen sizes.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-1-error-2025-07-12T22-58-08-293Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:09.858Z",
+        "action": "Navigate through the application to ensure all features are accessible.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-2-error-2025-07-12T22-58-09-788Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:11.908Z",
+        "action": "Check table readability and formatting on mobile screens.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-3-error-2025-07-12T22-58-11-840Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:13.757Z",
+        "action": "Verify that emojis and numeric values display correctly on mobile.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-4-error-2025-07-12T22-58-13-681Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:15.229Z",
+        "action": "Ensure no elements are cut off or misaligned.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/mobile-responsiveness-test-step-5-error-2025-07-12T22-58-15-153Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:16.725Z",
+        "action": "Measure page load times before and after the changes.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-1-error-2025-07-12T22-58-16-647Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:18.343Z",
+        "action": "Check for any increase in resource usage (CPU, memory).",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-2-error-2025-07-12T22-58-18-279Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:19.842Z",
+        "action": "Test application responsiveness during high load conditions.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-3-error-2025-07-12T22-58-19-774Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:21.393Z",
+        "action": "Ensure no new performance bottlenecks have been introduced.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-4-error-2025-07-12T22-58-21-316Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:23.021Z",
+        "action": "Compare performance metrics with previous versions.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/performance-impact-assessment-step-5-error-2025-07-12T22-58-22-958Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:24.488Z",
+        "action": "Identify potential edge cases for table readability and emoji display.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-1-error-2025-07-12T22-58-24-421Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:26.188Z",
+        "action": "Test with extreme numeric values (very large, very small, negative).",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-2-error-2025-07-12T22-58-26-114Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:27.760Z",
+        "action": "Check emoji display with non-standard Yes/No values.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-3-error-2025-07-12T22-58-27-679Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:29.521Z",
+        "action": "Test table formatting with maximum and minimum data entries.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-4-error-2025-07-12T22-58-29-462Z.png"
+      },
+      {
+        "timestamp": "2025-07-12T22:58:31.223Z",
+        "action": "Ensure application stability under edge case conditions.",
+        "element": "error",
+        "success": false,
+        "userFrustration": "User frustrated by broken functionality",
+        "screenshot": "/Users/yelarysyertaiuly/Downloads/Solopreneuring/weaveHacks/testBrowserbase/stagehandtest/qa-screenshots/edge-case-handling-test-step-5-error-2025-07-12T22-58-31-163Z.png"
+      }
+    ],
+    "userJourney": [
+      {
+        "step": "Initial page load",
+        "timestamp": "2025-07-12T22:57:23.844Z",
+        "pageState": "Loading page",
+        "userExpectation": "Page should load quickly and show relevant content",
+        "actualResult": "Page loaded in 2058ms"
+      },
+      {
+        "step": "Navigate to the web pages containing tables.",
+        "timestamp": "2025-07-12T22:57:29.582Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Verify that Yes/No values are displayed as emojis (✅/❌).",
+        "timestamp": "2025-07-12T22:57:31.109Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check that numeric values are right-aligned and use a monospaced font.",
+        "timestamp": "2025-07-12T22:57:32.625Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test table formatting across various screen sizes.",
+        "timestamp": "2025-07-12T22:57:34.277Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Compare the readability of tables before and after the changes.",
+        "timestamp": "2025-07-12T22:57:35.756Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Locate sections where Yes/No values are displayed.",
+        "timestamp": "2025-07-12T22:57:37.242Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure Yes values are shown as ✅ or the appropriate emoji.",
+        "timestamp": "2025-07-12T22:57:38.742Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure No values are shown as ❌ or the appropriate emoji.",
+        "timestamp": "2025-07-12T22:57:40.326Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test emoji display across different web browsers.",
+        "timestamp": "2025-07-12T22:57:41.845Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check emoji accessibility with screen readers.",
+        "timestamp": "2025-07-12T22:57:43.342Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Navigate to sections displaying numeric data.",
+        "timestamp": "2025-07-12T22:57:44.826Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Verify that numbers are displayed in a monospaced font.",
+        "timestamp": "2025-07-12T22:57:46.359Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check that numbers are right-aligned.",
+        "timestamp": "2025-07-12T22:57:47.991Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test with various number formats (integers, decimals, percentages).",
+        "timestamp": "2025-07-12T22:57:49.459Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132680 tokens (132524 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure alignment consistency across different data sets.",
+        "timestamp": "2025-07-12T22:57:50.961Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Capture screenshots of affected pages.",
+        "timestamp": "2025-07-12T22:57:52.466Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Compare with previous versions if available.",
+        "timestamp": "2025-07-12T22:57:54.056Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check for any layout breaks or misalignments.",
+        "timestamp": "2025-07-12T22:57:55.557Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test on different screen sizes.",
+        "timestamp": "2025-07-12T22:57:57.130Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132673 tokens (132517 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Verify that no unintended style changes have occurred.",
+        "timestamp": "2025-07-12T22:57:59.012Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Open the application in various web browsers (Chrome, Firefox, Safari, Edge).",
+        "timestamp": "2025-07-12T22:58:00.576Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132683 tokens (132527 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Navigate through the application to ensure all features work as expected.",
+        "timestamp": "2025-07-12T22:58:02.228Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check for any visual discrepancies or functionality issues.",
+        "timestamp": "2025-07-12T22:58:03.710Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test emoji and numeric formatting across browsers.",
+        "timestamp": "2025-07-12T22:58:05.158Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure consistent user experience across all browsers.",
+        "timestamp": "2025-07-12T22:58:06.846Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Open the application on various mobile devices and screen sizes.",
+        "timestamp": "2025-07-12T22:58:08.378Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Navigate through the application to ensure all features are accessible.",
+        "timestamp": "2025-07-12T22:58:09.858Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check table readability and formatting on mobile screens.",
+        "timestamp": "2025-07-12T22:58:11.908Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132676 tokens (132520 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Verify that emojis and numeric values display correctly on mobile.",
+        "timestamp": "2025-07-12T22:58:13.757Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure no elements are cut off or misaligned.",
+        "timestamp": "2025-07-12T22:58:15.229Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Measure page load times before and after the changes.",
+        "timestamp": "2025-07-12T22:58:16.725Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check for any increase in resource usage (CPU, memory).",
+        "timestamp": "2025-07-12T22:58:18.343Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132679 tokens (132523 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test application responsiveness during high load conditions.",
+        "timestamp": "2025-07-12T22:58:19.842Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure no new performance bottlenecks have been introduced.",
+        "timestamp": "2025-07-12T22:58:21.393Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Compare performance metrics with previous versions.",
+        "timestamp": "2025-07-12T22:58:23.021Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132674 tokens (132518 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Identify potential edge cases for table readability and emoji display.",
+        "timestamp": "2025-07-12T22:58:24.488Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test with extreme numeric values (very large, very small, negative).",
+        "timestamp": "2025-07-12T22:58:26.188Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132681 tokens (132525 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Check emoji display with non-standard Yes/No values.",
+        "timestamp": "2025-07-12T22:58:27.760Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132678 tokens (132522 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Test table formatting with maximum and minimum data entries.",
+        "timestamp": "2025-07-12T22:58:29.521Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132677 tokens (132521 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      },
+      {
+        "step": "Ensure application stability under edge case conditions.",
+        "timestamp": "2025-07-12T22:58:31.223Z",
+        "pageState": "Attempting action",
+        "userExpectation": "User expects action to work",
+        "actualResult": "Error occurred: StagehandDefaultError: \nHey! We're sorry you ran into an error. \nStagehand version: 2.4.1 \nIf you need help, please open a Github issue or reach out to us on Slack: https://stagehand.dev/slack\n\nFull error:\nThis model's maximum context length is 128000 tokens. However, your messages resulted in 132675 tokens (132519 in the messages, 156 in the functions). Please reduce the length of the messages or functions.",
+        "problemType": "broken"
+      }
+    ]
+  }
+}
