@@ -164,3 +164,111 @@
   max-width: 700px;
   line-height: 1.5;
 }
+
+.sponsored-section {
+  margin-top: 80px;
+  background: #f3fbe9;
+  border-radius: 32px;
+  padding: 36px 32px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.06);
+  text-align: center;
+}
+.sponsored-section h3 {
+  color: #184d27;
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+.sponsor-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  min-height: 60px;
+}
+.sponsor-placeholder {
+  color: #388e3c;
+  font-size: 1.1rem;
+  background: #e0f7e9;
+  border-radius: 16px;
+  padding: 12px 28px;
+  border: 2px dashed #a8e063;
+  opacity: 0.7;
+}
+
+.sponsor-logo {
+  height: 48px;
+  width: auto;
+  margin: 0 12px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
+  padding: 6px 12px;
+  transition: transform 0.2s;
+}
+.sponsor-logo:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow: 0 4px 16px rgba(56, 142, 60, 0.15);
+}
+
+.sponsor-name {
+  color: #fff;
+  background: #246b3c;
+  border-radius: 8px;
+  padding: 6px 16px;
+  margin: 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
+  transition: background 0.2s;
+}
+.sponsor-name:hover {
+  background: #a8e063;
+  color: #184d27;
+}
+
+.bottom-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #388e3c;
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 12px rgba(56, 142, 60, 0.12);
+  gap: 24px;
+}
+.bottom-banner-text {
+  margin-right: 18px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.bottom-banner-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.close-banner {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  margin-left: 32px;
+  cursor: pointer;
+  padding: 0 12px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.close-banner:hover {
+  color: #a8e063;
+}
