@@ -41,60 +41,40 @@ class QAContextGenerator:
             f"Processing PR: {pr_url}",
             border_style="blue"
         ))
+
+        print("generate_qa_context from main.py")
         
-        with Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            console=self.console,
-            transient=True,
-        ) as progress:
-            
-            # Step 1: Collect GitHub data
-            task1 = progress.add_task("Collecting GitHub data...", total=None)
-            github_result = self.agents.collect_github_data(pr_url)
-            
-            if not github_result.success:
-                self.console.print(f"[red]❌ Failed to collect GitHub data: {github_result.error}[/red]")
-                raise Exception(f"GitHub data collection failed: {github_result.error}")
-            
-            pr_data = github_result.data["pr_data"]
-            doc_data = github_result.data["doc_data"]
-            progress.update(task1, description="[green]✓[/green] GitHub data collected")
-            
-            # Step 2: Monitor deployment
-            task2 = progress.add_task("Monitoring deployment...", total=None)
-            deployment_result = self.agents.monitor_deployment(pr_url)
-            
-            if not deployment_result.success:
-                self.console.print(f"[yellow]⚠️ Deployment monitoring had issues: {deployment_result.error}[/yellow]")
-                # Continue with empty deployment info
-                deployment_info = deployment_result.data if deployment_result.data else None
-            else:
-                deployment_info = deployment_result.data
-            
-            progress.update(task2, description="[green]✓[/green] Deployment monitoring completed")
-            
-            # Step 3: Generate QA context
-            task3 = progress.add_task("Generating QA context...", total=None)
-            
-            # Use the agents to format the report directly
-            qa_report = self.agents.format_qa_report(
-                qa_context="",  # Will be populated by the formatter
-                pr_data=pr_data,
-                doc_data=doc_data,
-                deployment_info=deployment_info
-            )
-            
-            progress.update(task3, description="[green]✓[/green] QA context generated")
+        # Collect GitHub data
+        self.console.print("Collecting GitHub data...")
+        github_result = self.agents.collect_github_data(pr_url)
         
-        # Display results
-        self._display_results(qa_report)
+        if not github_result.success:
+            self.console.print(f"[red]❌ Failed to collect GitHub data: {github_result.error}[/red]")
+            raise Exception(f"GitHub data collection failed: {github_result.error}")
         
-        # Save report if output file specified
-        if output_file:
-            await self._save_reports(qa_report, output_file)
+        pr_data = github_result.data["pr_data"]
+        doc_data = github_result.data["doc_data"]
         
-        return qa_report
+        # Display PR information
+        self.console.print(f"\n[bold green]✓ Pull Request Information:[/bold green]")
+        self.console.print(f"[bold]Title:[/bold] {pr_data.title}")
+        self.console.print(f"[bold]Description:[/bold] {pr_data.description or 'No description provided'}")
+        
+        # Display README information
+        self.console.print(f"\n[bold green]✓ Repository Documentation:[/bold green]")
+        if doc_data.readme_content:
+            readme_preview = doc_data.readme_content[:500] + "..." if len(doc_data.readme_content) > 500 else doc_data.readme_content
+            self.console.print(f"[bold]README Preview:[/bold]")
+            self.console.print(Panel(readme_preview, title="README.md", border_style="dim"))
+            
+            if doc_data.key_features:
+                self.console.print(f"[bold]Key Features:[/bold]")
+                for feature in doc_data.key_features:
+                    self.console.print(f"  • {feature}")
+        else:
+            self.console.print("[yellow]⚠️  No README found in repository[/yellow]")
+        
+        return "success"
     
     def _display_results(self, qa_report: QAReport):
         """Display the QA report results in the console."""

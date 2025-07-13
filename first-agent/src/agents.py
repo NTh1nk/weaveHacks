@@ -157,6 +157,8 @@ class QAContextAgents:
     def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
         """Generate comprehensive QA context using CrewAI."""
         start_time = time.time()    
+
+        print("generate_qa_context from agents.py")
         
         try:
             # Extract actual changes from diff
@@ -279,6 +281,8 @@ class QAContextAgents:
             )
             
             result = crew.kickoff()
+
+            print("result: " + result)
             
             return AgentResult(
                 agent_name="QA Context Generator",
@@ -317,55 +321,6 @@ class QAContextAgents:
                         changes.append(f"     REMOVED: {line[1:].strip()}")
         
         return '\n'.join(changes)
-    
-    @weave.op()
-    def format_qa_report(self, qa_context: str, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> QAReport:
-        """Format the final QA report."""
-        
-        # Determine priority based on PR characteristics
-        priority = Priority.MEDIUM
-        if pr_data.additions + pr_data.deletions > 200:
-            priority = Priority.HIGH
-        elif any(label.lower() in ['critical', 'urgent', 'hotfix'] for label in pr_data.labels):
-            priority = Priority.HIGH
-        elif pr_data.additions + pr_data.deletions < 50:
-            priority = Priority.LOW
-        
-        # Generate primary focus areas based on actual changes
-        focus_areas = self._generate_focus_areas_from_changes(pr_data)
-        
-        # Generate SPECIFIC testing scenarios based on actual changes
-        testing_scenarios = self._generate_specific_scenarios(pr_data, priority)
-        
-        # Create application context with specific changes
-        app_context = self._create_application_context_with_changes(doc_data, pr_data)
-        
-        # Prepare additional resources
-        additional_resources = {}
-        
-        # Only include setup instructions if there's no deployed URL
-        if not deployment_info.url and doc_data.setup_instructions:
-            additional_resources["Setup Instructions"] = doc_data.setup_instructions
-        
-        if doc_data.testing_guidelines:
-            additional_resources["Testing Guidelines"] = doc_data.testing_guidelines
-        if pr_data.pr_url:
-            additional_resources["Pull Request"] = pr_data.pr_url
-        
-        return QAReport(
-            overview={
-                "feature": pr_data.title,
-                "priority": priority.value,
-                "files_changed": len(pr_data.files_changed),
-                "lines_changed": pr_data.additions + pr_data.deletions,
-                "testing_window": "30-60 minutes"
-            },
-            primary_focus_areas=focus_areas,
-            testing_scenarios=testing_scenarios,
-            application_context=app_context,
-            deployment_info=deployment_info,
-            additional_resources=additional_resources
-        )
     
     def _generate_focus_areas_from_changes(self, pr_data: PRData) -> List[str]:
         """Generate focus areas based on actual code changes."""

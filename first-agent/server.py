@@ -93,6 +93,8 @@ async def generate_qa_context(request: GenerateRequest):
             pr_url=request.url,
             output_file=output_file
         )
+
+        print("qa_report: " + qa_report)
         
         # Generate markdown report
         markdown_report = formatter.generate_markdown_report(qa_report)
