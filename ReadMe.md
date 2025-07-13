@@ -22,7 +22,9 @@ A workspace containing multiple projects including CodeTurtle, Dashboard, and Br
 
 3. **Start all projects:**
    ```bash
-   npm run start-all
+   npm run start (stageHand)
+   npm run build (dashboard)
+   order is important, 2 consoles running simul
    ```
 
 ### Individual Project Commands
