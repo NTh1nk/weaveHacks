@@ -299,19 +299,18 @@ Only include features that FAILED in the screenshots array.`;
       };
     }
 
-    // Step 6: Force at least one failure for testing if none found
+    // Step 6: Handle case when no failures are found
     if (!structuredResult.failedFeatures || structuredResult.failedFeatures.length === 0) {
-      console.log("No failed features detected, adding test failure for screenshot demonstration");
-      structuredResult.failedFeatures = [
-        {
-          featureName: "Test Screenshot Feature",
-          reason: "Forced failure to demonstrate screenshot capture functionality"
-        }
-      ];
+      console.log("No failed features detected - no screenshots needed");
+      structuredResult.failedFeatures = [];
     }
 
     // Step 7: Capture screenshots for each failed feature
-    console.log(`\n📸 Starting screenshot capture for ${structuredResult.failedFeatures.length} failed features...`);
+    if (structuredResult.failedFeatures.length === 0) {
+      console.log(`\n📸 No screenshots needed - no failed features detected`);
+    } else {
+      console.log(`\n📸 Starting screenshot capture for ${structuredResult.failedFeatures.length} failed features...`);
+    }
     const screenshots = [];
     
     for (const [index, failedFeature] of structuredResult.failedFeatures.entries()) {
@@ -370,6 +369,8 @@ Only include features that FAILED in the screenshots array.`;
         console.log(`   Path: ${shot.screenshotPath}`);
         console.log(`   Base64: ${shot.screenshotBase64 ? 'Available' : 'Failed'}`);
       });
+    } else {
+      console.log(`\n📸 No screenshots captured - all tests passed successfully`);
     }
 
     // Step 10: Send to external endpoint
