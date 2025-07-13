@@ -528,14 +528,23 @@ export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: Wo
                 style={{
                   left: `${node.x}px`,
                   top: `${node.y}px`,
+                  minWidth: '120px',
+                  maxWidth: '220px',
                 }}
                 onMouseDown={(e) => handleMouseDown(e, node.id)}
               >
                 <div
-                  className={`w-20 h-12 ${getStatusBgColor(node.status)} text-white rounded-lg flex items-center justify-center font-semibold text-xs shadow-lg relative border-2 border-white`}
+                  className={`px-2 py-1 ${getStatusBgColor(node.status)} text-white rounded-lg flex flex-col items-center justify-center font-semibold text-xs shadow-lg relative border-2 border-white`}
+                  style={{
+                    minWidth: '120px',
+                    maxWidth: '220px',
+                    wordBreak: 'break-word',
+                    whiteSpace: 'pre-line',
+                    textAlign: 'center',
+                  }}
                 >
-                  <div className="text-center">
-                    <div className="leading-tight">{node.name}</div>
+                  <div className="leading-tight break-words w-full">
+                    {node.name}
                   </div>
                   {node.status === "running" && (
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></div>
