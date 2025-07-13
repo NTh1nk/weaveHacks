@@ -91,6 +91,59 @@ async function screenshotToBase64(screenshotPath: string): Promise<string | null
   }
 }
 
+// Helper function to generate GitHub comment using OpenAI
+async function generateGithubComment(features: any[], url: string): Promise<string | null> {
+  if (!process.env.OPENAI_API_KEY) {
+    console.warn('⚠️ OPENAI_API_KEY not found. Skipping GitHub comment generation.');
+    return null;
+  }
+  try {
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+    // Prepare a summary of the test results
+    const testSummary = features.map(feature => {
+      let statusIcon = '❓';
+      if (feature.status === 'PASSED') statusIcon = '✅';
+      if (feature.status === 'FAILED') statusIcon = '❌';
+
+      return `- ${statusIcon} **${feature.featureName}**: ${feature.status} - ${feature.whatHappened}`;
+    }).join('\n');
+
+    const prompt = `
+Generate a concise and professional GitHub comment in Markdown for a pull request based on the QA test results for ${url}.
+
+The comment must be brief and focus on the functionality of each tested feature.
+- Start with a short title with an emoji.
+- List each feature with a status icon (✅, ❌).
+- Briefly describe what happened for each feature.
+- If any tests failed, note that screenshots are available.
+
+Here are the test results:
+${testSummary}
+
+Generate a concise comment based on these results.
+`;
+
+    console.log("🤖 Calling OpenAI to generate GitHub comment...");
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.5,
+    });
+
+    const comment = response.choices[0]?.message?.content?.trim() || null;
+    if (comment) {
+      console.log('✅ GitHub comment generated successfully.');
+    } else {
+      console.log('❌ Failed to generate GitHub comment from OpenAI response.');
+    }
+    return comment;
+  } catch (error) {
+    console.error('❌ Failed to generate GitHub comment:', error);
+    return null;
+  }
+}
+
 // Helper function to ensure db directory exists
 async function ensureDbDirectory(): Promise<string> {
   const dbDir = path.join(process.cwd(), 'db');
@@ -245,7 +298,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
       autoScreenshot: true
     });
 
-    // Step 8: Parse the agent's JSON output
+    // Step 5: Parse the agent's JSON output
     console.log("\n🔧 Parsing agent result...");
     let structuredResult;
     try {
@@ -266,10 +319,14 @@ If you first click a "Login" button and then fill in a username, your graph migh
       };
     }
     
-    // Step 6: Identify failed features for screenshots
+    // Step 6: Generate GitHub comment
+    console.log("\n📝 Generating GitHub comment...");
+    const githubComment = await generateGithubComment(structuredResult.features || [], url);
+
+    // Step 7: Identify failed features for screenshots
     const failedFeatures = structuredResult.features?.filter((f: any) => f.status === 'FAILED') || [];
 
-    // Step 7: Capture screenshots for each failed feature
+    // Step 8: Capture screenshots for each failed feature
     if (failedFeatures.length === 0) {
       console.log(`\n📸 No screenshots needed - no failed features detected`);
     } else {
@@ -316,15 +373,21 @@ If you first click a "Login" button and then fill in a username, your graph migh
       }
     }
 
-    // Step 8: Add screenshots to the structured result
+    // Step 9: Add screenshots to the structured result
     structuredResult.screenshots = screenshots;
 
-    // Step 9: Display results
+    // Step 10: Display results
     console.log("\n🧪 QA Test Results:");
     console.log("==================");
     console.log("Features tested:", structuredResult.features?.length || 0);
     console.log("Failed features:", failedFeatures.length);
     console.log("Screenshots captured:", screenshots.length);
+    if (githubComment) {
+      console.log("GitHub Comment Generated: ✅");
+      console.log(githubComment);
+    } else {
+      console.log("GitHub Comment Generated: ❌");
+    }
 
     if (screenshots.length > 0) {
       console.log(`\n📸 Screenshot Summary:`);
@@ -337,7 +400,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
       console.log(`\n📸 No screenshots captured - all tests passed successfully`);
     }
 
-    // Step 10: Send to external endpoint
+    // Step 11: Send to external endpoint
     console.log("\n📤 Sending results to external endpoint...");
     const payload = {
       url: url,
@@ -351,8 +414,9 @@ If you first click a "Login" button and then fill in a username, your graph migh
     console.log(`   URL: ${payload.url}`);
     console.log(`   Features: ${structuredResult.features?.length || 0}`);
     console.log(`   Screenshots: ${payload.screenshotCount}`);
+    console.log(`   GitHub Comment: ${githubComment ? 'Generated' : 'Not Generated'}`);
     
-    // Step 11: Save result to local db
+    // Step 12: Save result to local db
     console.log("\n💾 Saving result to local database...");
     let savedFileName = null;
     try {
@@ -391,6 +455,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
         featuresReceived: structuredResult.features?.length || 0,
         screenshotsReceived: screenshots.length,
         localDbFile: savedFileName,
+        githubComment: githubComment,
         timestamp: new Date().toISOString()
       };
       
@@ -401,6 +466,37 @@ If you first click a "Login" button and then fill in a username, your graph migh
       console.error('❌ Failed to send to external endpoint:', error);
     }
 
+    // Step 13: Send GitHub comment to another dummy endpoint (commented out as requested)
+    /*
+    if (githubComment) {
+      try {
+        console.log("\n📤 Sending GitHub comment to a dummy endpoint...");
+        const commentPayload = {
+          comment: githubComment,
+          sourceUrl: url,
+          timestamp: new Date().toISOString(),
+        };
+
+        const response = await fetch('https://your-dummy-comment-endpoint.com/post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(commentPayload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("✅ Successfully sent GitHub comment to dummy endpoint:", result);
+      } catch (error) {
+        console.error("❌ Failed to send GitHub comment to dummy endpoint:", error);
+      }
+    } else {
+      console.log("\n🤷 No GitHub comment was generated, skipping post to dummy endpoint.");
+    }
+    */
+
     // Clean up
     console.log("Closing Stagehand connection...");
     await stagehand.close();
@@ -410,7 +506,8 @@ If you first click a "Login" button and then fill in a username, your graph migh
       success: true, 
       result: structuredResult,
       status: structuredResult.agentAnalysis.status,
-      localDbFile: savedFileName
+      localDbFile: savedFileName,
+      githubComment: githubComment
     };
 
   } catch (error) {
@@ -452,13 +549,14 @@ app.post('/qa-test', async (req, res) => {
     const result = await runQATest(url, promptContent);
 
     // Return result
-    res.json({
-      success: result.success,
-      status: result.status,
-      data: result.result || null,
-      error: result.error || null,
-      localDbFile: result.localDbFile || null
-    });
+    if (result.success) {
+      res.json({ githubComment: result.githubComment || null });
+    } else {
+      res.status(500).json({
+        success: false,
+        error: result.error ? (result.error as Error).message : 'Internal Server Error'
+      });
+    }
 
   } catch (error) {
     console.error("Server error:", error);
