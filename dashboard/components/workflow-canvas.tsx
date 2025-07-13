@@ -469,6 +469,7 @@ export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: Wo
   return (
     <div className="relative">
       {/* Workflow Controls */}
+      {/*
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           {workflowKeys.map((workflowKey) => (
@@ -482,7 +483,8 @@ export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: Wo
             </Button>
           ))}
         </div>
-        
+        */}
+        {/*
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
@@ -502,7 +504,8 @@ export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: Wo
             {isRunning ? "Running..." : "Start"}
           </Button>
         </div>
-      </div>
+        */}
+      {/*</div>*/}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Workflow Canvas */}
