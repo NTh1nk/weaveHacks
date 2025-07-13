@@ -1,0 +1,8 @@
+{
+  "Click the suggestion to use AI": {
+    "description": "Option to configure Cursor to use Stagehand",
+    "method": "click",
+    "arguments": [],
+    "selector": "xpath=/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[5]"
+  }
+}
