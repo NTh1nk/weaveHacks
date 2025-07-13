@@ -142,126 +142,6 @@ class QAContextAgents:
             )
     
     @weave.op()
-    def _run_analysis_task(self, pr_data: PRData, doc_data: DocumentationData, specific_changes: str) -> str:
-        """Run the analysis task with timing tracking."""
-        analysis_task = Task(
-            description=f"""
-            Analyze the following PR with SPECIFIC code changes and generate QA testing context:
-            
-            PR Title: {pr_data.title}
-            PR Description: {pr_data.description or "No description provided"}
-            
-            SPECIFIC CHANGES MADE:
-            {specific_changes}
-            
-            PR Comments (additional context):
-            {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
-            
-            Files Changed: {', '.join(pr_data.files_changed)}
-            Labels: {', '.join(pr_data.labels)}
-            
-            Repository Features: {', '.join(doc_data.key_features)}
-            
-            Focus on:
-            1. What SPECIFIC functionality changed based on the actual code changes
-            2. What UI/UX elements were modified and how
-            3. What user behaviors need to be tested based on the changes
-            4. Priority level for different testing areas based on impact
-            
-            Be SPECIFIC about what changed, not generic.
-            """,
-            agent=self.qa_context_generator,
-            expected_output="Specific testing focus areas based on actual code changes"
-        )
-        
-        # Execute single task
-        crew = Crew(
-            agents=[self.qa_context_generator],
-            tasks=[analysis_task],
-            verbose=True
-        )
-        
-        return crew.kickoff()
-    
-    @weave.op()
-    def _run_scenario_task(self, pr_data: PRData, specific_changes: str) -> str:
-        """Run the scenario task with timing tracking."""
-        scenario_task = Task(
-            description=f"""
-            Based on the SPECIFIC PR changes, create targeted testing scenarios:
-            
-            PR Title: {pr_data.title}
-            
-            ACTUAL CHANGES MADE:
-            {specific_changes}
-            
-            PR Comments Context:
-            {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
-            
-            Create 3-5 SPECIFIC test scenarios that cover:
-            1. Testing the exact changes made (not generic functionality)
-            2. Visual/UI changes that were implemented
-            3. User experience validation for the specific modifications
-            4. Edge cases related to the specific changes
-            
-            For each scenario, provide:
-            - Title (specific to the changes)
-            - Description (what exactly to test)
-            - Step-by-step testing instructions (based on actual changes)
-            - Expected outcomes (specific to the modifications)
-            - Priority level (High/Medium/Low)
-            
-            Be SPECIFIC about what to test, not generic.
-            """,
-            agent=self.qa_context_generator,
-            expected_output="Specific testing scenarios based on actual code changes"
-        )
-        
-        # Execute single task
-        crew = Crew(
-            agents=[self.qa_context_generator],
-            tasks=[scenario_task],
-            verbose=True
-        )
-        
-        return crew.kickoff()
-    
-    @weave.op()
-    def _run_context_task(self, pr_data: PRData, doc_data: DocumentationData, specific_changes: str) -> str:
-        """Run the context task with timing tracking."""
-        context_task = Task(
-            description=f"""
-            Generate application context for QA testers:
-            
-            Repository: {pr_data.repo_name}
-            Key Features: {', '.join(doc_data.key_features)}
-            README Content: {doc_data.readme_content[:500] if doc_data.readme_content else "No README available"}
-            
-            SPECIFIC CHANGES IN THIS PR:
-            {specific_changes}
-            
-            Create a focused explanation of:
-            1. What this application does
-            2. What specific area was changed in this PR
-            3. How the changes affect user experience
-            4. Technical context specific to the modifications
-            
-            Keep it focused on the specific changes made.
-            """,
-            agent=self.documentation_analyzer,
-            expected_output="Specific application context for the changes made"
-        )
-        
-        # Execute single task
-        crew = Crew(
-            agents=[self.documentation_analyzer],
-            tasks=[context_task],
-            verbose=True
-        )
-        
-        return crew.kickoff()
-
-    @weave.op()
     def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
         """Generate comprehensive QA context using CrewAI."""
         start_time = time.time()
@@ -270,17 +150,100 @@ class QAContextAgents:
             # Extract actual changes from diff
             specific_changes = self._extract_specific_changes(pr_data)
             
-            # Run each task separately with individual timing
-            analysis_result = self._run_analysis_task(pr_data, doc_data, specific_changes)
-            scenario_result = self._run_scenario_task(pr_data, specific_changes)
-            context_result = self._run_context_task(pr_data, doc_data, specific_changes)
+            # Create tasks for the crew with SPECIFIC change information
+            analysis_task = Task(
+                description=f"""
+                Analyze the following PR with SPECIFIC code changes and generate QA testing context:
+                
+                PR Title: {pr_data.title}
+                PR Description: {pr_data.description or "No description provided"}
+                
+                SPECIFIC CHANGES MADE:
+                {specific_changes}
+                
+                PR Comments (additional context):
+                {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
+                
+                Files Changed: {', '.join(pr_data.files_changed)}
+                Labels: {', '.join(pr_data.labels)}
+                
+                Repository Features: {', '.join(doc_data.key_features)}
+                
+                Focus on:
+                1. What SPECIFIC functionality changed based on the actual code changes
+                2. What UI/UX elements were modified and how
+                3. What user behaviors need to be tested based on the changes
+                4. Priority level for different testing areas based on impact
+                
+                Be SPECIFIC about what changed, not generic.
+                """,
+                agent=self.qa_context_generator,
+                expected_output="Specific testing focus areas based on actual code changes"
+            )
             
-            # Combine results
-            result = {
-                "analysis": analysis_result,
-                "scenarios": scenario_result,
-                "context": context_result
-            }
+            scenario_task = Task(
+                description=f"""
+                Based on the SPECIFIC PR changes, create targeted testing scenarios:
+                
+                PR Title: {pr_data.title}
+                
+                ACTUAL CHANGES MADE:
+                {specific_changes}
+                
+                PR Comments Context:
+                {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
+                
+                Create 3-5 SPECIFIC test scenarios that cover:
+                1. Testing the exact changes made (not generic functionality)
+                2. Visual/UI changes that were implemented
+                3. User experience validation for the specific modifications
+                4. Edge cases related to the specific changes
+                
+                For each scenario, provide:
+                - Title (specific to the changes)
+                - Description (what exactly to test)
+                - Step-by-step testing instructions (based on actual changes)
+                - Expected outcomes (specific to the modifications)
+                - Priority level (High/Medium/Low)
+                
+                Be SPECIFIC about what to test, not generic.
+                """,
+                agent=self.qa_context_generator,
+                expected_output="Specific testing scenarios based on actual code changes"
+            )
+            
+            context_task = Task(
+                description=f"""
+                Generate application context for QA testers:
+                
+                Repository: {pr_data.repo_name}
+                Key Features: {', '.join(doc_data.key_features)}
+                README Content: {doc_data.readme_content[:500] if doc_data.readme_content else "No README available"}
+                
+                SPECIFIC CHANGES IN THIS PR:
+                {specific_changes}
+                
+                Create a focused explanation of:
+                1. What this application does
+                2. What specific area was changed in this PR
+                3. How the changes affect user experience
+                4. Technical context specific to the modifications
+                
+                Keep it focused on the specific changes made.
+                """,
+                agent=self.documentation_analyzer,
+                expected_output="Specific application context for the changes made"
+            )
+            
+            # Create and run the crew
+            crew = Crew(
+                agents=[self.qa_context_generator, self.documentation_analyzer],
+                tasks=[analysis_task, scenario_task, context_task],
+                process=Process.parallel,
+                verbose=True
+            )
+            
+            result = crew.kickoff()
             
             return AgentResult(
                 agent_name="QA Context Generator",
