@@ -546,6 +546,170 @@ class DataService {
       return null;
     }
   }
+
+  // Get all available test sessions
+  async getAllSessions(): Promise<Array<{
+    id: number;
+    url: string;
+    timestamp: string;
+    promptContent: string;
+    totalFeatures: number;
+    failedFeatures: number;
+    screenshots: number;
+  }>> {
+    try {
+      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      if (!summaryResponse.ok) {
+        console.error('Failed to fetch sessions summary:', summaryResponse.statusText);
+        return [];
+      }
+      
+      const summaryData = await summaryResponse.json();
+      if (!summaryData.success || !summaryData.summary) {
+        console.log('No sessions available');
+        return [];
+      }
+      
+      // Sort sessions by timestamp (newest first)
+      const sessions = summaryData.summary
+        .sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .map((session: any) => ({
+          id: session.id,
+          url: session.url,
+          timestamp: session.timestamp,
+          promptContent: session.promptContent || 'No prompt content',
+          totalFeatures: session.totalFeatures || 0,
+          failedFeatures: session.failedFeatures || 0,
+          screenshots: session.screenshots || 0
+        }));
+      
+      console.log(`Found ${sessions.length} test sessions`);
+      return sessions;
+      
+    } catch (error) {
+      console.error('Error getting all sessions:', error);
+      return [];
+    }
+  }
+
+  // Get specific session by ID
+  async getSessionById(sessionId: number): Promise<QATestResult | null> {
+    try {
+      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${sessionId}`);
+      
+      if (!resultResponse.ok) {
+        console.error('Failed to fetch session:', resultResponse.statusText);
+        return null;
+      }
+      
+      const resultData = await resultResponse.json();
+      if (!resultData.success) {
+        console.error('Failed to get session data:', resultData.error);
+        return null;
+      }
+      
+      // Convert the test system format to dashboard format
+      const dashboardData = this.convertTestSystemToDashboard(resultData.data);
+      console.log(`Successfully loaded session ${sessionId} from API`);
+      return dashboardData;
+      
+    } catch (error) {
+      console.error('Error getting session by ID:', error);
+      return null;
+    }
+  }
+
+  // Get workflow data for specific session
+  async getWorkflowDataForSession(sessionId: number): Promise<{
+    nodes: Array<{
+      id: string;
+      name: string;
+      status: "completed" | "running" | "pending" | "failed";
+      duration: string;
+      x: number;
+      y: number;
+      connections: string[];
+      description?: string;
+    }>;
+  } | null> {
+    try {
+      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${sessionId}`);
+      
+      if (!resultResponse.ok) {
+        console.error('Failed to fetch session for workflow:', resultResponse.statusText);
+        return null;
+      }
+      
+      const resultData = await resultResponse.json();
+      if (!resultData.success || !resultData.data.testResult.graph) {
+        console.log(`No graph data available in session ${sessionId}`);
+        return null;
+      }
+      
+      const graph = resultData.data.testResult.graph;
+      const features = resultData.data.testResult.features || [];
+      
+      console.log(`Processing workflow data for session ${sessionId}:`, {
+        graphNodes: graph.nodes.length,
+        graphEdges: graph.edges.length,
+        features: features.length
+      });
+      
+      // Convert graph nodes to workflow format
+      const nodes = graph.nodes.map((node: { nodeId: string; nodeText: string }, index: number) => {
+        // Find corresponding feature for status
+        const feature = features.find((f: { featureName: string; status: string; whatHappened: string }) => 
+          f.featureName.toLowerCase().includes(node.nodeText.toLowerCase()) ||
+          node.nodeText.toLowerCase().includes(f.featureName.toLowerCase())
+        );
+        
+        // Determine status based on feature status or default to completed
+        let status: "completed" | "running" | "pending" | "failed" = "completed";
+        if (feature) {
+          switch (feature.status) {
+            case 'PASSED':
+              status = 'completed';
+              break;
+            case 'FAILED':
+              status = 'failed';
+              break;
+            case 'WARNING':
+              status = 'pending';
+              break;
+            default:
+              status = 'completed';
+          }
+        }
+        
+        // Calculate position (simple grid layout)
+        const x = 50 + (index * 150);
+        const y = 100 + (index % 2 * 100);
+        
+        // Find connections for this node
+        const connections = graph.edges
+          .filter((edge: { source: string; target: string }) => edge.source === node.nodeId)
+          .map((edge: { source: string; target: string }) => edge.target);
+        
+        return {
+          id: node.nodeId,
+          name: node.nodeText,
+          status,
+          duration: feature ? "0.5s" : "0.1s",
+          x,
+          y,
+          connections,
+          description: feature?.whatHappened
+        };
+      });
+      
+      console.log(`Generated ${nodes.length} workflow nodes for session ${sessionId}`);
+      return { nodes };
+      
+    } catch (error) {
+      console.error('Error getting workflow data for session:', error);
+      return null;
+    }
+  }
 }
 
 export const dataService = new DataService(); 

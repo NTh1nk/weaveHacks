@@ -22,6 +22,7 @@ import {
 } from "recharts"
 import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2, RefreshCw } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
+import { SessionSelector } from "@/components/session-selector"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,10 +41,9 @@ import { useQAData } from "@/hooks/use-qa-data"
 import { Skeleton } from "@/components/ui/skeleton"
 import { RawJsonModal } from "@/components/ui/modal"
 
-
-
 export function QADashboard() {
-  const { data, loading, error, refetch } = useQAData();
+  const [selectedSessionId, setSelectedSessionId] = useState<number | undefined>(undefined);
+  const { data, loading, error, refetch } = useQAData(selectedSessionId);
   const [showRawJson, setShowRawJson] = useState(false);
   const [selectedScreenshot, setSelectedScreenshot] = useState<{
     featureName: string;
@@ -69,6 +69,10 @@ export function QADashboard() {
     const interval = setInterval(checkApiStatus, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSessionSelect = (sessionId: number | undefined) => {
+    setSelectedSessionId(sessionId);
+  };
 
   if (loading) {
     return (
@@ -146,6 +150,10 @@ export function QADashboard() {
                         apiStatus === 'checking' ? 'Checking...' : 'Disconnected'}
             </span>
           </div>
+          <SessionSelector 
+            selectedSessionId={selectedSessionId}
+            onSessionSelect={handleSessionSelect}
+          />
           <Button onClick={refetch} variant="outline" size="sm">
             <RefreshCw className="w-4 h-4 mr-1" />
             Refresh
@@ -246,6 +254,40 @@ export function QADashboard() {
           </Button>
         </div>
       </div>
+
+      {/* Session Info */}
+      {selectedSessionId && data && (
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div>
+                  <h3 className="font-semibold text-lg">Session {selectedSessionId}</h3>
+                  <p className="text-sm text-gray-600">
+                    {data.testHistory[0]?.timestamp && 
+                      new Date(data.testHistory[0].timestamp).toLocaleString()}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant={data.metrics.successRate === 100 ? "default" : "destructive"}>
+                    {data.metrics.successRate.toFixed(1)}% Success
+                  </Badge>
+                  <Badge variant="outline">
+                    {data.metrics.totalTests} Tests
+                  </Badge>
+                </div>
+              </div>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setSelectedSessionId(undefined)}
+              >
+                View Latest
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Top Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

@@ -38,7 +38,17 @@ interface QAData {
   timestamp: string;
 }
 
-export function useQAData() {
+interface Session {
+  id: number;
+  url: string;
+  timestamp: string;
+  promptContent: string;
+  totalFeatures: number;
+  failedFeatures: number;
+  screenshots: number;
+}
+
+export function useQAData(selectedSessionId?: number) {
   const [data, setData] = useState<QAData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +58,11 @@ export function useQAData() {
       setLoading(true);
       setError(null);
       
-      const response = await fetch('/api/qa-data');
+      const url = selectedSessionId 
+        ? `/api/qa-data?sessionId=${selectedSessionId}`
+        : '/api/qa-data';
+      
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch QA data');
       }
@@ -70,12 +84,58 @@ export function useQAData() {
     const interval = setInterval(fetchData, 30000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [selectedSessionId]);
 
   return {
     data,
     loading,
     error,
     refetch: fetchData
+  };
+}
+
+export function useSessions() {
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchSessions = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/sessions');
+      if (!response.ok) {
+        throw new Error('Failed to fetch sessions');
+      }
+      
+      const sessionsData = await response.json();
+      if (sessionsData.success) {
+        setSessions(sessionsData.sessions);
+      } else {
+        throw new Error(sessionsData.error || 'Failed to fetch sessions');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+      console.error('Error fetching sessions:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSessions();
+    
+    // Refresh sessions every 60 seconds
+    const interval = setInterval(fetchSessions, 60000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  return {
+    sessions,
+    loading,
+    error,
+    refetch: fetchSessions
   };
 } 
