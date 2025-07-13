@@ -8,6 +8,7 @@ import { OpenAI } from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
 import cors from 'cors';
+import * as weave from 'weave';
 
 // Stagehand configuration
 const stagehandConfig = (): ConstructorParams => {
@@ -143,6 +144,7 @@ Generate a concise comment based on these results.
     return null;
   }
 }
+const generateGithubCommentOp = weave.op(generateGithubComment);
 
 // Helper function to ensure db directory exists
 async function ensureDbDirectory(): Promise<string> {
@@ -321,7 +323,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
     
     // Step 6: Generate GitHub comment
     console.log("\n📝 Generating GitHub comment...");
-    const githubComment = await generateGithubComment(structuredResult.features || [], url);
+    const githubComment = await generateGithubCommentOp(structuredResult.features || [], url);
 
     // Step 7: Identify failed features for screenshots
     const failedFeatures = structuredResult.features?.filter((f: any) => f.status === 'FAILED') || [];
@@ -519,6 +521,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
     };
   }
 }
+const runQATestOp = weave.op(runQATest);
 
 // Express.js Server
 const app = express();
@@ -546,7 +549,7 @@ app.post('/qa-test', async (req, res) => {
     console.log(`📝 Prompt: ${promptContent.substring(0, 100)}...`);
 
     // Run QA test
-    const result = await runQATest(url, promptContent);
+    const result = await runQATestOp(url, promptContent);
 
     // Return result
     if (result.success) {
@@ -713,11 +716,25 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'QA Testing Service is running' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 QA Testing Service running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/health`);
-  console.log(`🧪 QA Test endpoint: POST http://localhost:${PORT}/qa-test`);
-});
+// Initialize Weave and start the server
+async function startServer() {
+  try {
+    // Initialize Weave
+    await weave.init('qa-testing-workflow');
+    console.log('🌿 Weave initialized successfully.');
+
+    // Start server
+    app.listen(PORT, () => {
+      console.log(`🚀 QA Testing Service running on port ${PORT}`);
+      console.log(`📍 Health check: http://localhost:${PORT}/health`);
+      console.log(`🧪 QA Test endpoint: POST http://localhost:${PORT}/qa-test`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to initialize Weave or start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 export default app;
