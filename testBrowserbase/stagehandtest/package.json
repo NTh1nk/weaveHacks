@@ -5,6 +5,11 @@
     "build": "tsc",
     "start": "tsx index.ts",
     "dev": "tsx watch index.ts",
+    "server": "node start-server.js",
+    "test-api": "node test-api.js",
+    "test-screenshots": "node test-screenshot.js",
+    "test-quick": "node test-quick.js",
+    "test-db": "node test-db.js",
     "postinstall": "playwright install"
   },
   "dependencies": {

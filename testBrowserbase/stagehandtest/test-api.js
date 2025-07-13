@@ -9,7 +9,7 @@ const testQAAPI = async () => {
       },
       body: JSON.stringify({
         url: 'https://weave-demo-sable.vercel.app/',
-        promptContent: 'Test login feature with username "admin" and password "password"'
+        promptContent: 'Test login feature with username "admin" and password "password". Also test a feature that should fail like "test non-existent contact form"'
       })
     });
 
@@ -18,7 +18,26 @@ const testQAAPI = async () => {
     
     if (result.success) {
       console.log('\n✅ QA Test Status:', result.status);
-      console.log('📊 Agent Analysis:', result.data);
+      console.log('📊 Agent Analysis:', result.data.agentAnalysis.rawResult.message);
+      
+      // Check for screenshots of failed features
+      if (result.data.screenshots && result.data.screenshots.length > 0) {
+        console.log('\n📸 Failed Feature Screenshots:');
+        result.data.screenshots.forEach((screenshot, index) => {
+          console.log(`${index + 1}. Feature: ${screenshot.featureName}`);
+          console.log(`   Reason: ${screenshot.reason}`);
+          console.log(`   Screenshot Path: ${screenshot.screenshotPath}`);
+          console.log(`   Base64 Available: ${screenshot.screenshotBase64 ? 'Yes' : 'No'}`);
+          
+          // You could save the base64 screenshot to a file if needed
+          if (screenshot.screenshotBase64) {
+            console.log(`   Base64 Length: ${screenshot.screenshotBase64.length} characters`);
+          }
+        });
+      } else {
+        console.log('\n✅ No failed features - no screenshots needed');
+      }
+      
     } else {
       console.log('\n❌ QA Test Failed:', result.error);
     }
@@ -43,7 +62,7 @@ const testHealth = async () => {
 console.log('🧪 Testing QA API...\n');
 
 testHealth().then(() => {
-  console.log('\n🚀 Running QA Test...\n');
+  console.log('\n🚀 Running QA Test with potential failures...\n');
   testQAAPI();
 });
 
