@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'CodeTurtle',
+  title: 'CodeTurtle | Dashboard',
   description: 'Monitor and analyze automated test results',
   icons: {
     icon: '/turtle.png',
