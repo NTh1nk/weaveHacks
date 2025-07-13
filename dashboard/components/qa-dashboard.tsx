@@ -142,9 +142,12 @@ export function QADashboard() {
     <div className="p-6 space-y-6">
       {/* Header Section */}
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">QA Testing Dashboard</h1>
-          <p className="text-gray-600">Monitor and analyze automated test results</p>
+        <div className="flex items-center gap-3">
+          <img src="/turtle.png" alt="CodeTurtle Logo" className="w-10 h-10 rounded" />
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">CodeTurtle</h1>
+            <p className="text-gray-600">Monitor and analyze automated test results</p>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
