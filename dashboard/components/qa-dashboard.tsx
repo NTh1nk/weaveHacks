@@ -19,7 +19,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
-import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2 } from "lucide-react"
+import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
 import {
   DropdownMenu,
@@ -29,54 +29,93 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
-// Mock data
-const costData = [
-  { time: "00:00", cost: 0.12, tokens: 450, requests: 45 },
-  { time: "00:05", cost: 0.18, tokens: 520, requests: 52 },
-  { time: "00:10", cost: 0.09, tokens: 380, requests: 38 },
-  { time: "00:15", cost: 0.22, tokens: 610, requests: 61 },
-  { time: "00:20", cost: 0.14, tokens: 470, requests: 47 },
-  { time: "00:25", cost: 0.16, tokens: 550, requests: 55 },
-]
-
-const networkRequests = [
-  { url: "/api/users", method: "GET", status: 200, duration: "120ms", size: "2.1KB" },
-  { url: "/api/products", method: "POST", status: 201, duration: "340ms", size: "1.8KB" },
-  { url: "/api/analytics", method: "GET", status: 500, duration: "2.1s", size: "0KB" },
-  { url: "/api/auth", method: "POST", status: 200, duration: "89ms", size: "512B" },
-  { url: "/api/images", method: "GET", status: 404, duration: "45ms", size: "0KB" },
-]
-
-const statusData = [
-  { name: "Success", value: 85, color: "#10b981" },
-  { name: "Failed", value: 12, color: "#ef4444" },
-  { name: "Pending", value: 3, color: "#f59e0b" },
-]
-
-const workflowSteps = [
-  { id: 1, name: "Page Load", status: "completed", duration: "1.2s" },
-  { id: 2, name: "Authentication", status: "completed", duration: "0.8s" },
-  { id: 3, name: "Data Fetch", status: "running", duration: "2.1s" },
-  { id: 4, name: "Render UI", status: "pending", duration: "-" },
-  { id: 5, name: "User Interaction", status: "pending", duration: "-" },
-]
+import { useQAData } from "@/hooks/use-qa-data"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 
 export function QADashboard() {
+  const { data, loading, error, refetch } = useQAData();
+
+  if (loading) {
+    return (
+      <div className="p-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <Skeleton className="h-8 w-48 mb-2" />
+            <Skeleton className="h-4 w-96" />
+          </div>
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-9 w-32" />
+            <Skeleton className="h-9 w-24" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-32" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">Error Loading Data</h2>
+            <p className="text-gray-600 mb-4">{error}</p>
+            <Button onClick={refetch} variant="outline">
+              Try Again
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const metrics = data?.metrics;
+  const testHistory = data?.testHistory || [];
+  const errorDetails = data?.errorDetails || [];
+
+  // Prepare chart data from real metrics
+  const statusData = [
+    { name: "Passed", value: metrics?.passedTests || 0, color: "#10b981" },
+    { name: "Failed", value: metrics?.failedTests || 0, color: "#ef4444" },
+    { name: "Warnings", value: metrics?.warningTests || 0, color: "#f59e0b" },
+  ];
+
+  const impactData = [
+    { name: "High Impact", value: metrics?.impactBreakdown.high || 0, color: "#ef4444" },
+    { name: "Medium Impact", value: metrics?.impactBreakdown.medium || 0, color: "#f59e0b" },
+    { name: "Low Impact", value: metrics?.impactBreakdown.low || 0, color: "#10b981" },
+  ];
+
+  const errorCategoryData = Object.entries(metrics?.errorBreakdown || {}).map(([category, count]) => ({
+    name: category,
+    value: count,
+    color: "#3b82f6"
+  }));
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">CodeTurtle</h1>
-          <p className="text-gray-600">QA Testing Dashboard - Performance monitoring and session analysis</p>
+          <h1 className="text-3xl font-bold text-gray-900">QA Test Dashboard</h1>
+          <p className="text-gray-600">Real-time QA testing results from testBrowserbase</p>
+          {data?.timestamp && (
+            <p className="text-sm text-gray-500 mt-1">
+              Last updated: {new Date(data.timestamp).toLocaleString()}
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={refetch}>
             <Filter className="w-4 h-4 mr-2" />
-            Filter Duration
+            Refresh Data
           </Button>
           <Button variant="outline" size="sm">
             <Settings className="w-4 h-4 mr-2" />
@@ -181,15 +220,15 @@ export function QADashboard() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-green-100 text-sm">Total Cost</p>
-                <p className="text-2xl font-bold">$0.91</p>
+                <p className="text-green-100 text-sm">Success Rate</p>
+                <p className="text-2xl font-bold">{metrics?.successRate.toFixed(1)}%</p>
               </div>
-              <DollarSign className="w-6 h-6 text-green-200" />
+              <CheckCircle className="w-6 h-6 text-green-200" />
             </div>
             <div className="mt-3 h-12">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={costData.slice(-4)}>
-                  <Area type="monotone" dataKey="cost" stroke="#ffffff" fill="#ffffff" fillOpacity={0.3} />
+                <AreaChart data={statusData}>
+                  <Area type="monotone" dataKey="value" stroke="#ffffff" fill="#ffffff" fillOpacity={0.3} />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -200,15 +239,15 @@ export function QADashboard() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Total Tokens</p>
-                <p className="text-xl font-bold">2,980</p>
+                <p className="text-gray-600 text-sm">Total Tests</p>
+                <p className="text-xl font-bold">{metrics?.totalTests || 0}</p>
               </div>
               <Hash className="w-5 h-5 text-gray-400" />
             </div>
             <div className="mt-2 h-8">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={costData.slice(-6)}>
-                  <Bar dataKey="tokens" fill="#3b82f6" />
+                <BarChart data={statusData}>
+                  <Bar dataKey="value" fill="#3b82f6" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -219,15 +258,15 @@ export function QADashboard() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Cost per Token</p>
-                <p className="text-xl font-bold">$0.0003</p>
+                <p className="text-gray-600 text-sm">User Experience Score</p>
+                <p className="text-xl font-bold">{metrics?.userExperienceScore || 0}/10</p>
               </div>
-              <DollarSign className="w-5 h-5 text-green-500" />
+              <AlertTriangle className="w-5 h-5 text-orange-500" />
             </div>
             <div className="mt-2 h-8">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={costData.slice(-6)}>
-                  <Line type="monotone" dataKey="cost" stroke="#10b981" strokeWidth={2} dot={false} />
+                <LineChart data={impactData}>
+                  <Line type="monotone" dataKey="value" stroke="#f59e0b" strokeWidth={2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -238,15 +277,15 @@ export function QADashboard() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Avg Tokens/Request</p>
-                <p className="text-xl font-bold">54.2</p>
+                <p className="text-gray-600 text-sm">Blocking Issues</p>
+                <p className="text-xl font-bold">{metrics?.userBlockingIssues || 0}</p>
               </div>
-              <Hash className="w-5 h-5 text-blue-500" />
+              <XCircle className="w-5 h-5 text-red-500" />
             </div>
             <div className="mt-2 h-8">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={costData.slice(-6)}>
-                  <Bar dataKey="tokens" fill="#3b82f6" />
+                <BarChart data={impactData}>
+                  <Bar dataKey="value" fill="#ef4444" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -325,7 +364,7 @@ export function QADashboard() {
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
                     <span>{item.name}</span>
                   </div>
-                  <span className="font-semibold">{item.value}%</span>
+                  <span className="font-semibold">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -333,53 +372,52 @@ export function QADashboard() {
         </Card>
       </div>
 
-      {/* Bottom Section - Performance Chart and Network Requests */}
+      {/* Bottom Section - Error Analysis and Test History */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Cost and Token Metrics Over Time */}
+        {/* Error Categories Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Cost & Token Metrics</CardTitle>
+            <CardTitle>Error Categories</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={costData}>
+                <BarChart data={errorCategoryData} layout="horizontal">
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="time" />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
+                  <XAxis type="number" />
+                  <YAxis type="category" dataKey="name" width={100} />
                   <Tooltip />
-                  <Line yAxisId="left" type="monotone" dataKey="cost" stroke="#10b981" name="Cost ($)" strokeWidth={2} />
-                  <Line yAxisId="right" type="monotone" dataKey="tokens" stroke="#3b82f6" name="Tokens" strokeWidth={2} />
-                </LineChart>
+                  <Bar dataKey="value" fill="#3b82f6" />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        {/* Network Requests */}
+        {/* Recent Errors */}
         <Card>
           <CardHeader>
-            <CardTitle>Network Console Logs</CardTitle>
+            <CardTitle>Recent Errors</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3 max-h-64 overflow-y-auto">
-              {networkRequests.map((request, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              {errorDetails.slice(0, 5).map((error) => (
+                <div key={error.id} className="flex items-start justify-between p-3 bg-gray-50 rounded-lg">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="text-xs">
-                        {request.method}
+                      <Badge variant={error.type === 'error' ? "destructive" : "outline"} className="text-xs">
+                        {error.type.toUpperCase()}
                       </Badge>
-                      <span className="text-sm font-medium truncate">{request.url}</span>
+                      <span className="text-sm font-medium truncate">{error.category}</span>
                     </div>
+                    <p className="text-xs text-gray-600 mt-1 truncate">{error.message}</p>
                     <div className="flex items-center gap-4 mt-1 text-xs text-gray-600">
-                      <span>Duration: {request.duration}</span>
-                      <span>Size: {request.size}</span>
+                      <span>Location: {error.location}</span>
+                      <span>Impact: {error.userImpact}</span>
                     </div>
                   </div>
-                  <Badge variant={request.status === 200 || request.status === 201 ? "default" : "destructive"}>
-                    {request.status}
+                  <Badge variant={error.userImpact === 'high' ? "destructive" : error.userImpact === 'medium' ? "default" : "outline"}>
+                    {error.userImpact}
                   </Badge>
                 </div>
               ))}
