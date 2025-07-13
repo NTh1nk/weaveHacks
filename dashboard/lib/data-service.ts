@@ -96,6 +96,24 @@ class DataService {
     // API base URL for the test system
     this.apiBaseUrl = process.env.TEST_API_URL || 'http://localhost:4000';
     console.log('Using test API at:', this.apiBaseUrl);
+    
+    // Test API connectivity on startup
+    this.testApiConnectivity();
+  }
+
+  // Test API connectivity
+  private async testApiConnectivity() {
+    try {
+      const response = await fetch(`${this.apiBaseUrl}/health`);
+      if (response.ok) {
+        console.log('✅ Test API is accessible');
+      } else {
+        console.warn('⚠️ Test API responded with status:', response.status);
+      }
+    } catch (error) {
+      console.warn('⚠️ Test API is not accessible:', error instanceof Error ? error.message : 'Unknown error');
+      console.log('Dashboard will show fallback data when API is unavailable');
+    }
   }
 
   // Convert test system format to dashboard format
@@ -467,6 +485,12 @@ class DataService {
       const graph = resultData.data.testResult.graph;
       const features = resultData.data.testResult.features || [];
       
+      console.log('Processing workflow data:', {
+        graphNodes: graph.nodes.length,
+        graphEdges: graph.edges.length,
+        features: features.length
+      });
+      
       // Convert graph nodes to workflow format
       const nodes = graph.nodes.map((node: { nodeId: string; nodeText: string }, index: number) => {
         // Find corresponding feature for status
@@ -514,6 +538,7 @@ class DataService {
         };
       });
       
+      console.log('Generated workflow nodes:', nodes.length);
       return { nodes };
       
     } catch (error) {

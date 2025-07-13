@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,7 +20,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
-import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2 } from "lucide-react"
+import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2, RefreshCw } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
 import {
   DropdownMenu,
@@ -51,6 +51,24 @@ export function QADashboard() {
     reason: string;
     timestamp: string;
   } | null>(null);
+  const [apiStatus, setApiStatus] = useState<'connected' | 'disconnected' | 'checking'>('checking');
+
+  // Check API status on component mount
+  useEffect(() => {
+    const checkApiStatus = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/health');
+        setApiStatus(response.ok ? 'connected' : 'disconnected');
+      } catch (error) {
+        setApiStatus('disconnected');
+      }
+    };
+    
+    checkApiStatus();
+    // Check every 30 seconds
+    const interval = setInterval(checkApiStatus, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   if (loading) {
     return (
@@ -111,29 +129,30 @@ export function QADashboard() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+      {/* Header Section */}
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">QA Test Dashboard</h1>
-          <p className="text-gray-600">Real-time QA testing results from testBrowserbase</p>
-          {data?.timestamp && (
-            <p className="text-sm text-gray-500 mt-1">
-              Last updated: {new Date(data.timestamp).toLocaleString()}
-            </p>
-          )}
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">QA Testing Dashboard</h1>
+          <p className="text-gray-600">Monitor and analyze automated test results</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" onClick={refetch}>
-            <Filter className="w-4 h-4 mr-2" />
-            Refresh Data
+          <div className="flex items-center gap-2">
+            <div className={`w-3 h-3 rounded-full ${
+              apiStatus === 'connected' ? 'bg-green-500' : 
+              apiStatus === 'checking' ? 'bg-yellow-500' : 'bg-red-500'
+            }`}></div>
+            <span className="text-sm text-gray-600">
+              Test API: {apiStatus === 'connected' ? 'Connected' : 
+                        apiStatus === 'checking' ? 'Checking...' : 'Disconnected'}
+            </span>
+          </div>
+          <Button onClick={refetch} variant="outline" size="sm">
+            <RefreshCw className="w-4 h-4 mr-1" />
+            Refresh
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setShowRawJson(true)}>
-            <Code className="w-4 h-4 mr-2" />
-            Show Raw
-          </Button>
-          <Button variant="outline" size="sm">
-            <Settings className="w-4 h-4 mr-2" />
-            Settings
+          <Button onClick={() => setShowRawJson(true)} variant="outline" size="sm">
+            <Code className="w-4 h-4 mr-1" />
+            Raw Data
           </Button>
         </div>
       </div>
@@ -349,7 +368,26 @@ export function QADashboard() {
             <CardTitle>Interactive Test Workflow</CardTitle>
           </CardHeader>
           <CardContent>
-            {data?.workflowData ? (
+            {apiStatus === 'disconnected' ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-center h-60 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                  <div className="text-center">
+                    <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-600 mb-2">Test API Disconnected</h3>
+                    <p className="text-gray-500 text-sm mb-4">Cannot load test workflow data.</p>
+                    <div className="text-xs text-gray-400 space-y-1">
+                      <p>• Start the test server: <code className="bg-gray-100 px-1 rounded">cd testBrowserbase/stagehandtest && npm run dev</code></p>
+                      <p>• Ensure the server is running on port 4000</p>
+                      <p>• Run a QA test to generate workflow data</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm text-gray-500 mb-2">Showing example workflows instead:</p>
+                  <WorkflowCanvas workflows={{}} />
+                </div>
+              </div>
+            ) : data?.workflowData ? (
               <WorkflowCanvas 
                 workflows={{ 
                   'test-workflow': data.workflowData.nodes 
@@ -365,7 +403,7 @@ export function QADashboard() {
                     <p className="text-gray-500 text-sm mb-4">No test workflows are currently available to display.</p>
                     <div className="text-xs text-gray-400 space-y-1">
                       <p>• Start a QA test to generate workflow data</p>
-                      <p>• Ensure the test server is running on port 4000</p>
+                      <p>• Test API is connected but no results found</p>
                       <p>• Check that test results contain graph data</p>
                     </div>
                   </div>

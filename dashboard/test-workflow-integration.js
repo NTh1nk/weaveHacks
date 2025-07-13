@@ -1,61 +1,65 @@
 // Test script to verify workflow integration
-// This script simulates the API response and tests the workflow data conversion
+// This script fetches data from the actual API and tests the workflow data conversion
 
-const testData = {
-  id: 1,
-  timestamp: "2025-07-13T08:07:33.224Z",
-  url: "https://weave-demo-sable.vercel.app/",
-  promptContent: "Test this login in this app",
-  testResult: {
-    agentAnalysis: {
-      status: "COMPLETED",
-      summary: "Successfully tested the login feature of the application with provided demo credentials."
-    },
-    features: [
-      {
-        featureName: "User Login",
-        status: "PASSED",
-        whatHappened: "The user was able to log in successfully using provided demo credentials."
+const API_BASE_URL = 'http://localhost:4000';
+
+// Fetch data from the actual API
+async function fetchTestData() {
+  try {
+    console.log('Fetching test data from API...');
+    
+    // First get the summary to find the latest result
+    const summaryResponse = await fetch(`${API_BASE_URL}/qa-summary`);
+    if (!summaryResponse.ok) {
+      throw new Error(`Failed to fetch summary: ${summaryResponse.statusText}`);
+    }
+    
+    const summaryData = await summaryResponse.json();
+    if (!summaryData.success || !summaryData.summary || summaryData.summary.length === 0) {
+      throw new Error('No test results available');
+    }
+    
+    // Get the latest result
+    const latestResult = summaryData.summary[summaryData.summary.length - 1];
+    console.log(`Latest result ID: ${latestResult.id}`);
+    
+    const resultResponse = await fetch(`${API_BASE_URL}/qa-result/${latestResult.id}`);
+    if (!resultResponse.ok) {
+      throw new Error(`Failed to fetch result: ${resultResponse.statusText}`);
+    }
+    
+    const resultData = await resultResponse.json();
+    if (!resultData.success) {
+      throw new Error(`Failed to get result data: ${resultData.error}`);
+    }
+    
+    console.log('✅ Successfully fetched test data from API');
+    return resultData.data;
+    
+  } catch (error) {
+    console.error('❌ Error fetching test data:', error.message);
+    console.log('\nTrying to read from local JSON file as fallback...');
+    
+    // Fallback to reading local JSON file
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const jsonPath = path.join(__dirname, '../testBrowserbase/stagehandtest/db/1.json');
+      
+      if (fs.existsSync(jsonPath)) {
+        const fileContent = fs.readFileSync(jsonPath, 'utf-8');
+        const data = JSON.parse(fileContent);
+        console.log('✅ Successfully read from local JSON file');
+        return data;
+      } else {
+        throw new Error('Local JSON file not found');
       }
-    ],
-    graph: {
-      nodes: [
-        {
-          nodeId: "step1",
-          nodeText: "Entered username"
-        },
-        {
-          nodeId: "step2",
-          nodeText: "Entered password"
-        },
-        {
-          nodeId: "step3",
-          nodeText: "Clicked on Sign In"
-        },
-        {
-          nodeId: "step4",
-          nodeText: "Login successful, redirected to Dashboard"
-        }
-      ],
-      edges: [
-        {
-          source: "step1",
-          target: "step2"
-        },
-        {
-          source: "step2",
-          target: "step3"
-        },
-        {
-          source: "step3",
-          target: "step4"
-        }
-      ]
-    },
-    screenshots: []
-  },
-  screenshotCount: 0
-};
+    } catch (fallbackError) {
+      console.error('❌ Fallback also failed:', fallbackError.message);
+      return null;
+    }
+  }
+}
 
 // Simulate the workflow data conversion logic
 function convertTestDataToWorkflow(testData) {
@@ -66,6 +70,12 @@ function convertTestDataToWorkflow(testData) {
     console.log('No graph data available in test result');
     return null;
   }
+  
+  console.log('Processing workflow data:', {
+    graphNodes: graph.nodes.length,
+    graphEdges: graph.edges.length,
+    features: features.length
+  });
   
   // Convert graph nodes to workflow format
   const nodes = graph.nodes.map((node, index) => {
@@ -118,24 +128,45 @@ function convertTestDataToWorkflow(testData) {
 }
 
 // Test the conversion
-console.log('Testing workflow data conversion...\n');
-
-const workflowData = convertTestDataToWorkflow(testData);
-
-if (workflowData) {
-  console.log('✅ Workflow data conversion successful!');
-  console.log('\nGenerated workflow nodes:');
-  workflowData.nodes.forEach((node, index) => {
-    console.log(`${index + 1}. ${node.name} (${node.status})`);
-    console.log(`   Position: (${node.x}, ${node.y})`);
-    console.log(`   Connections: ${node.connections.join(', ') || 'none'}`);
-    if (node.description) {
-      console.log(`   Description: ${node.description}`);
-    }
-    console.log('');
-  });
-} else {
-  console.log('❌ Workflow data conversion failed');
+async function runTest() {
+  console.log('Testing workflow data conversion...\n');
+  
+  const testData = await fetchTestData();
+  
+  if (!testData) {
+    console.log('❌ Could not fetch test data');
+    return;
+  }
+  
+  console.log('Test data structure:');
+  console.log('- ID:', testData.id);
+  console.log('- URL:', testData.url);
+  console.log('- Timestamp:', testData.timestamp);
+  console.log('- Features:', testData.testResult.features?.length || 0);
+  console.log('- Graph nodes:', testData.testResult.graph?.nodes?.length || 0);
+  console.log('- Graph edges:', testData.testResult.graph?.edges?.length || 0);
+  console.log('');
+  
+  const workflowData = convertTestDataToWorkflow(testData);
+  
+  if (workflowData) {
+    console.log('✅ Workflow data conversion successful!');
+    console.log('\nGenerated workflow nodes:');
+    workflowData.nodes.forEach((node, index) => {
+      console.log(`${index + 1}. ${node.name} (${node.status})`);
+      console.log(`   Position: (${node.x}, ${node.y})`);
+      console.log(`   Connections: ${node.connections.join(', ') || 'none'}`);
+      if (node.description) {
+        console.log(`   Description: ${node.description}`);
+      }
+      console.log('');
+    });
+  } else {
+    console.log('❌ Workflow data conversion failed');
+  }
+  
+  console.log('Test completed!');
 }
 
-console.log('Test completed!'); 
+// Run the test
+runTest().catch(console.error); 
