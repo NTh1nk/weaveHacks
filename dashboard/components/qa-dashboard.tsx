@@ -20,7 +20,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
-import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2, RefreshCw } from "lucide-react"
+import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2, RefreshCw, ChevronRight } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
 import { SessionSelector } from "@/components/session-selector"
 import {
@@ -52,6 +52,7 @@ export function QADashboard() {
     timestamp: string;
   } | null>(null);
   const [apiStatus, setApiStatus] = useState<'connected' | 'disconnected' | 'checking'>('checking');
+  const [expandedErrorIds, setExpandedErrorIds] = useState<string[]>([]);
 
   // Check API status on component mount
   useEffect(() => {
@@ -72,6 +73,12 @@ export function QADashboard() {
 
   const handleSessionSelect = (sessionId: number | undefined) => {
     setSelectedSessionId(sessionId);
+  };
+
+  const toggleErrorExpand = (id: string) => {
+    setExpandedErrorIds((prev) =>
+      prev.includes(id) ? prev.filter((eid) => eid !== id) : [...prev, id]
+    );
   };
 
   if (loading) {
@@ -567,26 +574,51 @@ export function QADashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3 max-h-64 overflow-y-auto">
-              {errorDetails.slice(0, 5).map((error) => (
-                <div key={error.id} className="flex items-start justify-between p-3 bg-gray-50 rounded-lg">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <Badge variant={error.type === 'error' ? "destructive" : "outline"} className="text-xs">
-                        {error.type.toUpperCase()}
-                      </Badge>
-                      <span className="text-sm font-medium truncate">{error.category}</span>
+              {errorDetails.slice(0, 5).map((error) => {
+                const expanded = expandedErrorIds.includes(error.id);
+                return (
+                  <div key={error.id} className="flex items-start justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 cursor-pointer select-none" onClick={() => toggleErrorExpand(error.id)}>
+                        {expanded ? (
+                          <ChevronDown className="w-4 h-4 text-gray-400" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-gray-400" />
+                        )}
+                        <Badge variant={error.type === 'error' ? "destructive" : "outline"} className="text-xs">
+                          {error.type.toUpperCase()}
+                        </Badge>
+                        <span className="text-sm font-medium truncate">{error.category}</span>
+                      </div>
+                      {expanded ? (
+                        <>
+                          <p className="text-xs text-gray-600 mt-1 whitespace-pre-line break-words">{error.message}</p>
+                          <div className="flex items-center gap-4 mt-1 text-xs text-gray-600">
+                            <span>Location: {error.location}</span>
+                            <span>Impact: {error.userImpact}</span>
+                            <span>Problem: {error.problemType}</span>
+                            <span>Timestamp: {error.timestamp && new Date(error.timestamp).toLocaleString()}</span>
+                          </div>
+                          {error.screenshot && (
+                            <div className="mt-2">
+                              <img
+                                src={error.screenshot.startsWith('data:') ? error.screenshot : `data:image/png;base64,${error.screenshot}`}
+                                alt="Error Screenshot"
+                                className="max-w-xs max-h-32 rounded border"
+                              />
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-xs text-gray-600 mt-1 truncate">{error.message}</p>
+                      )}
                     </div>
-                    <p className="text-xs text-gray-600 mt-1 truncate">{error.message}</p>
-                    <div className="flex items-center gap-4 mt-1 text-xs text-gray-600">
-                      <span>Location: {error.location}</span>
-                      <span>Impact: {error.userImpact}</span>
-                    </div>
+                    <Badge variant={error.userImpact === 'high' ? "destructive" : error.userImpact === 'medium' ? "default" : "outline"}>
+                      {error.userImpact}
+                    </Badge>
                   </div>
-                  <Badge variant={error.userImpact === 'high' ? "destructive" : error.userImpact === 'medium' ? "default" : "outline"}>
-                    {error.userImpact}
-                  </Badge>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>
