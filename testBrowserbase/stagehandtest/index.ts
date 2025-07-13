@@ -7,6 +7,7 @@ import express from 'express';
 import { OpenAI } from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
+import cors from 'cors';
 
 // Stagehand configuration
 const stagehandConfig = (): ConstructorParams => {
@@ -461,6 +462,10 @@ Only include features that FAILED in the screenshots array.`;
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cors({
+  origin: '*',
+  credentials: false
+}));
 app.use(express.json());
 
 app.post('/qa-test', async (req, res) => {
@@ -583,6 +588,57 @@ app.get('/qa-results', async (req, res) => {
     
   } catch (error) {
     console.error("Error listing results:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error"
+    });
+  }
+});
+
+// Endpoint to get basic summary data for all results
+app.get('/qa-summary', async (req, res) => {
+  try {
+    const files = await getAvailableFiles();
+    const summaryData = [];
+    
+    for (const file of files) {
+      try {
+        const dbDir = await ensureDbDirectory();
+        const filePath = path.join(dbDir, file);
+        const fileContent = await fs.readFile(filePath, 'utf-8');
+        const result = JSON.parse(fileContent);
+        
+        const failedCount = result.testResult.features?.filter((f: any) => f.status === 'FAILED').length || 0;
+        const totalCount = result.testResult.features?.length || 0;
+        
+        summaryData.push({
+          id: result.id,
+          url: result.url,
+          timestamp: result.timestamp,
+          totalFeatures: totalCount,
+          failedFeatures: failedCount,
+          screenshots: result.testResult.screenshots?.length || 0
+        });
+      } catch (fileError) {
+        console.error(`Error reading file ${file}:`, fileError);
+        // Skip corrupted files
+        continue;
+      }
+    }
+    
+    // Sort by ID (file number)
+    summaryData.sort((a, b) => a.id - b.id);
+    
+    console.log(`📊 Generated summary for ${summaryData.length} results`);
+    
+    res.json({
+      success: true,
+      totalResults: summaryData.length,
+      summary: summaryData
+    });
+    
+  } catch (error) {
+    console.error("Error generating summary:", error);
     res.status(500).json({
       success: false,
       error: "Internal server error"
