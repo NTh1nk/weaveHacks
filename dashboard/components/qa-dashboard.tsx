@@ -396,17 +396,30 @@ export function QADashboard() {
                       </Badge>
                     </div>
                     <p className="text-xs text-gray-600 mb-2">{screenshot.reason}</p>
-                    {screenshot.screenshotBase64 && (
+                    {screenshot.screenshotBase64 ? (
                       <div className="relative">
                         <img 
-                          src={`data:image/png;base64,${screenshot.screenshotBase64}`}
+                          src={screenshot.screenshotBase64.startsWith('data:') ? screenshot.screenshotBase64 : `data:image/png;base64,${screenshot.screenshotBase64}`}
                           alt={`Screenshot for ${screenshot.featureName}`}
                           className="w-full h-auto rounded border"
                           style={{ maxHeight: '200px', objectFit: 'contain' }}
+                          onError={(e) => {
+                            console.error('Failed to load screenshot:', screenshot.featureName);
+                            console.error('Base64 data length:', screenshot.screenshotBase64?.length);
+                            console.error('Base64 data preview:', screenshot.screenshotBase64?.substring(0, 100));
+                          }}
+                          onLoad={() => {
+                            console.log('Successfully loaded screenshot for:', screenshot.featureName);
+                          }}
                         />
                         <div className="absolute top-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
                           {new Date(screenshot.timestamp).toLocaleTimeString()}
                         </div>
+                      </div>
+                    ) : (
+                      <div className="bg-gray-100 rounded border p-4 text-center text-gray-500">
+                        <p className="text-sm">No screenshot data available</p>
+                        <p className="text-xs mt-1">Base64 data missing for this feature</p>
                       </div>
                     )}
                   </div>

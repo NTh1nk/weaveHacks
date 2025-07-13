@@ -381,17 +381,28 @@ class DataService {
       const screenshots = resultData.data.testResult.screenshots || [];
       const features = resultData.data.testResult.features || [];
       
+      console.log('Raw screenshots data:', screenshots);
+      console.log('Raw features data:', features);
+      
       // Combine screenshots with feature status
       return screenshots.map((screenshot: any, index: number) => {
         const feature = features.find((f: any) => f.featureName === screenshot.featureName);
-        return {
+        const screenshotData = {
           id: `screenshot-${index}`,
           featureName: screenshot.featureName,
           reason: screenshot.reason,
-          screenshotBase64: screenshot.screenshotBase64,
+          screenshotBase64: screenshot.screenshotBase64 || '',
           status: feature?.status || 'UNKNOWN',
           timestamp: resultData.data.timestamp
         };
+        
+        console.log(`Screenshot ${index}:`, {
+          featureName: screenshotData.featureName,
+          hasBase64: !!screenshotData.screenshotBase64,
+          base64Length: screenshotData.screenshotBase64?.length || 0
+        });
+        
+        return screenshotData;
       });
       
     } catch (error) {
