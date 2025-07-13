@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { X, Copy, Check } from "lucide-react"
+import { X, Copy, Check, ChevronDown, ChevronRight, Image } from "lucide-react"
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
 
 interface ModalProps {
   isOpen: boolean
@@ -66,6 +67,98 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   )
 }
 
+// Function to detect if a string is base64 image data
+function isBase64Image(str: string): boolean {
+  // Check if it starts with data:image or is a long base64 string that could be an image
+  return str.startsWith('data:image/') || 
+         (str.length > 1000 && /^[A-Za-z0-9+/]*={0,2}$/.test(str));
+}
+
+// Component for collapsible base64 image
+function CollapsibleBase64Image({ data, depth }: { data: string; depth: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const truncated = data.length > 100 ? `${data.substring(0, 100)}...` : data;
+  
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <div className="inline-flex items-center gap-2">
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-6 px-2 py-1 text-xs">
+            {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+            <Image className="h-3 w-3 mr-1" />
+            Base64 Image ({data.length} chars)
+          </Button>
+        </CollapsibleTrigger>
+      </div>
+      <CollapsibleContent className="mt-2">
+        <div className="bg-gray-800 rounded p-2 text-xs">
+          <div className="mb-2">
+            <img 
+              src={data.startsWith('data:') ? data : `data:image/png;base64,${data}`}
+              alt="Base64 Image"
+              className="max-w-full max-h-48 object-contain border rounded"
+              onError={(e) => {
+                console.error('Failed to load base64 image');
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </div>
+          <div className="text-gray-400 break-all">
+            {truncated}
+          </div>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+
+// Function to render JSON with collapsible base64 images
+function renderJsonWithCollapsibleImages(obj: any, depth: number = 0): React.ReactNode {
+  if (typeof obj === 'string') {
+    if (isBase64Image(obj)) {
+      return <CollapsibleBase64Image key={`base64-${depth}-${Math.random()}`} data={obj} depth={depth} />;
+    }
+    return `"${obj}"`;
+  }
+  
+  if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null) {
+    return String(obj);
+  }
+  
+  if (Array.isArray(obj)) {
+    return (
+      <span>
+        [<br />
+        {obj.map((item, index) => (
+          <div key={index} style={{ marginLeft: `${(depth + 1) * 2}em` }}>
+            {renderJsonWithCollapsibleImages(item, depth + 1)}
+            {index < obj.length - 1 && ','}
+          </div>
+        ))}
+        <div style={{ marginLeft: `${depth * 2}em` }}>]</div>
+      </span>
+    );
+  }
+  
+  if (typeof obj === 'object') {
+    const entries = Object.entries(obj);
+    return (
+      <span>
+        {'{'}<br />
+        {entries.map(([key, value], index) => (
+          <div key={key} style={{ marginLeft: `${(depth + 1) * 2}em` }}>
+            <span className="text-blue-400">"{key}"</span>: {renderJsonWithCollapsibleImages(value, depth + 1)}
+            {index < entries.length - 1 && ','}
+          </div>
+        ))}
+        <div style={{ marginLeft: `${depth * 2}em` }}>{'}'}</div>
+      </span>
+    );
+  }
+  
+  return String(obj);
+}
+
 interface RawJsonModalProps {
   isOpen: boolean
   onClose: () => void
@@ -112,7 +205,7 @@ export function RawJsonModal({ isOpen, onClose, data, title = "Raw JSON Data" }:
         
         <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-auto max-h-96">
           <pre className="text-sm whitespace-pre-wrap">
-            {JSON.stringify(data, null, 2)}
+            {renderJsonWithCollapsibleImages(data)}
           </pre>
         </div>
       </div>
