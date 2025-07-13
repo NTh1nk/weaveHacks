@@ -80,10 +80,7 @@ export function useQAData(selectedSessionId?: number) {
   useEffect(() => {
     fetchData();
     
-    // Refresh data every 30 seconds
-    const interval = setInterval(fetchData, 30000);
-    
-    return () => clearInterval(interval);
+    // Removed automatic refresh - data will only refresh on manual refetch
   }, [selectedSessionId]);
 
   return {
@@ -126,10 +123,7 @@ export function useSessions() {
   useEffect(() => {
     fetchSessions();
     
-    // Refresh sessions every 60 seconds
-    const interval = setInterval(fetchSessions, 60000);
-    
-    return () => clearInterval(interval);
+    // Removed automatic refresh - sessions will only refresh on manual refetch
   }, []);
 
   return {

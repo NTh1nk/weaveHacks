@@ -66,9 +66,7 @@ export function QADashboard() {
     };
     
     checkApiStatus();
-    // Check every 30 seconds
-    const interval = setInterval(checkApiStatus, 30000);
-    return () => clearInterval(interval);
+    // Removed automatic refresh - API status will only check on initial load
   }, []);
 
   const handleSessionSelect = (sessionId: number | undefined) => {
