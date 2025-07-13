@@ -189,134 +189,98 @@ async function runQATest(url: string, promptContent: string) {
 Based on this testing context: "${promptContent}"
 
 **YOUR TASK:**
-Test the features mentioned in the context on the CURRENT WEBSITE you are viewing right now.
+Test the features mentioned in the context on the CURRENT WEBSITE you are viewing right now. While you are testing, track the steps you take.
 
 **CRITICAL INSTRUCTIONS:**
-1. Look at the current page you are on
-2. Test each feature/functionality mentioned in the context systematically
-3. For each feature, you MUST clearly state: PASSED, FAILED, or NOT_FOUND
-4. If a feature doesn't work the first time, mark it as FAILED and move to next feature
-5. Document what happened for each feature with clear status
+1. Look at the current page you are on.
+2. Test each feature/functionality mentioned in the context systematically.
+3. For each feature, you MUST determine if it: PASSED, FAILED, or NOT_FOUND.
+4. If a feature doesn't work the first time, mark it as FAILED and move to the next feature.
+5. Document what happened for each feature with clear status.
+6. As you perform actions, create a graph of your steps. Each step is a node. Connect nodes to show the sequence of actions.
 
-**TESTING METHODOLOGY:**
-- You are already on the website - start testing immediately
-- Navigate through the website systematically
-- Test each feature mentioned in the context
-- If a feature doesn't work the first time, mark it as FAILED and move to next feature
-- Document what happened for each feature
+**REQUIRED OUTPUT FORMAT:**
+You MUST return ONLY a single JSON object. Do not add any text before or after the JSON object. The JSON object must conform to this structure:
 
-**IMPORTANT:** 
-- You are ALREADY on the website ${url}
-- Start testing the features mentioned in the context RIGHT NOW
-- Do not ask for another website - test the current one you are viewing
-
-**REQUIRED REPORT FORMAT:**
-For each feature tested, provide exactly this format:
-Feature: [Feature Name]
-Status: PASSED/FAILED/NOT_FOUND
-Details: [What happened during testing]
-
-Focus on clear PASSED/FAILED/NOT_FOUND status for each feature.`,
-      maxSteps: 30,
-      autoScreenshot: true
-    });
-
-    // Step 8: Structure the agent result using GPT-4o
-    console.log("\n🔧 Structuring agent result...");
-    const structurePrompt = `Parse this QA test result into structured JSON. Extract features and their status.
-
-Agent Result:
-${agentResult.message}
-
-Return ONLY a JSON object with this structure:
 {
   "agentAnalysis": {
     "status": "COMPLETED" or "FAILED",
-    "rawResult": {the original agent result}
+    "summary": "A brief summary of the testing process."
   },
   "features": [
     {
       "featureName": "string",
-      "status": "PASSED" or "FAILED",
+      "status": "PASSED" | "FAILED" | "NOT_FOUND",
       "whatHappened": "string"
     }
   ],
-  "screenshots": [
-    {
-      "featureName": "string", 
-      "reason": "string",
-      "screenshotPath": "string",
-      "screenshotBase64": "string"
-    }
+  "graph": {
+    "nodes": [
+      { "nodeId": "string (e.g., 'step1')", "nodeText": "string (description of the step)" }
+    ],
+    "edges": [
+      { "source": "string (nodeId)", "target": "string (nodeId)" }
+    ]
+  }
+}
+
+**EXAMPLE GRAPH:**
+If you first click a "Login" button and then fill in a username, your graph might look like this:
+"graph": {
+  "nodes": [
+    { "nodeId": "step1", "nodeText": "Clicked Login button" },
+    { "nodeId": "step2", "nodeText": "Filled in username" }
+  ],
+  "edges": [
+    { "source": "step1", "target": "step2" }
   ]
 }
 
-Only include features that FAILED in the screenshots array.`;
-
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+**IMPORTANT:**
+- You are ALREADY on the website ${url}.
+- Start testing RIGHT NOW.
+- Do not ask for another website.
+- Your final output must be only the JSON object.`,
+      maxSteps: 30,
+      autoScreenshot: true
     });
 
-    const structuredResponse = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        {
-          role: 'user',
-          content: structurePrompt
-        }
-      ],
-      temperature: 0.1
-    });
-
-    // Parse the structured response
+    // Step 8: Parse the agent's JSON output
+    console.log("\n🔧 Parsing agent result...");
     let structuredResult;
     try {
-      let responseContent = structuredResponse.choices[0].message.content!;
+      let responseContent = agentResult.message;
       responseContent = responseContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
       structuredResult = JSON.parse(responseContent);
       console.log("Structured result:", JSON.stringify(structuredResult, null, 2));
     } catch (error) {
-      console.error("Failed to parse structured response:", error);
-      console.log("Raw response:", structuredResponse.choices[0].message.content);
+      console.error("Failed to parse agent JSON response:", error);
+      console.log("Raw agent response:", agentResult.message);
       structuredResult = {
         agentAnalysis: {
           status: "FAILED",
-          rawResult: {
-            success: false,
-            actions: [],
-            message: "Failed to structure agent response",
-            completed: false,
-            usage: { input_tokens: 0, output_tokens: 0, inference_time_ms: 0 }
-          }
+          summary: "Failed to parse agent response into JSON."
         },
         features: [],
-        failedFeatures: [
-          {
-            featureName: "Agent Response Processing",
-            reason: "Failed to parse agent response into structured format"
-          }
-        ]
+        graph: { nodes: [], edges: [] }
       };
     }
-
-    // Step 6: Handle case when no failures are found
-    if (!structuredResult.failedFeatures || structuredResult.failedFeatures.length === 0) {
-      console.log("No failed features detected - no screenshots needed");
-      structuredResult.failedFeatures = [];
-    }
+    
+    // Step 6: Identify failed features for screenshots
+    const failedFeatures = structuredResult.features?.filter((f: any) => f.status === 'FAILED') || [];
 
     // Step 7: Capture screenshots for each failed feature
-    if (structuredResult.failedFeatures.length === 0) {
+    if (failedFeatures.length === 0) {
       console.log(`\n📸 No screenshots needed - no failed features detected`);
     } else {
-      console.log(`\n📸 Starting screenshot capture for ${structuredResult.failedFeatures.length} failed features...`);
+      console.log(`\n📸 Starting screenshot capture for ${failedFeatures.length} failed features...`);
     }
     const screenshots = [];
     
-    for (const [index, failedFeature] of structuredResult.failedFeatures.entries()) {
-      console.log(`\n🎯 Capturing screenshot ${index + 1}/${structuredResult.failedFeatures.length}`);
+    for (const [index, failedFeature] of failedFeatures.entries()) {
+      console.log(`\n🎯 Capturing screenshot ${index + 1}/${failedFeatures.length}`);
       console.log(`   Feature: ${failedFeature.featureName}`);
-      console.log(`   Reason: ${failedFeature.reason}`);
+      console.log(`   Reason: ${failedFeature.whatHappened}`);
       
       try {
         const screenshotPath = await captureFailureScreenshot(page, failedFeature.featureName);
@@ -330,7 +294,7 @@ Only include features that FAILED in the screenshots array.`;
           if (base64Screenshot) {
             screenshots.push({
               featureName: failedFeature.featureName,
-              reason: failedFeature.reason,
+              reason: failedFeature.whatHappened,
               screenshotPath: screenshotPath,
               screenshotBase64: base64Screenshot
             });
@@ -339,7 +303,7 @@ Only include features that FAILED in the screenshots array.`;
             console.log(`❌ Failed to convert screenshot to base64`);
             screenshots.push({
               featureName: failedFeature.featureName,
-              reason: failedFeature.reason,
+              reason: failedFeature.whatHappened,
               screenshotPath: screenshotPath,
               screenshotBase64: null
             });
@@ -359,7 +323,7 @@ Only include features that FAILED in the screenshots array.`;
     console.log("\n🧪 QA Test Results:");
     console.log("==================");
     console.log("Features tested:", structuredResult.features?.length || 0);
-    console.log("Failed features:", structuredResult.failedFeatures.length);
+    console.log("Failed features:", failedFeatures.length);
     console.log("Screenshots captured:", screenshots.length);
 
     if (screenshots.length > 0) {
