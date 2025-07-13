@@ -142,15 +142,11 @@ class QAContextAgents:
             )
     
     @weave.op()
-    def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
-        """Generate comprehensive QA context using CrewAI."""
+    def _run_analysis_task(self, pr_data: PRData, doc_data: DocumentationData, specific_changes: str) -> AgentResult:
+        """Run the analysis task with timing tracking."""
         start_time = time.time()
         
         try:
-            # Extract actual changes from diff
-            specific_changes = self._extract_specific_changes(pr_data)
-            
-            # Create tasks for the crew with SPECIFIC change information
             analysis_task = Task(
                 description=f"""
                 Analyze the following PR with SPECIFIC code changes and generate QA testing context:
@@ -181,6 +177,36 @@ class QAContextAgents:
                 expected_output="Specific testing focus areas based on actual code changes"
             )
             
+            # Execute single task
+            crew = Crew(
+                agents=[self.qa_context_generator],
+                tasks=[analysis_task],
+                verbose=True
+            )
+            
+            result = crew.kickoff()
+            
+            return AgentResult(
+                agent_name="Analysis Task",
+                success=True,
+                data=result,
+                execution_time=time.time() - start_time
+            )
+            
+        except Exception as e:
+            return AgentResult(
+                agent_name="Analysis Task",
+                success=False,
+                error=str(e),
+                execution_time=time.time() - start_time
+            )
+    
+    @weave.op()
+    def _run_scenario_task(self, pr_data: PRData, specific_changes: str) -> AgentResult:
+        """Run the scenario task with timing tracking."""
+        start_time = time.time()
+        
+        try:
             scenario_task = Task(
                 description=f"""
                 Based on the SPECIFIC PR changes, create targeted testing scenarios:
@@ -212,6 +238,36 @@ class QAContextAgents:
                 expected_output="Specific testing scenarios based on actual code changes"
             )
             
+            # Execute single task
+            crew = Crew(
+                agents=[self.qa_context_generator],
+                tasks=[scenario_task],
+                verbose=True
+            )
+            
+            result = crew.kickoff()
+            
+            return AgentResult(
+                agent_name="Scenario Task",
+                success=True,
+                data=result,
+                execution_time=time.time() - start_time
+            )
+            
+        except Exception as e:
+            return AgentResult(
+                agent_name="Scenario Task",
+                success=False,
+                error=str(e),
+                execution_time=time.time() - start_time
+            )
+    
+    @weave.op()
+    def _run_context_task(self, pr_data: PRData, doc_data: DocumentationData, specific_changes: str) -> AgentResult:
+        """Run the context task with timing tracking."""
+        start_time = time.time()
+        
+        try:
             context_task = Task(
                 description=f"""
                 Generate application context for QA testers:
@@ -235,15 +291,50 @@ class QAContextAgents:
                 expected_output="Specific application context for the changes made"
             )
             
-            # Create and run the crew
+            # Execute single task
             crew = Crew(
-                agents=[self.qa_context_generator, self.documentation_analyzer],
-                tasks=[analysis_task, scenario_task, context_task],
-                process=Process.sequential,
+                agents=[self.documentation_analyzer],
+                tasks=[context_task],
                 verbose=True
             )
             
             result = crew.kickoff()
+            
+            return AgentResult(
+                agent_name="Context Task",
+                success=True,
+                data=result,
+                execution_time=time.time() - start_time
+            )
+            
+        except Exception as e:
+            return AgentResult(
+                agent_name="Context Task",
+                success=False,
+                error=str(e),
+                execution_time=time.time() - start_time
+            )
+
+    @weave.op()
+    def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
+        """Generate comprehensive QA context using CrewAI."""
+        start_time = time.time()
+        
+        try:
+            # Extract actual changes from diff
+            specific_changes = self._extract_specific_changes(pr_data)
+            
+            # Run each task separately with individual timing
+            analysis_result = self._run_analysis_task(pr_data, doc_data, specific_changes)
+            scenario_result = self._run_scenario_task(pr_data, specific_changes)
+            context_result = self._run_context_task(pr_data, doc_data, specific_changes)
+            
+            # Combine results
+            result = {
+                "analysis": analysis_result,
+                "scenarios": scenario_result,
+                "context": context_result
+            }
             
             return AgentResult(
                 agent_name="QA Context Generator",

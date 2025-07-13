@@ -164,12 +164,6 @@ class GitHubService:
         # Check comments for deployment links
         comments = list(pr.get_issue_comments())
         
-        # Wait for deployment if not enough comments yet
-        if len(comments) < config.min_comments_for_deployment:
-            print(f"Waiting for deployment comments... ({len(comments)}/{config.min_comments_for_deployment})")
-            time.sleep(60)  # Wait 1 minute before checking again
-            comments = list(pr.get_issue_comments())
-        
         # Look for deployment URLs in comments
         deployment_patterns = [
             r'https://[^/]+\.fly\.dev[^\s]*',
