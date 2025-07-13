@@ -7,12 +7,14 @@ export async function GET() {
     const testHistory = await dataService.getTestHistory();
     const errorDetails = await dataService.getErrorDetails();
     const screenshots = await dataService.getScreenshots();
+    const workflowData = await dataService.getWorkflowData();
     
     return NextResponse.json({
       metrics,
       testHistory,
       errorDetails,
       screenshots,
+      workflowData,
       timestamp: new Date().toISOString()
     });
   } catch (error) {

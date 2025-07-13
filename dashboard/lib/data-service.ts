@@ -10,13 +10,24 @@ export interface TestSystemResult {
   testResult: {
     agentAnalysis: {
       status: string;
-      rawResult: string;
+      rawResult?: string;
+      summary?: string;
     };
     features: Array<{
       featureName: string;
       status: string;
       whatHappened: string;
     }>;
+    graph?: {
+      nodes: Array<{
+        nodeId: string;
+        nodeText: string;
+      }>;
+      edges: Array<{
+        source: string;
+        target: string;
+      }>;
+    };
     screenshots: Array<{
       featureName: string;
       reason: string;
@@ -408,6 +419,106 @@ class DataService {
     } catch (error) {
       console.error('Error getting screenshots:', error);
       return [];
+    }
+  }
+
+  // Convert test system graph data to workflow format
+  async getWorkflowData(): Promise<{
+    nodes: Array<{
+      id: string;
+      name: string;
+      status: "completed" | "running" | "pending" | "failed";
+      duration: string;
+      x: number;
+      y: number;
+      connections: string[];
+      description?: string;
+    }>;
+  } | null> {
+    try {
+      // Get the latest result from the test system
+      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      if (!summaryResponse.ok) {
+        console.error('Failed to fetch summary:', summaryResponse.statusText);
+        return null;
+      }
+      
+      const summaryData = await summaryResponse.json();
+      if (!summaryData.success || !summaryData.summary || summaryData.summary.length === 0) {
+        console.log('No test results available for workflow');
+        return null;
+      }
+      
+      // Get the latest result
+      const latestResult = summaryData.summary[summaryData.summary.length - 1];
+      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      
+      if (!resultResponse.ok) {
+        console.error('Failed to fetch latest result:', resultResponse.statusText);
+        return null;
+      }
+      
+      const resultData = await resultResponse.json();
+      if (!resultData.success || !resultData.data.testResult.graph) {
+        console.log('No graph data available in test result');
+        return null;
+      }
+      
+      const graph = resultData.data.testResult.graph;
+      const features = resultData.data.testResult.features || [];
+      
+      // Convert graph nodes to workflow format
+      const nodes = graph.nodes.map((node: { nodeId: string; nodeText: string }, index: number) => {
+        // Find corresponding feature for status
+        const feature = features.find((f: { featureName: string; status: string; whatHappened: string }) => 
+          f.featureName.toLowerCase().includes(node.nodeText.toLowerCase()) ||
+          node.nodeText.toLowerCase().includes(f.featureName.toLowerCase())
+        );
+        
+        // Determine status based on feature status or default to completed
+        let status: "completed" | "running" | "pending" | "failed" = "completed";
+        if (feature) {
+          switch (feature.status) {
+            case 'PASSED':
+              status = 'completed';
+              break;
+            case 'FAILED':
+              status = 'failed';
+              break;
+            case 'WARNING':
+              status = 'pending';
+              break;
+            default:
+              status = 'completed';
+          }
+        }
+        
+        // Calculate position (simple grid layout)
+        const x = 50 + (index * 150);
+        const y = 100 + (index % 2 * 100);
+        
+        // Find connections for this node
+        const connections = graph.edges
+          .filter((edge: { source: string; target: string }) => edge.source === node.nodeId)
+          .map((edge: { source: string; target: string }) => edge.target);
+        
+        return {
+          id: node.nodeId,
+          name: node.nodeText,
+          status,
+          duration: feature ? "0.5s" : "0.1s",
+          x,
+          y,
+          connections,
+          description: feature?.whatHappened
+        };
+      });
+      
+      return { nodes };
+      
+    } catch (error) {
+      console.error('Error getting workflow data:', error);
+      return null;
     }
   }
 }

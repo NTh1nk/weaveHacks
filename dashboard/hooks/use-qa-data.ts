@@ -23,6 +23,18 @@ interface QAData {
     status: string;
     timestamp: string;
   }>;
+  workflowData?: {
+    nodes: Array<{
+      id: string;
+      name: string;
+      status: "completed" | "running" | "pending" | "failed";
+      duration: string;
+      x: number;
+      y: number;
+      connections: string[];
+      description?: string;
+    }>;
+  } | null;
   timestamp: string;
 }
 

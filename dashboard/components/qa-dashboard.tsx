@@ -349,7 +349,33 @@ export function QADashboard() {
             <CardTitle>Interactive Test Workflow</CardTitle>
           </CardHeader>
           <CardContent>
-            <WorkflowCanvas workflows={{}} />
+            {data?.workflowData ? (
+              <WorkflowCanvas 
+                workflows={{ 
+                  'test-workflow': data.workflowData.nodes 
+                }} 
+                defaultWorkflow="test-workflow"
+              />
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center justify-center h-60 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                  <div className="text-center">
+                    <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-600 mb-2">No Test Workflow Available</h3>
+                    <p className="text-gray-500 text-sm mb-4">No test workflows are currently available to display.</p>
+                    <div className="text-xs text-gray-400 space-y-1">
+                      <p>• Start a QA test to generate workflow data</p>
+                      <p>• Ensure the test server is running on port 4000</p>
+                      <p>• Check that test results contain graph data</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm text-gray-500 mb-2">Showing example workflows instead:</p>
+                  <WorkflowCanvas workflows={{}} />
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
 
