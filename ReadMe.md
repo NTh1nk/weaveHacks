@@ -24,7 +24,7 @@ A workspace containing multiple projects including CodeTurtle, Dashboard, and Br
    ```bash
    npm run start (stageHand)
    npm run build (dashboard)
-   order is important, 2 consoles running simul
+   order is important, 2 consoles running simul is necessary 
    ```
 
 ### Individual Project Commands
