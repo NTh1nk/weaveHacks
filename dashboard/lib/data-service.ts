@@ -131,7 +131,7 @@ class DataService {
     }
     
     // Calculate user experience score (0-100)
-    const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
+    const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 10 : 0;
     
     // Convert features to errors format and include screenshots
     const errors = features
