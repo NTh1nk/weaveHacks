@@ -1,30 +1,143 @@
-# codeTurtle - QA Testing Dashboard
+# QA Dashboard
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A modern dashboard for visualizing QA test results from the Browserbase Stagehand testing system.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/nth1nks-projects/v0-qa-dashboard-prompt)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/ylw3Hiw1OpO)
+## Features
 
-## Overview
+- **Real-time Data Loading**: Connects to the test system API to load the latest test results
+- **Interactive Metrics**: Displays test success rates, error breakdowns, and user experience scores
+- **Test History**: Shows historical test data with trends over time
+- **Error Details**: Detailed view of failed tests with screenshots and error messages
+- **Responsive Design**: Works on desktop and mobile devices
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## Architecture
 
-## Deployment
+The dashboard is built with Next.js and connects to the test system API running on port 4000. It automatically converts the test system's JSON format to the dashboard's internal format.
 
-Your project is live at:
+### Data Flow
 
-**[https://vercel.com/nth1nks-projects/v0-qa-dashboard-prompt](https://vercel.com/nth1nks-projects/v0-qa-dashboard-prompt)**
+1. **Test System** (port 4000) - Runs QA tests and saves results to numbered JSON files
+2. **Dashboard** (port 3000) - Fetches data from test system API and displays it
 
-## Build your app
+### API Endpoints Used
 
-Continue building your app on:
+- `GET /health` - Health check
+- `GET /qa-summary` - Get summary of all test results
+- `GET /qa-result/:id` - Get detailed result for specific test
 
-**[https://v0.dev/chat/projects/ylw3Hiw1OpO](https://v0.dev/chat/projects/ylw3Hiw1OpO)**
+## Setup
 
-## How It Works
+### Prerequisites
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+1. **Test System**: Make sure the test system is running on port 4000
+   ```bash
+   cd testBrowserbase/stagehandtest
+   npm start
+   ```
+
+2. **Dashboard**: Install dependencies and start the dashboard
+   ```bash
+   cd dashboard
+   npm install
+   npm run dev
+   ```
+
+### Environment Variables
+
+- `TEST_API_URL` - URL of the test system API (default: `http://localhost:4000`)
+
+## Data Format Conversion
+
+The dashboard automatically converts the test system's JSON format to its internal format:
+
+### Test System Format
+```json
+{
+  "id": 4,
+  "timestamp": "2025-07-13T07:08:13.936Z",
+  "url": "https://example.com",
+  "promptContent": "Test login functionality",
+  "testResult": {
+    "agentAnalysis": {
+      "status": "COMPLETED",
+      "rawResult": "..."
+    },
+    "features": [
+      {
+        "featureName": "Login",
+        "status": "PASSED",
+        "whatHappened": "Successfully logged in"
+      }
+    ],
+    "screenshots": [...]
+  }
+}
+```
+
+### Dashboard Format
+```json
+{
+  "testUrl": "https://example.com",
+  "testTimestamp": "2025-07-13T07:08:13.936Z",
+  "overallStatus": "passed",
+  "userExperienceScore": 100,
+  "summary": {
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0,
+    "warnings": 0,
+    "userBlockingIssues": 0,
+    "usabilityIssues": 0
+  },
+  "errors": []
+}
+```
+
+## Pages
+
+- **Dashboard** (`/`) - Main dashboard with metrics and charts
+- **Test Results** (`/test`) - Detailed view of test results
+- **Status** (`/status`) - System status and health information
+
+## Development
+
+### Adding New Metrics
+
+1. Update the `DashboardMetrics` interface in `lib/data-service.ts`
+2. Modify the `getDashboardMetrics()` method to calculate the new metric
+3. Update the dashboard components to display the new metric
+
+### Adding New Data Sources
+
+1. Add new API endpoints to the test system
+2. Update the data service to fetch from the new endpoints
+3. Create new interfaces for the data format
+4. Add conversion logic if needed
+
+## Troubleshooting
+
+### Dashboard Shows No Data
+
+1. Check if the test system is running: `http://localhost:4000/health`
+2. Verify there are test results: `http://localhost:4000/qa-summary`
+3. Check browser console for API errors
+4. Ensure CORS is properly configured on the test system
+
+### API Connection Issues
+
+1. Verify the test system is running on port 4000
+2. Check the `TEST_API_URL` environment variable
+3. Ensure both systems are on the same network/localhost
+
+## API Reference
+
+### Test System API
+
+- `POST /qa-test` - Run a new QA test
+- `GET /qa-summary` - Get summary of all test results
+- `GET /qa-result/:id` - Get detailed result for specific test
+- `GET /health` - Health check
+
+### Dashboard API
+
+- `GET /api/qa-data` - Get dashboard metrics and data

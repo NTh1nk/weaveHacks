@@ -1,6 +1,31 @@
 import fs from 'fs';
 import path from 'path';
 
+// Interface for the test system's JSON format
+export interface TestSystemResult {
+  id: number;
+  timestamp: string;
+  url: string;
+  promptContent: string;
+  testResult: {
+    agentAnalysis: {
+      status: string;
+      rawResult: string;
+    };
+    features: Array<{
+      featureName: string;
+      status: string;
+      whatHappened: string;
+    }>;
+    screenshots: Array<{
+      featureName: string;
+      reason: string;
+      screenshotPath: string;
+      screenshotBase64: string;
+    }>;
+  };
+}
+
 export interface QATestResult {
   testUrl: string;
   testTimestamp: string;
@@ -54,52 +79,112 @@ export interface DashboardMetrics {
 }
 
 class DataService {
-  private qaResultsPath: string;
+  private apiBaseUrl: string;
 
   constructor() {
-    // Path to the QA test results file in testBrowserbase
-    this.qaResultsPath = path.join(process.cwd(), '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json');
+    // API base URL for the test system
+    this.apiBaseUrl = process.env.TEST_API_URL || 'http://localhost:4000';
+    console.log('Using test API at:', this.apiBaseUrl);
+  }
+
+  // Convert test system format to dashboard format
+  private convertTestSystemToDashboard(testSystemData: TestSystemResult): QATestResult {
+    const features = testSystemData.testResult.features || [];
+    const totalFeatures = features.length;
+    const passedFeatures = features.filter(f => f.status === 'PASSED').length;
+    const failedFeatures = features.filter(f => f.status === 'FAILED').length;
     
-    // Log the path for debugging
-    console.log('Looking for QA results at:', this.qaResultsPath);
-    console.log('Current working directory:', process.cwd());
+    // Calculate overall status
+    let overallStatus: 'passed' | 'failed' | 'warning' = 'passed';
+    if (failedFeatures > 0) {
+      overallStatus = failedFeatures === totalFeatures ? 'failed' : 'warning';
+    }
+    
+    // Calculate user experience score (0-100)
+    const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
+    
+    // Convert features to errors format
+    const errors = features
+      .filter(f => f.status === 'FAILED')
+      .map(f => ({
+        type: 'error' as const,
+        category: 'Feature Test',
+        message: f.whatHappened,
+        location: f.featureName,
+        userImpact: 'medium' as const, // Default to medium impact
+        problemType: 'Functional Issue',
+        timestamp: testSystemData.timestamp
+      }));
+    
+    // Add warnings for any issues
+    const warnings = features
+      .filter(f => f.status === 'WARNING')
+      .map(f => ({
+        type: 'warning' as const,
+        category: 'Feature Test',
+        message: f.whatHappened,
+        location: f.featureName,
+        userImpact: 'low' as const,
+        problemType: 'Usability Issue',
+        timestamp: testSystemData.timestamp
+      }));
+    
+    const allErrors = [...errors, ...warnings];
+    
+    return {
+      testUrl: testSystemData.url,
+      testTimestamp: testSystemData.timestamp,
+      overallStatus,
+      userExperienceScore,
+      summary: {
+        totalTests: totalFeatures,
+        passed: passedFeatures,
+        failed: failedFeatures,
+        warnings: warnings.length,
+        userBlockingIssues: failedFeatures,
+        usabilityIssues: warnings.length
+      },
+      errors: allErrors
+    };
   }
 
   async getQATestResults(): Promise<QATestResult | null> {
     try {
-      console.log('Checking if file exists at:', this.qaResultsPath);
-      if (!fs.existsSync(this.qaResultsPath)) {
-        console.warn('QA test results file not found:', this.qaResultsPath);
-        
-        // Try alternative paths
-        const alternativePaths = [
-          path.join(process.cwd(), 'testBrowserbase', 'stagehandtest', 'qa-test-results.json'),
-          path.join(process.cwd(), '..', '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json'),
-          path.join(process.cwd(), '..', '..', '..', 'testBrowserbase', 'stagehandtest', 'qa-test-results.json')
-        ];
-        
-        for (const altPath of alternativePaths) {
-          console.log('Trying alternative path:', altPath);
-          if (fs.existsSync(altPath)) {
-            console.log('Found file at alternative path:', altPath);
-            this.qaResultsPath = altPath;
-            break;
-          }
-        }
-        
-        if (!fs.existsSync(this.qaResultsPath)) {
-          console.error('QA test results file not found at any location');
-          return null;
-        }
+      // Get the latest result from the test system
+      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      if (!summaryResponse.ok) {
+        console.error('Failed to fetch summary:', summaryResponse.statusText);
+        return null;
       }
-
-      console.log('Reading file from:', this.qaResultsPath);
-      const fileContent = fs.readFileSync(this.qaResultsPath, 'utf-8');
-      const data = JSON.parse(fileContent) as QATestResult;
-      console.log('Successfully loaded QA test results');
-      return data;
+      
+      const summaryData = await summaryResponse.json();
+      if (!summaryData.success || !summaryData.summary || summaryData.summary.length === 0) {
+        console.log('No test results available');
+        return null;
+      }
+      
+      // Get the latest result
+      const latestResult = summaryData.summary[summaryData.summary.length - 1];
+      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      
+      if (!resultResponse.ok) {
+        console.error('Failed to fetch latest result:', resultResponse.statusText);
+        return null;
+      }
+      
+      const resultData = await resultResponse.json();
+      if (!resultData.success) {
+        console.error('Failed to get result data:', resultData.error);
+        return null;
+      }
+      
+      // Convert the test system format to dashboard format
+      const dashboardData = this.convertTestSystemToDashboard(resultData.data);
+      console.log('Successfully loaded QA test results from API');
+      return dashboardData;
+      
     } catch (error) {
-      console.error('Error reading QA test results:', error);
+      console.error('Error reading QA test results from API:', error);
       return null;
     }
   }
@@ -176,19 +261,44 @@ class DataService {
   }
 
   async getTestHistory(): Promise<Array<{ timestamp: string; status: string; score: number }>> {
-    const qaResults = await this.getQATestResults();
-    
-    if (!qaResults) {
+    try {
+      // Get all results from the test system
+      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      if (!summaryResponse.ok) {
+        console.error('Failed to fetch summary for history:', summaryResponse.statusText);
+        return [];
+      }
+      
+      const summaryData = await summaryResponse.json();
+      if (!summaryData.success || !summaryData.summary) {
+        return [];
+      }
+      
+      // Convert summary data to history format
+      const history = summaryData.summary.map((item: any) => {
+        const totalFeatures = item.totalFeatures || 0;
+        const failedFeatures = item.failedFeatures || 0;
+        const passedFeatures = totalFeatures - failedFeatures;
+        const score = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
+        
+        let status: string;
+        if (failedFeatures === 0) status = 'passed';
+        else if (failedFeatures === totalFeatures) status = 'failed';
+        else status = 'warning';
+        
+        return {
+          timestamp: item.timestamp,
+          status,
+          score
+        };
+      });
+      
+      return history;
+      
+    } catch (error) {
+      console.error('Error getting test history:', error);
       return [];
     }
-
-    // For now, return the current test result as history
-    // In a real scenario, you might have multiple test runs
-    return [{
-      timestamp: qaResults.testTimestamp,
-      status: qaResults.overallStatus,
-      score: qaResults.userExperienceScore
-    }];
   }
 
   async getErrorDetails(): Promise<Array<{
