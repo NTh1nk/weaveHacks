@@ -18,13 +18,28 @@ function App() {
         </nav>
       </header>
       <main className="landing-main">
-        <h1>Cut Code Review Time & Bugs in Half. Instantly.</h1>
-        <h2>Supercharge your team to ship faster with the most advanced AI code reviews. Now with turtle power!</h2>
+        <h1>Ship Code at a Turtle's Pace - But with Turtle Precision!</h1>
+        <h2>Let CodeTurtle help your team review code with the wisdom and steadiness of a turtle. Fewer bugs, more reliability, and a shell of protection for your codebase.</h2>
         <button className="main-cta">Get a free trial</button>
         <p className="trial-info">14-day free trial · No credit card needed · 2-click signup with GitHub/GitLab.</p>
+        <div className="video-section">
+          <h3>See Code Turtle in Action</h3>
+          <div className="video-placeholder">
+            {/* Replace the src below with your actual video link when ready */}
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="Code Turtle Demo Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
       </main>
       <footer className="landing-footer">
-        <p>Powered by <span role="img" aria-label="turtle">🐢</span> Code Turtle</p>
+        <p>Powered by <span role="img" aria-label="turtle">🐢</span> Code Turtle — Slow and Steady Wins the Race!</p>
       </footer>
     </div>
   );
