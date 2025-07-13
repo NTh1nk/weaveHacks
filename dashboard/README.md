@@ -1,4 +1,4 @@
-# QA Dashboard
+# CodeTurtle Dashboard
 
 A modern dashboard for visualizing QA test results from the Browserbase Stagehand testing system.
 
@@ -8,16 +8,18 @@ A modern dashboard for visualizing QA test results from the Browserbase Stagehan
 - **Interactive Metrics**: Displays test success rates, error breakdowns, and user experience scores
 - **Test History**: Shows historical test data with trends over time
 - **Error Details**: Detailed view of failed tests with screenshots and error messages
+- **Session Management**: Select and view specific test sessions
+- **Workflow Visualization**: Visual representation of test workflow steps
 - **Responsive Design**: Works on desktop and mobile devices
 
 ## Architecture
 
-The dashboard is built with Next.js and connects to the test system API running on port 4000. It automatically converts the test system's JSON format to the dashboard's internal format.
+The dashboard is built with Next.js 15 and connects to the test system API running on port 4000. It automatically converts the test system's JSON format to the dashboard's internal format.
 
 ### Data Flow
 
 1. **Test System** (port 4000) - Runs QA tests and saves results to numbered JSON files
-2. **Dashboard** (port 3000) - Fetches data from test system API and displays it
+2. **Dashboard** (port 7777) - Fetches data from test system API and displays it
 
 ### API Endpoints Used
 
@@ -96,8 +98,17 @@ The dashboard automatically converts the test system's JSON format to its intern
 ## Pages
 
 - **Dashboard** (`/`) - Main dashboard with metrics and charts
-- **Test Results** (`/test`) - Detailed view of test results
+- **Test** (`/test`) - Detailed view of test results
 - **Status** (`/status`) - System status and health information
+- **Workflow** (`/workflow`) - Workflow visualization
+
+## Technology Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **UI Components**: Radix UI, Tailwind CSS
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **State Management**: React Hooks
 
 ## Development
 
@@ -141,3 +152,5 @@ The dashboard automatically converts the test system's JSON format to its intern
 ### Dashboard API
 
 - `GET /api/qa-data` - Get dashboard metrics and data
+- `GET /api/sessions` - Get list of available sessions
+- `GET /api/data` - Get additional dashboard data

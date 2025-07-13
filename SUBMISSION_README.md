@@ -178,9 +178,10 @@ weaveHacks/
 
 ## 👥 Team
 
-- **Team Name**: CodeTurtle
+- **Team Name**: NTh1nk
+- **Members**: [Your team members]
 - **Hackathon**: WeaveHacks 2025
 
 ---
 
-*Built with ❤️ using CrewAI, W&B Weave, and BrowserBase for the WeaveHacks hackathon*
+*Built with ❤️ using CrewAI, W&B Weave, and BrowserBase for the WeaveHacks hackathon* 
