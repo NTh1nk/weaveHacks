@@ -122,6 +122,27 @@
   box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
 }
 
+.simulation-section {
+  margin-top: 80px;
+  background: #e0f7e9;
+  border-radius: 32px;
+  padding: 40px 32px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
+}
+.simulation-section h3 {
+  color: #184d27;
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+.simulation-section p {
+  color: #388e3c;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
 .logo-brand {
   display: flex;
   align-items: center;
@@ -134,4 +155,12 @@
   margin-left: 18px;
   letter-spacing: 1px;
   font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+
+.simulation-info {
+  color: #246b3c;
+  font-size: 1.18rem;
+  margin: 28px auto 32px auto;
+  max-width: 700px;
+  line-height: 1.5;
 }
