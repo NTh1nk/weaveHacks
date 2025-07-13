@@ -239,7 +239,7 @@ class QAContextAgents:
             crew = Crew(
                 agents=[self.qa_context_generator, self.documentation_analyzer],
                 tasks=[analysis_task, scenario_task, context_task],
-                process=Process.sequential,
+                process=Process.parallel,
                 verbose=True
             )
             
