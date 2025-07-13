@@ -154,7 +154,7 @@ class QAContextAgents:
             )
     
     @weave.op()
-    def generate_qa_context(self, pr_data: PRData, doc_data: DocumentationData, deployment_info: DeploymentInfo) -> AgentResult:
+    def generate_qa_context(self, pr_title, pr_description, readme_content) -> AgentResult:
         """Generate comprehensive QA context using CrewAI."""
         start_time = time.time()    
 
@@ -162,26 +162,18 @@ class QAContextAgents:
         
         try:
             # Extract actual changes from diff
-            specific_changes = self._extract_specific_changes(pr_data)
+            
             
             # Create tasks for the crew with SPECIFIC change information
             analysis_task = Task(
                 description=f"""
                 Analyze the following PR with SPECIFIC code changes and generate QA testing context:
                 
-                PR Title: {pr_data.title}
-                PR Description: {pr_data.description or "No description provided"}
+                PR Title: {pr_title}
+                PR Description: {pr_description or "No description provided"}
                 
-                SPECIFIC CHANGES MADE:
-                {specific_changes}
-                
-                PR Comments (additional context):
-                {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
-                
-                Files Changed: {', '.join(pr_data.files_changed)}
-                Labels: {', '.join(pr_data.labels)}
-                
-                Repository Features: {', '.join(doc_data.key_features)}
+                # Repository README:
+                {readme_content}
                 
                 Focus on:
                 1. What SPECIFIC functionality changed based on the actual code changes
@@ -199,11 +191,11 @@ class QAContextAgents:
                 description=f"""
                 Generate a SHORT GitHub comment (2-3 sentences max) that explains what QA analysis will be performed for this PR:
                 
-                PR Title: {pr_data.title}
-                PR Description: {pr_data.description or "No description provided"}
-                Files Changed: {pr_data.files_changed}
-                Lines Changed: {pr_data.additions + pr_data.deletions}
-                File Types: {', '.join(set(f.split('.')[-1] for f in pr_data.files_changed if '.' in f))}
+                PR Title: {pr_title}
+                PR Description: {pr_description or "No description provided"}
+
+                Repository README:
+                {readme_content}
                 
                 The comment should:
                 1. Briefly mention what will be tested based on the changes
@@ -218,65 +210,65 @@ class QAContextAgents:
             )
 
             
-            scenario_task = Task(
-                description=f"""
-                Based on the SPECIFIC PR changes, create targeted testing scenarios:
+            # scenario_task = Task(
+            #     description=f"""
+            #     Based on the SPECIFIC PR changes, create targeted testing scenarios:
                 
-                PR Title: {pr_data.title}
+            #     PR Title: {pr_data.title}
                 
-                ACTUAL CHANGES MADE:
-                {specific_changes}
+            #     ACTUAL CHANGES MADE:
+            #     {specific_changes}
                 
-                PR Comments Context:
-                {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
+            #     PR Comments Context:
+            #     {chr(10).join(pr_data.pr_comments) if pr_data.pr_comments else "No comments"}
                 
-                Create 3-5 SPECIFIC test scenarios that cover:
-                1. Testing the exact changes made (not generic functionality)
-                2. Visual/UI changes that were implemented
-                3. User experience validation for the specific modifications
-                4. Edge cases related to the specific changes
+            #     Create 3-5 SPECIFIC test scenarios that cover:
+            #     1. Testing the exact changes made (not generic functionality)
+            #     2. Visual/UI changes that were implemented
+            #     3. User experience validation for the specific modifications
+            #     4. Edge cases related to the specific changes
                 
-                For each scenario, provide:
-                - Title (specific to the changes)
-                - Description (what exactly to test)
-                - Step-by-step testing instructions (based on actual changes)
-                - Expected outcomes (specific to the modifications)
-                - Priority level (High/Medium/Low)
+            #     For each scenario, provide:
+            #     - Title (specific to the changes)
+            #     - Description (what exactly to test)
+            #     - Step-by-step testing instructions (based on actual changes)
+            #     - Expected outcomes (specific to the modifications)
+            #     - Priority level (High/Medium/Low)
                 
-                Be SPECIFIC about what to test, not generic.
-                """,
-                agent=self.qa_context_generator,
-                expected_output="Specific testing scenarios based on actual code changes"
-            )
+            #     Be SPECIFIC about what to test, not generic.
+            #     """,
+            #     agent=self.qa_context_generator,
+            #     expected_output="Specific testing scenarios based on actual code changes"
+            # )
             
-            context_task = Task(
-                description=f"""
-                Generate application context for QA testers:
+            # context_task = Task(
+            #     description=f"""
+            #     Generate application context for QA testers:
                 
-                Repository: {pr_data.repo_name}
-                Key Features: {', '.join(doc_data.key_features)}
-                README Content: {doc_data.readme_content[:500] if doc_data.readme_content else "No README available"}
+            #     Repository: {pr_data.repo_name}
+            #     Key Features: {', '.join(doc_data.key_features)}
+            #     README Content: {doc_data.readme_content[:500] if doc_data.readme_content else "No README available"}
                 
-                SPECIFIC CHANGES IN THIS PR:
-                {specific_changes}
+            #     SPECIFIC CHANGES IN THIS PR:
+            #     {specific_changes}
                 
-                Create a focused explanation of:
-                1. What this application does
-                2. What specific area was changed in this PR
-                3. How the changes affect user experience
-                4. Technical context specific to the modifications
+            #     Create a focused explanation of:
+            #     1. What this application does
+            #     2. What specific area was changed in this PR
+            #     3. How the changes affect user experience
+            #     4. Technical context specific to the modifications
                 
-                Keep it focused on the specific changes made.
-                """,
-                agent=self.documentation_analyzer,
-                expected_output="Specific application context for the changes made"
-            )
+            #     Keep it focused on the specific changes made.
+            #     """,
+            #     agent=self.documentation_analyzer,
+            #     expected_output="Specific application context for the changes made"
+            # )
             
             # Create and run the crew
             crew = Crew(
                 agents=[self.qa_context_generator, self.documentation_analyzer, self.github_comment_generator],
-                tasks=[analysis_task, scenario_task, context_task, comment_task],
-                process=Process.parallel,
+                tasks=[analysis_task, comment_task],
+                process=Process.sequential,
                 verbose=True
             )
             

@@ -74,7 +74,21 @@ class QAContextGenerator:
         else:
             self.console.print("[yellow]⚠️  No README found in repository[/yellow]")
         
-        return "success"
+        # Generate QA context using agents
+        self.console.print(f"\n[bold]🤖 Generating QA Context...[/bold]")
+        qa_context_result = self.agents.generate_qa_context(
+            pr_title=pr_data.title,
+            pr_description=pr_data.description,
+            readme_content=doc_data.readme_content
+        )
+        
+        if qa_context_result.success:
+            self.console.print(f"[green]✓[/green] QA Context generated successfully!")
+            self.console.print(f"[bold]Execution time:[/bold] {qa_context_result.execution_time:.2f} seconds")
+            return qa_context_result.data
+        else:
+            self.console.print(f"[red]❌ Failed to generate QA context: {qa_context_result.error}[/red]")
+            raise Exception(f"QA context generation failed: {qa_context_result.error}")
     
     def _display_results(self, qa_report: QAReport):
         """Display the QA report results in the console."""
