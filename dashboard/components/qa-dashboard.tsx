@@ -20,7 +20,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
-import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code } from "lucide-react"
+import { Clock, Globe, CheckCircle, XCircle, ExternalLink, Play, Settings, Filter, DollarSign, Hash, ChevronDown, Video, Download, Trash2, AlertTriangle, AlertCircle, Code, Maximize2 } from "lucide-react"
 import { WorkflowCanvas } from "@/components/workflow-canvas"
 import {
   DropdownMenu,
@@ -30,6 +30,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { useQAData } from "@/hooks/use-qa-data"
 import { Skeleton } from "@/components/ui/skeleton"
 import { RawJsonModal } from "@/components/ui/modal"
@@ -39,6 +45,12 @@ import { RawJsonModal } from "@/components/ui/modal"
 export function QADashboard() {
   const { data, loading, error, refetch } = useQAData();
   const [showRawJson, setShowRawJson] = useState(false);
+  const [selectedScreenshot, setSelectedScreenshot] = useState<{
+    featureName: string;
+    screenshotBase64: string;
+    reason: string;
+    timestamp: string;
+  } | null>(null);
 
   if (loading) {
     return (
@@ -397,11 +409,16 @@ export function QADashboard() {
                     </div>
                     <p className="text-xs text-gray-600 mb-2">{screenshot.reason}</p>
                     {screenshot.screenshotBase64 ? (
-                      <div className="relative">
+                      <div className="relative group cursor-pointer" onClick={() => setSelectedScreenshot({
+                        featureName: screenshot.featureName,
+                        screenshotBase64: screenshot.screenshotBase64,
+                        reason: screenshot.reason,
+                        timestamp: screenshot.timestamp
+                      })}>
                         <img 
                           src={screenshot.screenshotBase64.startsWith('data:') ? screenshot.screenshotBase64 : `data:image/png;base64,${screenshot.screenshotBase64}`}
                           alt={`Screenshot for ${screenshot.featureName}`}
-                          className="w-full h-auto rounded border"
+                          className="w-full h-auto rounded border transition-transform group-hover:scale-105"
                           style={{ maxHeight: '200px', objectFit: 'contain' }}
                           onError={(e) => {
                             console.error('Failed to load screenshot:', screenshot.featureName);
@@ -414,6 +431,9 @@ export function QADashboard() {
                         />
                         <div className="absolute top-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
                           {new Date(screenshot.timestamp).toLocaleTimeString()}
+                        </div>
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded flex items-center justify-center">
+                          <Maximize2 className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                       </div>
                     ) : (
@@ -465,6 +485,30 @@ export function QADashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Screenshot Modal */}
+      <Dialog open={!!selectedScreenshot} onOpenChange={() => setSelectedScreenshot(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+          <DialogHeader>
+            <DialogTitle>{selectedScreenshot?.featureName}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="text-sm text-gray-600">
+              <p><strong>Reason:</strong> {selectedScreenshot?.reason}</p>
+              <p><strong>Timestamp:</strong> {selectedScreenshot?.timestamp ? new Date(selectedScreenshot.timestamp).toLocaleString() : 'Unknown'}</p>
+            </div>
+            {selectedScreenshot?.screenshotBase64 && (
+              <div className="flex justify-center">
+                <img 
+                  src={selectedScreenshot.screenshotBase64.startsWith('data:') ? selectedScreenshot.screenshotBase64 : `data:image/png;base64,${selectedScreenshot.screenshotBase64}`}
+                  alt={`Screenshot for ${selectedScreenshot.featureName}`}
+                  className="max-w-full max-h-[70vh] object-contain rounded border"
+                />
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Raw JSON Modal */}
       <RawJsonModal
