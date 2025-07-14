@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from './supabaseClient';
 
 function App() {
   const [showBanner, setShowBanner] = useState(true);
+  const [waitlistCount, setWaitlistCount] = useState(null);
+  const [waitlistError, setWaitlistError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchWaitlistCount() {
+      setWaitlistError(null);
+      try {
+        const { count, error } = await supabase
+          .from('waitlist')
+          .select('*', { count: 'exact', head: true });
+        if (error) {
+          setWaitlistError('Could not fetch waitlist count.');
+        } else {
+          setWaitlistCount(count);
+        }
+      } catch (err) {
+        setWaitlistError('Could not fetch waitlist count.');
+      }
+    }
+    fetchWaitlistCount();
+  }, []);
+
   return (
     <div className="landing-root">
       <header className="landing-header">
@@ -28,6 +51,58 @@ function App() {
         <h1>Slow and Steady Wins the Race!</h1>
         <h2>Let CodeTurtle help your team review code with the wisdom and steadiness of a turtle. Fewer bugs, more reliability, and a shell of protection for your codebase.</h2>
         <button className="main-cta" onClick={() => window.location.href = '/waitlist'}>Join the waitlist 🐢</button>
+        {/* Waitlist tracker below CTA */}
+        <div
+          style={{
+            marginBottom: 40,
+            marginTop: 18,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            style={{
+              background: 'linear-gradient(90deg, #fffbe6 0%, #e0f7e9 100%)',
+              border: '4px solid #388e3c',
+              borderRadius: 32,
+              boxShadow: '0 8px 32px rgba(56, 142, 60, 0.18)',
+              padding: '32px 48px',
+              minWidth: 340,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              fontSize: '2.2rem',
+              fontWeight: 900,
+              color: '#184d27',
+              letterSpacing: 1.2,
+              position: 'relative',
+              zIndex: 2,
+              textShadow: '0 2px 8px #a8e06344',
+              animation: 'grand-waitlist-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1',
+            }}
+          >
+            <span style={{ fontSize: '2.8rem', marginBottom: 8, display: 'block' }} role="img" aria-label="turtle">🐢</span>
+            {waitlistError && (
+              <span style={{ color: 'red', fontWeight: 700, fontSize: '1.5rem' }}>Waitlist unavailable</span>
+            )}
+            {!waitlistError && waitlistCount === null && (
+              <span style={{ color: '#388e3c', fontWeight: 700, fontSize: '1.5rem' }}>Loading waitlist...</span>
+            )}
+            {!waitlistError && waitlistCount !== null && (
+              <>
+                <span style={{ fontSize: '2.6rem', color: '#184d27', fontWeight: 900, lineHeight: 1 }}>
+                  {waitlistCount.toLocaleString()}
+                </span>
+                <span style={{ fontSize: '1.5rem', color: '#388e3c', fontWeight: 700, marginTop: 8, display: 'block' }}>
+                  <span role="img" aria-label="confetti">🎉</span> people on the waitlist! <span role="img" aria-label="star">🌟</span>
+                </span>
+                <span style={{ fontSize: '1.1rem', color: '#246b3c', fontWeight: 500, marginTop: 8, display: 'block' }}>
+                  Join the movement. Be part of something big!
+                </span>
+              </>
+            )}
+          </div>
+        </div>
         <div className="video-section">
           <h3>See CodeTurtle in Action</h3>
           <div className="video-placeholder">

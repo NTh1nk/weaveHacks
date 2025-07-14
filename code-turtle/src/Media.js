@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 const posts = [
   {
@@ -14,8 +15,10 @@ const posts = [
 ];
 
 function Media() {
+  const navigate = useNavigate();
   return (
     <div className="media-page">
+      <button className="main-cta" style={{ position: 'absolute', left: 32, top: 32, minWidth: 120 }} onClick={() => navigate('/')}>← Home</button>
       <h2 className="media-title">Media Gallery</h2>
       <div className="media-gallery">
         {posts.map(post => (
