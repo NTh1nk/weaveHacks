@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Waitlist from './Waitlist';
+import Media from './Media';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/waitlist" element={<Waitlist />} />
+        <Route path="/media" element={<Media />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

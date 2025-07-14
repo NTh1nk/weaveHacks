@@ -29,6 +29,18 @@
   color: #388e3c;
 }
 
+.media-link {
+  color: #184d27;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+.media-link:hover {
+  color: #388e3c;
+}
+
 .login-btn, .trial-btn {
   background: none;
   border: 2px solid #388e3c;
@@ -362,6 +374,96 @@
   font-weight: 600;
   margin: 0 2px;
   display: inline-block;
+}
+
+.media-btn {
+  background: none;
+  border: 2px solid #388e3c;
+  color: #184d27;
+  border-radius: 24px;
+  padding: 8px 20px;
+  margin-left: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-size: 1rem;
+}
+.media-btn:hover {
+  background: #388e3c;
+  color: #fff;
+}
+
+.media-page {
+  max-width: 1100px;
+  margin: 80px auto 0 auto;
+  padding: 32px 16px 64px 16px;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 4px 32px rgba(56, 142, 60, 0.10);
+  text-align: center;
+}
+
+.media-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #184d27;
+  margin-bottom: 36px;
+}
+
+.media-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.media-post {
+  background: #e0f7e9;
+  border-radius: 24px;
+  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
+  width: 320px;
+  padding: 18px 18px 28px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.media-post:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(56, 142, 60, 0.13);
+}
+
+.media-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
+}
+
+.media-post-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #184d27;
+  margin: 10px 0 8px 0;
+}
+
+.media-post-desc {
+  color: #388e3c;
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .media-gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+  .media-post {
+    width: 90vw;
+    max-width: 400px;
+  }
 }
 
 @media (max-width: 600px) {

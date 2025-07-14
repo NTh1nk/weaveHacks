@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [showBanner, setShowBanner] = useState(true);
+  const navigate = useNavigate();
   return (
     <div className="landing-root">
       <header className="landing-header">
@@ -19,8 +21,7 @@ function App() {
           <a href="#blog">Blog</a>
           <a href="#resources">Resources</a>
           */}
-          <button className="login-btn">Log In</button>
-          <button className="trial-btn">Demo</button>
+          <button className="media-btn" onClick={() => navigate('/media')}>Media</button>
         </nav>
       </header>
       <main className="landing-main">
@@ -58,7 +59,7 @@ function App() {
           <div className="bottom-banner-logos">
             <a href="https://weave.ai/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Weave AI</a>
             <a href="https://crewai.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">CrewAI</a>
-            <a href="https://fly.io/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Fly.io</a>
+            <a href="https://supabase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Supabase</a>
             <a href="https://browserbase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Browserbase</a>
             <a href="https://wandb.ai/inference" className="sponsor-name" target="_blank" rel="noopener noreferrer">Weights & Biases Inference</a>
           </div>
