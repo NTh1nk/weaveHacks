@@ -26,8 +26,7 @@ function App() {
       <main className="landing-main">
         <h1>Slow and Steady Wins the Race!</h1>
         <h2>Let CodeTurtle help your team review code with the wisdom and steadiness of a turtle. Fewer bugs, more reliability, and a shell of protection for your codebase.</h2>
-        <button className="main-cta">Get started! 🐢</button>
-        <p className="trial-info">14-day free trial · No credit card needed · 2-click signup with GitHub/GitLab.</p>
+        <button className="main-cta" onClick={() => window.location.href = '/waitlist'}>Join the waitlist 🐢</button>
         <div className="video-section">
           <h3>See CodeTurtle in Action</h3>
           <div className="video-placeholder">
