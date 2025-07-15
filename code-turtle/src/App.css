@@ -475,3 +475,132 @@
     font-size: 1.3rem;
   }
 }
+
+/* Inline Waitlist Form Styles */
+.waitlist-signup {
+  margin: 32px 0;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(56, 142, 60, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(168, 224, 99, 0.3);
+}
+
+.waitlist-signup h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #184d27;
+  margin-bottom: 8px;
+}
+
+.waitlist-signup p {
+  font-size: 1.1rem;
+  color: #388e3c;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.waitlist-form-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+.email-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 2px solid #a8e063;
+  border-radius: 24px;
+  font-size: 1.1rem;
+  background: #f3fbe9;
+  color: #184d27;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.email-input:focus {
+  border: 2px solid #388e3c;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.1);
+}
+
+.email-input::placeholder {
+  color: #388e3c;
+  opacity: 0.7;
+}
+
+.form-group .main-cta {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  border-radius: 24px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 8px 0 0 0;
+  text-align: center;
+}
+
+.waitlist-success {
+  margin: 32px 0;
+  padding: 32px;
+  background: rgba(168, 224, 99, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(56, 142, 60, 0.1);
+  border: 2px solid rgba(168, 224, 99, 0.5);
+  text-align: center;
+}
+
+.waitlist-success h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #184d27;
+  margin-bottom: 12px;
+}
+
+.waitlist-success p {
+  font-size: 1.1rem;
+  color: #388e3c;
+  margin-bottom: 0;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments for inline waitlist */
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-group .main-cta {
+    width: 100%;
+  }
+  
+  .waitlist-signup {
+    padding: 24px 20px;
+    margin: 24px 0;
+  }
+  
+  .waitlist-success {
+    padding: 24px 20px;
+    margin: 24px 0;
+  }
+  
+  .waitlist-signup h3,
+  .waitlist-success h3 {
+    font-size: 1.5rem;
+  }
+}

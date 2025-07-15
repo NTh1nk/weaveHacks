@@ -7,6 +7,9 @@ function App() {
   const [showBanner, setShowBanner] = useState(true);
   const [waitlistCount, setWaitlistCount] = useState(null);
   const [waitlistError, setWaitlistError] = useState(null);
+  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
+  const [waitlistForm, setWaitlistForm] = useState({ email: '' });
+  const [waitlistFormError, setWaitlistFormError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +30,32 @@ function App() {
     }
     fetchWaitlistCount();
   }, []);
+
+  const handleWaitlistChange = (e) => {
+    setWaitlistForm({ ...waitlistForm, email: e.target.value });
+  };
+
+  const handleWaitlistSubmit = async (e) => {
+    e.preventDefault();
+    setWaitlistFormError(null);
+    // Insert into Supabase
+    const { error } = await supabase
+      .from('waitlist')
+      .insert([{ email: waitlistForm.email }]);
+    if (error) {
+      setWaitlistFormError('There was a problem joining the waitlist. Please try again.');
+    } else {
+      setWaitlistSubmitted(true);
+      setWaitlistForm({ email: '' });
+      // Refresh the count
+      const { count } = await supabase
+        .from('waitlist')
+        .select('*', { count: 'exact', head: true });
+      if (count !== null) {
+        setWaitlistCount(count);
+      }
+    }
+  };
 
   return (
     <div className="landing-root">
@@ -50,7 +79,40 @@ function App() {
       <main className="landing-main">
         <h1>Slow and Steady Wins the Race!</h1>
         <h2>Let CodeTurtle help your team review code with the wisdom and steadiness of a turtle. Fewer bugs, more reliability, and a shell of protection for your codebase.</h2>
-        <button className="main-cta" onClick={() => window.location.href = '/waitlist'}>Join the waitlist 🐢</button>
+        
+        {waitlistSubmitted ? (
+          <div className="waitlist-success">
+            <h3>Thank you for joining the waitlist! <span role="img" aria-label="party">🎉</span></h3>
+            <p>We'll let you know as soon as CodeTurtle is ready for you.<br/>Stay tuned for our GitHub bot launch!</p>
+            <button 
+              className="main-cta" 
+              onClick={() => setWaitlistSubmitted(false)}
+              style={{ marginTop: 16 }}
+            >
+              Join Another Email 🐢
+            </button>
+          </div>
+        ) : (
+          <div className="waitlist-signup">
+            <h3>Join the CodeTurtle Waitlist</h3>
+            <p>Coming soon as a <span className="github-bot">GitHub Bot</span> <span role="img" aria-label="robot">🤖</span></p>
+            <form onSubmit={handleWaitlistSubmit} className="waitlist-form-inline">
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  value={waitlistForm.email}
+                  onChange={handleWaitlistChange}
+                  placeholder="Enter your email address"
+                  required
+                  className="email-input"
+                />
+                <button type="submit" className="main-cta">Join Waitlist 🐢</button>
+              </div>
+              {waitlistFormError && <p className="error-message">{waitlistFormError}</p>}
+            </form>
+          </div>
+        )}
         {/* Waitlist tracker below CTA */}
         <div
           style={{
