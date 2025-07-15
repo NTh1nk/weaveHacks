@@ -65,110 +65,116 @@ function App() {
           <span className="brand-name">CodeTurtle</span>
         </div>
         <nav className="landing-nav">
-             {/*
-          <a href="#powered-by">Powered by</a>
-       
-          <a href="#customers">Customers</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#blog">Blog</a>
-          <a href="#resources">Resources</a>
-          */}
           <button className="media-btn" onClick={() => navigate('/media')}>Media</button>
         </nav>
       </header>
       <main className="landing-main">
-        <h1>Slow and Steady Wins the Race!</h1>
-        <h2>Let CodeTurtle help your team review code with the wisdom and steadiness of a turtle. Fewer bugs, more reliability, and a shell of protection for your codebase.</h2>
-        
-        {waitlistSubmitted ? (
-          <div className="waitlist-success">
-            <h3>Thank you for joining the waitlist! <span role="img" aria-label="party">🎉</span></h3>
-            <p>We'll let you know as soon as CodeTurtle is ready for you.<br/>Stay tuned for our GitHub bot launch!</p>
-            <button 
-              className="main-cta" 
-              onClick={() => setWaitlistSubmitted(false)}
-              style={{ marginTop: 16 }}
-            >
-              Join Another Email 🐢
-            </button>
+        <section className="hero-section">
+          <div className="hero-content">
+            <div className="hero-eyebrow">🐢 VibeTester</div>
+            <h1 className="hero-title">
+              <span className="hero-title-main">Vibe-test your code</span>
+              <br />
+              <span className="hero-title-accent">before it hits main</span>
+            </h1>
+            <p className="hero-desc">
+              VibeTester is the next-gen code review assistant.<br />
+              Automatically simulate real user flows, catch bugs before they ship, and keep your codebase production-ready.<br />
+              Powered by BrowserBase, CrewAI, Supabase, and more.
+            </p>
+            <div className="hero-cta-row">
+              <button className="main-cta" onClick={() => document.getElementById('waitlist-section').scrollIntoView({behavior: 'smooth'})}>Start VibeTesting</button>
+              <button className="secondary-cta" onClick={() => document.getElementById('video-section').scrollIntoView({behavior: 'smooth'})}>See a demo</button>
+            </div>
           </div>
-        ) : (
-          <div className="waitlist-signup">
-            <h3>Join the CodeTurtle Waitlist</h3>
-            <p>Coming soon as a <span className="github-bot">GitHub Bot</span> <span role="img" aria-label="robot">🤖</span></p>
-            <form onSubmit={handleWaitlistSubmit} className="waitlist-form-inline">
-              <div className="form-group">
-                <input
-                  type="email"
-                  name="email"
-                  value={waitlistForm.email}
-                  onChange={handleWaitlistChange}
-                  placeholder="Enter your email address"
-                  required
-                  className="email-input"
-                />
-                <button type="submit" className="main-cta">Join Waitlist 🐢</button>
-              </div>
-              {waitlistFormError && <p className="error-message">{waitlistFormError}</p>}
-            </form>
+        </section>
+        <section className="trusted-by-row">
+          <span className="trusted-by-label">Trusted by</span>
+          <div className="trusted-logos">
+            <a href="https://weave.ai/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Weave AI" className="trusted-logo" /></a>
+            <a href="https://crewai.com/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="CrewAI" className="trusted-logo" /></a>
+            <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Supabase" className="trusted-logo" /></a>
+            <a href="https://browserbase.com/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Browserbase" className="trusted-logo" /></a>
           </div>
-        )}
-        {/* Waitlist tracker below CTA */}
-        <div
-          style={{
-            marginBottom: 40,
-            marginTop: 18,
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            style={{
-              background: 'linear-gradient(90deg, #fffbe6 0%, #e0f7e9 100%)',
-              border: '4px solid #388e3c',
-              borderRadius: 32,
-              boxShadow: '0 8px 32px rgba(56, 142, 60, 0.18)',
-              padding: '32px 48px',
-              minWidth: 340,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              fontSize: '2.2rem',
-              fontWeight: 900,
-              color: '#184d27',
-              letterSpacing: 1.2,
-              position: 'relative',
-              zIndex: 2,
-              textShadow: '0 2px 8px #a8e06344',
-              animation: 'grand-waitlist-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1',
-            }}
-          >
-            <span style={{ fontSize: '2.8rem', marginBottom: 8, display: 'block' }} role="img" aria-label="turtle">🐢</span>
+        </section>
+        <section className="features-section">
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🐢</div>
+              <div className="feature-title">Real User Simulation</div>
+              <div className="feature-desc">Test your code as if a real user is interacting with it, not just static analysis.</div>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🔒</div>
+              <div className="feature-title">Secure by Default</div>
+              <div className="feature-desc">Automated checks for security, reliability, and best practices in every PR.</div>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">⚡</div>
+              <div className="feature-title">Instant Feedback</div>
+              <div className="feature-desc">Get actionable feedback in minutes, not hours or days.</div>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🤖</div>
+              <div className="feature-title">GitHub Bot</div>
+              <div className="feature-desc">Seamlessly integrates as a GitHub App for your workflow.</div>
+            </div>
+          </div>
+        </section>
+        <section id="waitlist-section" className="waitlist-section">
+          {waitlistSubmitted ? (
+            <div className="waitlist-success">
+              <h3>Thank you for joining the waitlist! <span role="img" aria-label="party">🎉</span></h3>
+              <p>We'll let you know as soon as CodeTurtle is ready for you.<br/>Stay tuned for our GitHub bot launch!</p>
+              <button 
+                className="main-cta" 
+                onClick={() => setWaitlistSubmitted(false)}
+                style={{ marginTop: 16 }}
+              >
+                Join Another Email 🐢
+              </button>
+            </div>
+          ) : (
+            <div className="waitlist-signup">
+              <h3>Join the CodeTurtle Waitlist</h3>
+              <p>Coming soon as a <span className="github-bot">GitHub Bot</span> <span role="img" aria-label="robot">🤖</span></p>
+              <form onSubmit={handleWaitlistSubmit} className="waitlist-form-inline">
+                <div className="form-group">
+                  <input
+                    type="email"
+                    name="email"
+                    value={waitlistForm.email}
+                    onChange={handleWaitlistChange}
+                    placeholder="Enter your email address"
+                    required
+                    className="email-input"
+                  />
+                  <button type="submit" className="main-cta">Join Waitlist 🐢</button>
+                </div>
+                {waitlistFormError && <p className="error-message">{waitlistFormError}</p>}
+              </form>
+            </div>
+          )}
+          <div className="waitlist-tracker-card">
+            <span className="waitlist-turtle" role="img" aria-label="turtle">🐢</span>
             {waitlistError && (
-              <span style={{ color: 'red', fontWeight: 700, fontSize: '1.5rem' }}>Waitlist unavailable</span>
+              <span className="waitlist-error">Waitlist unavailable</span>
             )}
             {!waitlistError && waitlistCount === null && (
-              <span style={{ color: '#388e3c', fontWeight: 700, fontSize: '1.5rem' }}>Loading waitlist...</span>
+              <span className="waitlist-loading">Loading waitlist...</span>
             )}
             {!waitlistError && waitlistCount !== null && (
               <>
-                <span style={{ fontSize: '2.6rem', color: '#184d27', fontWeight: 900, lineHeight: 1 }}>
-                  {waitlistCount.toLocaleString()}
-                </span>
-                <span style={{ fontSize: '1.5rem', color: '#388e3c', fontWeight: 700, marginTop: 8, display: 'block' }}>
-                  <span role="img" aria-label="confetti">🎉</span> people on the waitlist! <span role="img" aria-label="star">🌟</span>
-                </span>
-                <span style={{ fontSize: '1.1rem', color: '#246b3c', fontWeight: 500, marginTop: 8, display: 'block' }}>
-                  Join the movement. Be part of something big!
-                </span>
+                <span className="waitlist-count">{waitlistCount.toLocaleString()}</span>
+                <span className="waitlist-people"><span role="img" aria-label="confetti">🎉</span> people on the waitlist! <span role="img" aria-label="star">🌟</span></span>
+                <span className="waitlist-join">Join the movement. Be part of something big!</span>
               </>
             )}
           </div>
-        </div>
-        <div className="video-section">
+        </section>
+        <div id="video-section" className="video-section">
           <h3>See CodeTurtle in Action</h3>
           <div className="video-placeholder">
-            {/* Replace the src below with your actual video link when ready */}
             <iframe
               width="560"
               height="315"
@@ -188,17 +194,45 @@ function App() {
         </section>
       </main>
       <footer className="landing-footer">
-        <p>Powered by <span role="img" aria-label="turtle">🐢</span> Code Turtle — Slow and Steady Wins the Race!</p>
+        <p>Powered by</p>
+        <div className="footer-logos">
+          <a href="https://weave.ai/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Weave AI" className="footer-logo-img" /> Weave AI
+          </a>
+          <a href="https://crewai.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
+          </a>
+          <a href="https://supabase.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Supabase" className="footer-logo-img" /> Supabase
+          </a>
+          <a href="https://browserbase.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
+          </a>
+          <a href="https://wandb.ai/inference" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
+          </a>
+        </div>
+        <p>Slow and Steady Wins the Race! <span role="img" aria-label="turtle">🐢</span> Code Turtle</p>
       </footer>
       {showBanner && (
         <div className="bottom-banner">
           <span className="bottom-banner-text">Powered by</span>
           <div className="bottom-banner-logos">
-            <a href="https://weave.ai/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Weave AI</a>
-            <a href="https://crewai.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">CrewAI</a>
-            <a href="https://supabase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Supabase</a>
-            <a href="https://browserbase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">Browserbase</a>
-            <a href="https://wandb.ai/inference" className="sponsor-name" target="_blank" rel="noopener noreferrer">Weights & Biases Inference</a>
+            <a href="https://weave.ai/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+              <img src="/turtle.png" alt="Weave AI" className="footer-logo-img" /> Weave AI
+            </a>
+            <a href="https://crewai.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+              <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
+            </a>
+            <a href="https://supabase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+              <img src="/turtle.png" alt="Supabase" className="footer-logo-img" /> Supabase
+            </a>
+            <a href="https://browserbase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+              <img src="/turtle.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
+            </a>
+            <a href="https://wandb.ai/inference" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+              <img src="/turtle.png" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
+            </a>
           </div>
           <button className="close-banner" onClick={() => setShowBanner(false)} aria-label="Close banner">×</button>
         </div>

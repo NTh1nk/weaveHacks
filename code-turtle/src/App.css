@@ -21,7 +21,7 @@ body, .landing-root {
 .brand-name {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #21e37b;
+  color: #fff;
   margin-left: 18px;
   letter-spacing: 1px;
 }
@@ -71,14 +71,14 @@ body, .landing-root {
   font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 24px rgba(33, 227, 123, 0.15);
+  margin-bottom: 0;
+  box-shadow: 0 4px 24px rgba(33, 227, 123, 0.10);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .main-cta:hover {
   background: linear-gradient(90deg, #1fdf64 0%, #21e37b 100%);
   color: #fff;
-  box-shadow: 0 8px 32px rgba(33, 227, 123, 0.25);
+  box-shadow: 0 8px 32px rgba(33, 227, 123, 0.18);
 }
 
 .landing-footer {
@@ -89,10 +89,154 @@ body, .landing-root {
   padding-bottom: 80px;
 }
 
-/* Card-like section for waitlist tracker */
-.landing-main .waitlist-tracker {
+/* HERO SECTION */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 48px 0 32px 0;
+  background: none;
+}
+.hero-content {
+  text-align: center;
+  max-width: 700px;
+}
+.hero-eyebrow {
+  color: #b3b8c2;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  letter-spacing: 1.2px;
+}
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.hero-title-main {
+  color: #fff;
+}
+.hero-title-accent {
+  color: #21e37b;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+.hero-desc {
+  color: #b3b8c2;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+.hero-cta-row {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.secondary-cta {
+  background: #191c20;
+  color: #e6e8eb;
+  border: 1.5px solid #23272f;
+  border-radius: 32px;
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.secondary-cta:hover {
+  background: #23272f;
+  color: #21e37b;
+  border: 1.5px solid #21e37b;
+}
+
+/* TRUSTED BY ROW */
+.trusted-by-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 24px 0;
+}
+.trusted-by-label {
+  color: #b3b8c2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+}
+.trusted-logos {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.trusted-logo {
+  height: 36px;
+  width: 36px;
+  border-radius: 8px;
+  background: #23272f;
+  padding: 6px;
+  box-shadow: 0 2px 8px #0002;
+  object-fit: contain;
+}
+
+/* FEATURES SECTION */
+.features-section {
+  margin: 32px 0 32px 0;
+  padding: 0 0 16px 0;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.feature-card {
   background: #181c22;
-  border: 1.5px solid #21e37b33;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(33, 227, 123, 0.04);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 180px;
+  border: 1.5px solid #23272f;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.feature-card:hover {
+  box-shadow: 0 4px 32px rgba(33, 227, 123, 0.10);
+  border: 1.5px solid #21e37b;
+}
+.feature-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+.feature-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.feature-desc {
+  color: #b3b8c2;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* WAITLIST SECTION */
+.waitlist-section {
+  margin: 48px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.waitlist-tracker-card {
+  background: #181c22;
+  border: 1.5px solid #23272f;
   border-radius: 24px;
   box-shadow: 0 4px 32px rgba(33, 227, 123, 0.08);
   padding: 32px 48px;
@@ -102,13 +246,48 @@ body, .landing-root {
   align-items: center;
   font-size: 2.2rem;
   font-weight: 900;
-  color: #21e37b;
+  color: #fff;
   letter-spacing: 1.2;
   position: relative;
   z-index: 2;
   text-shadow: 0 2px 8px #21e37b22;
   margin: 0 auto 40px auto;
   animation: grand-waitlist-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+.waitlist-turtle {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.waitlist-error {
+  color: #ff4d4f;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.waitlist-loading {
+  color: #21e37b;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.waitlist-count {
+  font-size: 2.6rem;
+  color: #21e37b;
+  font-weight: 900;
+  line-height: 1;
+}
+.waitlist-people {
+  font-size: 1.5rem;
+  color: #21e37b;
+  font-weight: 700;
+  margin-top: 8px;
+  display: block;
+}
+.waitlist-join {
+  font-size: 1.1rem;
+  color: #b3b8c2;
+  font-weight: 500;
+  margin-top: 8px;
+  display: block;
 }
 
 /* Waitlist Form Modernization */
@@ -258,12 +437,77 @@ body, .landing-root {
 .close-banner:hover {
   color: #fff;
 }
+.footer-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0 10px 0;
+}
+.footer-sponsor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b3b8c2;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.footer-sponsor:hover {
+  background: #23272f;
+  color: #21e37b;
+}
+.footer-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #23272f;
+  object-fit: contain;
+  margin-right: 4px;
+  box-shadow: 0 1px 4px #0002;
+}
+.bottom-banner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-banner-logos .sponsor-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #b3b8c2;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.bottom-banner-logos .sponsor-name:hover {
+  background: #23272f;
+  color: #21e37b;
+}
+.bottom-banner-logos .footer-logo-img {
+  width: 22px;
+  height: 22px;
+  margin-right: 3px;
+}
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .landing-header, .landing-main {
     padding-left: 4vw;
     padding-right: 4vw;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 }
 @media (max-width: 600px) {
@@ -274,10 +518,14 @@ body, .landing-root {
   .waitlist-signup, .waitlist-success, .video-section, .simulation-section {
     padding: 18px 4vw;
   }
-  .landing-main h1 {
+  .landing-main h1, .hero-title {
     font-size: 2rem;
   }
-  .landing-main h2 {
+  .landing-main h2, .hero-desc {
     font-size: 1.1rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
