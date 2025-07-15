@@ -1,15 +1,15 @@
-.landing-root {
-  background: linear-gradient(135deg, #e0f7e9 0%, #a8e063 100%);
-  min-height: 100vh;
-  color: #184d27;
+body, .landing-root {
+  background: #0a0c10;
+  color: #e6e8eb;
   font-family: 'Segoe UI', 'Arial', sans-serif;
+  min-height: 100vh;
 }
 
 .landing-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 72px 160px 0 160px;
+  padding: 48px 8vw 0 8vw;
   background: transparent;
 }
 
@@ -18,74 +18,53 @@
   margin-right: 24px;
 }
 
-.landing-nav a {
-  color: #184d27;
+.brand-name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #21e37b;
+  margin-left: 18px;
+  letter-spacing: 1px;
+}
+
+.landing-nav a, .media-btn {
+  color: #e6e8eb;
   text-decoration: none;
   margin: 0 16px;
   font-weight: 500;
-  transition: color 0.2s;
-}
-.landing-nav a:hover {
-  color: #388e3c;
-}
-
-.media-link {
-  color: #184d27;
-  text-decoration: none;
-  margin: 0 12px;
-  font-weight: 500;
-  transition: color 0.2s;
-  font-size: 0.95rem;
-}
-.media-link:hover {
-  color: #388e3c;
-}
-
-.login-btn, .trial-btn {
   background: none;
-  border: 2px solid #388e3c;
-  color: #184d27;
-  border-radius: 24px;
-  padding: 8px 20px;
-  margin-left: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-.login-btn:hover, .trial-btn:hover {
-  background: #388e3c;
-  color: #fff;
-}
-.trial-btn {
-  background: #388e3c;
-  color: #fff;
   border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
 }
-.trial-btn:hover {
-  background: #184d27;
+.landing-nav a:hover, .media-btn:hover {
+  color: #21e37b;
 }
 
 .landing-main {
   text-align: center;
-  margin-top: 180px;
-  margin-left: 160px;
-  margin-right: 160px;
+  margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
 }
 .landing-main h1 {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 900;
   margin-bottom: 16px;
-  color: #184d27;
+  color: #fff;
+  letter-spacing: 1px;
 }
 .landing-main h2 {
   font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 32px;
-  color: #388e3c;
+  color: #21e37b;
 }
+
 .main-cta {
-  background: #388e3c;
-  color: #fff;
+  background: linear-gradient(90deg, #21e37b 0%, #1fdf64 100%);
+  color: #0a0c10;
   border: none;
   border-radius: 32px;
   padding: 18px 48px;
@@ -93,410 +72,66 @@
   font-weight: 700;
   cursor: pointer;
   margin-bottom: 24px;
-  box-shadow: 0 4px 16px rgba(56, 142, 60, 0.15);
-  transition: background 0.2s;
+  box-shadow: 0 4px 24px rgba(33, 227, 123, 0.15);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .main-cta:hover {
-  background: #184d27;
+  background: linear-gradient(90deg, #1fdf64 0%, #21e37b 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(33, 227, 123, 0.25);
 }
-.trial-info {
-  color: #184d27;
-  margin-top: 16px;
-  font-size: 1rem;
-}
+
 .landing-footer {
   text-align: center;
-  margin-top: 240px;
-  color: #388e3c;
+  margin-top: 180px;
+  color: #21e37b;
   font-size: 1.1rem;
   padding-bottom: 80px;
 }
 
-.video-section {
-  margin-top: 120px;
-  text-align: center;
-}
-.video-section h3 {
-  color: #184d27;
-  font-size: 1.4rem;
-  margin-bottom: 16px;
-}
-.video-placeholder {
+/* Card-like section for waitlist tracker */
+.landing-main .waitlist-tracker {
+  background: #181c22;
+  border: 1.5px solid #21e37b33;
+  border-radius: 24px;
+  box-shadow: 0 4px 32px rgba(33, 227, 123, 0.08);
+  padding: 32px 48px;
+  min-width: 340px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background: #e0f7e9;
-  border: 4px dashed #388e3c;
-  border-radius: 32px;
-  padding: 24px;
-  max-width: 650px;
-  margin: 0 auto;
-  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
-}
-
-.simulation-section {
-  margin-top: 80px;
-  background: #e0f7e9;
-  border-radius: 32px;
-  padding: 40px 32px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
-}
-.simulation-section h3 {
-  color: #184d27;
-  font-size: 1.5rem;
-  margin-bottom: 18px;
-}
-.simulation-section p {
-  color: #388e3c;
-  font-size: 1.15rem;
-  margin: 0;
-}
-
-.logo-brand {
-  display: flex;
-  align-items: center;
-}
-
-.brand-name {
   font-size: 2.2rem;
-  font-weight: 800;
-  color: #184d27;
-  margin-left: 18px;
-  letter-spacing: 1px;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-weight: 900;
+  color: #21e37b;
+  letter-spacing: 1.2;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px #21e37b22;
+  margin: 0 auto 40px auto;
+  animation: grand-waitlist-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 
-.simulation-info {
-  color: #246b3c;
-  font-size: 1.18rem;
-  margin: 28px auto 32px auto;
-  max-width: 700px;
-  line-height: 1.5;
-}
-
-.sponsored-section {
-  margin-top: 80px;
-  background: #f3fbe9;
-  border-radius: 32px;
-  padding: 36px 32px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.06);
-  text-align: center;
-}
-.sponsored-section h3 {
-  color: #184d27;
-  font-size: 1.4rem;
-  margin-bottom: 18px;
-}
-.sponsor-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  flex-wrap: wrap;
-  min-height: 60px;
-}
-.sponsor-placeholder {
-  color: #388e3c;
-  font-size: 1.1rem;
-  background: #e0f7e9;
-  border-radius: 16px;
-  padding: 12px 28px;
-  border: 2px dashed #a8e063;
-  opacity: 0.7;
-}
-
-.sponsor-logo {
-  height: 48px;
-  width: auto;
-  margin: 0 12px;
-  object-fit: contain;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
-  padding: 6px 12px;
-  transition: transform 0.2s;
-}
-.sponsor-logo:hover {
-  transform: scale(1.07) rotate(-2deg);
-  box-shadow: 0 4px 16px rgba(56, 142, 60, 0.15);
-}
-
-.sponsor-name {
-  color: #fff;
-  background: #246b3c;
-  border-radius: 8px;
-  padding: 6px 16px;
-  margin: 0 4px;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
-  transition: background 0.2s;
-}
-.sponsor-name:hover {
-  background: #a8e063;
-  color: #184d27;
-}
-
-.bottom-banner {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #388e3c;
-  color: #fff;
-  font-size: 1.1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 18px 0;
-  z-index: 1000;
-  box-shadow: 0 -2px 12px rgba(56, 142, 60, 0.12);
-  gap: 24px;
-}
-.bottom-banner-text {
-  margin-right: 18px;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-.bottom-banner-logos {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.close-banner {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.6rem;
-  margin-left: 32px;
-  cursor: pointer;
-  padding: 0 12px;
-  line-height: 1;
-  transition: color 0.2s;
-}
-.close-banner:hover {
-  color: #a8e063;
-}
-
-.waitlist-container {
-  background: #fff;
-  max-width: 420px;
-  margin: 120px auto 0 auto;
-  padding: 48px 36px 40px 36px;
-  border-radius: 32px;
-  box-shadow: 0 4px 32px rgba(56, 142, 60, 0.10);
-  text-align: center;
-  color: #184d27;
-}
-
-.waitlist-container h2 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 18px;
-  color: #184d27;
-}
-
-.waitlist-form {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  margin-top: 18px;
-}
-
-.waitlist-form label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-weight: 600;
-  color: #246b3c;
-  font-size: 1.1rem;
-  margin-bottom: 2px;
-}
-
-.waitlist-form input[type="text"],
-.waitlist-form input[type="email"] {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #a8e063;
-  border-radius: 16px;
-  font-size: 1rem;
-  margin-top: 6px;
-  margin-bottom: 2px;
-  background: #f3fbe9;
-  color: #184d27;
-  transition: border 0.2s;
-}
-
-.waitlist-form input[type="text"]:focus,
-.waitlist-form input[type="email"]:focus {
-  border: 2px solid #388e3c;
-  outline: none;
-}
-
-.waitlist-form .main-cta {
-  width: 100%;
-  margin-top: 10px;
-  padding: 14px 0;
-  font-size: 1.1rem;
-  border-radius: 24px;
-}
-
-.waitlist-logo {
-  display: block;
-  margin: 0 auto 18px auto;
-  border-radius: 50%;
-  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.10);
-  background: #e0f7e9;
-  padding: 8px;
-}
-
-.waitlist-subtitle {
-  font-size: 1.1rem;
-  color: #388e3c;
-  margin-bottom: 18px;
-  font-weight: 500;
-  letter-spacing: 0.2px;
-}
-
-.github-bot {
-  background: #24292f;
-  color: #fff;
-  border-radius: 6px;
-  padding: 2px 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 2px;
-  display: inline-block;
-}
-
-.media-btn {
-  background: none;
-  border: 2px solid #388e3c;
-  color: #184d27;
-  border-radius: 24px;
-  padding: 8px 20px;
-  margin-left: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  font-size: 1rem;
-}
-.media-btn:hover {
-  background: #388e3c;
-  color: #fff;
-}
-
-.media-page {
-  max-width: 1100px;
-  margin: 80px auto 0 auto;
-  padding: 32px 16px 64px 16px;
-  background: #fff;
-  border-radius: 32px;
-  box-shadow: 0 4px 32px rgba(56, 142, 60, 0.10);
-  text-align: center;
-}
-
-.media-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #184d27;
-  margin-bottom: 36px;
-}
-
-.media-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
-}
-
-.media-post {
-  background: #e0f7e9;
-  border-radius: 24px;
-  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
-  width: 320px;
-  padding: 18px 18px 28px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.media-post:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 32px rgba(56, 142, 60, 0.13);
-}
-
-.media-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 6px rgba(56, 142, 60, 0.08);
-}
-
-.media-post-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #184d27;
-  margin: 10px 0 8px 0;
-}
-
-.media-post-desc {
-  color: #388e3c;
-  font-size: 1rem;
-  margin: 0;
-}
-
-@media (max-width: 900px) {
-  .media-gallery {
-    flex-direction: column;
-    align-items: center;
-  }
-  .media-post {
-    width: 90vw;
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 600px) {
-  .waitlist-container {
-    padding: 28px 8vw 28px 8vw;
-    margin-top: 48px;
-  }
-  .waitlist-container h2 {
-    font-size: 1.3rem;
-  }
-}
-
-/* Inline Waitlist Form Styles */
-.waitlist-signup {
+/* Waitlist Form Modernization */
+.waitlist-signup, .waitlist-success {
   margin: 32px 0;
   padding: 32px;
-  background: rgba(255, 255, 255, 0.8);
+  background: #181c22;
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(56, 142, 60, 0.1);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(168, 224, 99, 0.3);
+  box-shadow: 0 4px 20px rgba(33, 227, 123, 0.10);
+  border: 1.5px solid #21e37b33;
+  text-align: center;
 }
 
-.waitlist-signup h3 {
+.waitlist-signup h3, .waitlist-success h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #184d27;
+  color: #fff;
   margin-bottom: 8px;
 }
 
-.waitlist-signup p {
+.waitlist-signup p, .waitlist-success p {
   font-size: 1.1rem;
-  color: #388e3c;
+  color: #21e37b;
   margin-bottom: 24px;
   font-weight: 500;
 }
@@ -518,22 +153,22 @@
 .email-input {
   flex: 1;
   padding: 16px 20px;
-  border: 2px solid #a8e063;
+  border: 2px solid #21e37b;
   border-radius: 24px;
   font-size: 1.1rem;
-  background: #f3fbe9;
-  color: #184d27;
+  background: #0a0c10;
+  color: #e6e8eb;
   transition: border 0.2s, box-shadow 0.2s;
 }
 
 .email-input:focus {
-  border: 2px solid #388e3c;
+  border: 2px solid #1fdf64;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.1);
+  box-shadow: 0 0 0 3px #21e37b33;
 }
 
 .email-input::placeholder {
-  color: #388e3c;
+  color: #21e37b;
   opacity: 0.7;
 }
 
@@ -546,61 +181,103 @@
 }
 
 .error-message {
-  color: #d32f2f;
+  color: #ff4d4f;
   font-size: 0.95rem;
   font-weight: 500;
   margin: 8px 0 0 0;
   text-align: center;
 }
 
-.waitlist-success {
-  margin: 32px 0;
-  padding: 32px;
-  background: rgba(168, 224, 99, 0.2);
+/* Video and simulation sections as cards */
+.video-section, .simulation-section {
+  margin-top: 60px;
+  background: #181c22;
   border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(56, 142, 60, 0.1);
-  border: 2px solid rgba(168, 224, 99, 0.5);
-  text-align: center;
+  padding: 40px 32px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 12px rgba(33, 227, 123, 0.08);
+  color: #e6e8eb;
+}
+.video-section h3, .simulation-section h3 {
+  color: #21e37b;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
 }
 
-.waitlist-success h3 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #184d27;
-  margin-bottom: 12px;
+.video-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0c10;
+  border: 2px dashed #21e37b;
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 650px;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(33, 227, 123, 0.08);
 }
 
-.waitlist-success p {
-  font-size: 1.1rem;
-  color: #388e3c;
-  margin-bottom: 0;
-  font-weight: 500;
-  line-height: 1.5;
+.simulation-section p {
+  color: #e6e8eb;
+  font-size: 1.15rem;
+  margin: 0;
 }
 
-/* Responsive adjustments for inline waitlist */
-@media (max-width: 768px) {
-  .form-group {
-    flex-direction: column;
-    gap: 16px;
+/* Banner and sponsors */
+.bottom-banner {
+  background: #181c22;
+  color: #21e37b;
+  border-top: 1.5px solid #21e37b33;
+  box-shadow: 0 -2px 12px rgba(33, 227, 123, 0.08);
+}
+.bottom-banner-text {
+  color: #21e37b;
+}
+.sponsor-name {
+  color: #21e37b;
+  font-weight: 600;
+  margin: 0 12px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.sponsor-name:hover {
+  color: #fff;
+}
+.close-banner {
+  background: none;
+  border: none;
+  color: #21e37b;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 12px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.close-banner:hover {
+  color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .landing-header, .landing-main {
+    padding-left: 4vw;
+    padding-right: 4vw;
   }
-  
-  .form-group .main-cta {
-    width: 100%;
+}
+@media (max-width: 600px) {
+  .landing-header, .landing-main {
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
-  
-  .waitlist-signup {
-    padding: 24px 20px;
-    margin: 24px 0;
+  .waitlist-signup, .waitlist-success, .video-section, .simulation-section {
+    padding: 18px 4vw;
   }
-  
-  .waitlist-success {
-    padding: 24px 20px;
-    margin: 24px 0;
+  .landing-main h1 {
+    font-size: 2rem;
   }
-  
-  .waitlist-signup h3,
-  .waitlist-success h3 {
-    font-size: 1.5rem;
+  .landing-main h2 {
+    font-size: 1.1rem;
   }
 }
