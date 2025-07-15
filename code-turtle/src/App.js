@@ -71,11 +71,11 @@ function App() {
       <main className="landing-main">
         <section className="hero-section">
           <div className="hero-content">
-            <div className="hero-eyebrow">🐢 VibeTester</div>
+            <div className="hero-eyebrow">🐢 turtle.codes</div>
             <h1 className="hero-title">
               <span className="hero-title-main">Vibe-test your code</span>
               <br />
-              <span className="hero-title-accent">before it hits main</span>
+              <span className="hero-title-accent">before it breaks production</span>
             </h1>
             <p className="hero-desc">
               VibeTester is the next-gen code review assistant.<br />
