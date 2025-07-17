@@ -726,4 +726,34 @@ body, .landing-root {
   .hero-section{
     padding: 0 !important;
   }
+  .hero-cta-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100%;
+    align-items: stretch;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .main-cta, .secondary-cta {
+    width: 100% !important;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 1.1rem;
+    padding: 18px 0 !important;
+    border-radius: 18px !important;
+    margin: 0 !important;
+    box-shadow: 0 2px 12px rgba(33, 227, 123, 0.10);
+  }
+  .main-cta {
+    margin-bottom: 8px !important;
+    background: linear-gradient(90deg, #21e37b 0%, #1fdf64 100%) !important;
+    color: #0a0c10 !important;
+    font-weight: 700;
+  }
+  .secondary-cta {
+    background: #181c22 !important;
+    color: #21e37b !important;
+    border: 1.5px solid #21e37b !important;
+    font-weight: 600;
+  }
 }
