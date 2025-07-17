@@ -606,7 +606,13 @@ body, .landing-root {
     margin-top: 18px;
     margin-bottom: 18px;
   }
-  .features-section, .features-grid, .video-section, .simulation-section, .waitlist-section {
+  .features-section {
+    display: none !important;
+  }
+  .simulation-section {
+    display: none !important;
+  }
+  .features-grid, .video-section, .waitlist-section {
     padding-left: 8vw;
     padding-right: 8vw;
     margin-left: 0;
