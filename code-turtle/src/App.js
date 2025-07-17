@@ -65,7 +65,7 @@ function App() {
           <span className="brand-name">CodeTurtle</span>
         </div>
         <nav className="landing-nav">
-          <button className="media-btn" onClick={() => navigate('/media')}>Media</button>
+          <button className="media-btn" onClick={() => window.open('https://x.com/codeturtlehq', '_blank')}>Media</button>
         </nav>
       </header>
       <main className="landing-main">
