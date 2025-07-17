@@ -200,7 +200,7 @@ function App() {
             <img src="/wandb-dots-logo.svg" alt="Weave AI" className="footer-logo-img" /> Weave AI
           </a>
           <a href="https://crewai.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
-            <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
+            <img src="/crewai.jpg" alt="CrewAI" className="footer-logo-img" /> CrewAI
           </a>
           <a href="https://supabase.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
             <img src="/supabase-logo-preview.webp" alt="Supabase" className="footer-logo-img" /> Supabase
