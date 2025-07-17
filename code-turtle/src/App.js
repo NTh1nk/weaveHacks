@@ -88,7 +88,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="trusted-by-row">
+        {/* <section className="trusted-by-row">
           <span className="trusted-by-label">Trusted by</span>
           <div className="trusted-logos">
             <a href="https://weave.ai/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Weave AI" className="trusted-logo" /></a>
@@ -96,7 +96,7 @@ function App() {
             <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Supabase" className="trusted-logo" /></a>
             <a href="https://browserbase.com/" target="_blank" rel="noopener noreferrer"><img src="/turtle.png" alt="Browserbase" className="trusted-logo" /></a>
           </div>
-        </section>
+        </section> */}
         <section className="features-section">
           <div className="features-grid">
             <div className="feature-card">
@@ -105,19 +105,19 @@ function App() {
               <div className="feature-desc">Test your code as if a real user is interacting with it, not just static analysis.</div>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔒</div>
-              <div className="feature-title">Secure by Default</div>
-              <div className="feature-desc">Automated checks for security, reliability, and best practices in every PR.</div>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">⚡</div>
-              <div className="feature-title">Instant Feedback</div>
-              <div className="feature-desc">Get actionable feedback in minutes, not hours or days.</div>
+              <div className="feature-icon">🤖</div>
+              <div className="feature-title">AI Powered</div>
+              <div className="feature-desc">Harnesses advanced AI to review, test, and simulate your code for smarter, faster, and more reliable results.</div>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🤖</div>
               <div className="feature-title">GitHub Bot</div>
               <div className="feature-desc">Seamlessly integrates as a GitHub App for your workflow.</div>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">⚡</div>
+              <div className="feature-title">Instant Feedback</div>
+              <div className="feature-desc">Get actionable feedback in minutes, not hours or days.</div>
             </div>
           </div>
         </section>
@@ -197,46 +197,46 @@ function App() {
         <p>Powered by</p>
         <div className="footer-logos">
           <a href="https://weave.ai/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
-            <img src="/turtle.png" alt="Weave AI" className="footer-logo-img" /> Weave AI
+            <img src="/wandb-dots-logo.svg" alt="Weave AI" className="footer-logo-img" /> Weave AI
           </a>
           <a href="https://crewai.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
             <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
           </a>
           <a href="https://supabase.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
-            <img src="/turtle.png" alt="Supabase" className="footer-logo-img" /> Supabase
+            <img src="/supabase-logo-preview.webp" alt="Supabase" className="footer-logo-img" /> Supabase
           </a>
           <a href="https://browserbase.com/" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
-            <img src="/turtle.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
+            <img src="/Browserbase.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
           </a>
           <a href="https://wandb.ai/inference" className="footer-sponsor" target="_blank" rel="noopener noreferrer">
-            <img src="/turtle.png" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
+            <img src="/wandb-dots-logo.svg" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
           </a>
         </div>
         <p>Slow and Steady Wins the Race! <span role="img" aria-label="turtle">🐢</span> Code Turtle</p>
       </footer>
-      {showBanner && (
-        <div className="bottom-banner">
-          <span className="bottom-banner-text">Powered by</span>
-          <div className="bottom-banner-logos">
-            <a href="https://weave.ai/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
-              <img src="/turtle.png" alt="Weave AI" className="footer-logo-img" /> Weave AI
-            </a>
-            <a href="https://crewai.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
-              <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
-            </a>
-            <a href="https://supabase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
-              <img src="/turtle.png" alt="Supabase" className="footer-logo-img" /> Supabase
-            </a>
-            <a href="https://browserbase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
-              <img src="/turtle.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
-            </a>
-            <a href="https://wandb.ai/inference" className="sponsor-name" target="_blank" rel="noopener noreferrer">
-              <img src="/turtle.png" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
-            </a>
-          </div>
-          <button className="close-banner" onClick={() => setShowBanner(false)} aria-label="Close banner">×</button>
+      {/*
+      <div className="bottom-banner">
+        <span className="bottom-banner-text">Powered by</span>
+        <div className="bottom-banner-logos">
+          <a href="https://weave.ai/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Weave AI" className="footer-logo-img" /> Weave AI
+          </a>
+          <a href="https://crewai.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="CrewAI" className="footer-logo-img" /> CrewAI
+          </a>
+          <a href="https://supabase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Supabase" className="footer-logo-img" /> Supabase
+          </a>
+          <a href="https://browserbase.com/" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Browserbase" className="footer-logo-img" /> Browserbase
+          </a>
+          <a href="https://wandb.ai/inference" className="sponsor-name" target="_blank" rel="noopener noreferrer">
+            <img src="/turtle.png" alt="Weights & Biases Inference" className="footer-logo-img" /> Weights & Biases Inference
+          </a>
         </div>
-      )}
+        <button className="close-banner" onClick={() => setShowBanner(false)} aria-label="Close banner">×</button>
+      </div>
+      */}
     </div>
   );
 }
