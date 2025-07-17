@@ -524,24 +524,33 @@ body, .landing-root {
 }
 @media (max-width: 600px) {
   .landing-header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 28px;
-    gap: 18px;
-    padding-left: 8vw;
-    padding-right: 8vw;
-    text-align: center;
+    position: relative;
+    padding-top: 56px;
+    flex-direction: unset;
+    align-items: unset;
+    justify-content: unset;
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: unset;
   }
   .landing-logo {
+    position: absolute;
+    top: 12px;
+    right: 8vw;
     height: 40px;
-    margin-right: 0;
-    margin-bottom: 12px;
+    margin: 0;
+    z-index: 2;
   }
   .brand-name {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    margin: 0;
+    width: max-content;
     font-size: 1.1rem;
-    margin-left: 0;
-    margin-bottom: 16px;
+    z-index: 1;
   }
   .landing-nav {
     width: 100%;
@@ -704,5 +713,17 @@ body, .landing-root {
     height: 100%;
     border: 0;
     border-radius: 16px;
+  }
+  .landing-nav {
+    margin-bottom: 0px;
+  }
+  .hero-eyebrow {
+    margin-top: 0 !important;
+  }
+  .landing-main{
+    margin: 0 !important;
+  }
+  .hero-section{
+    padding: 0 !important;
   }
 }
