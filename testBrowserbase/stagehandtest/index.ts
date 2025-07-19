@@ -12,13 +12,28 @@ import * as weave from 'weave';
 
 // Stagehand configuration
 const stagehandConfig = (): ConstructorParams => {
+  // Validate required API keys for Stagehand
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is required for Stagehand configuration');
+  }
+  
+  if (!process.env.BROWSERBASE_API_KEY) {
+    throw new Error('BROWSERBASE_API_KEY is required for Stagehand configuration');
+  }
+  
+  if (!process.env.BROWSERBASE_PROJECT_ID) {
+    throw new Error('BROWSERBASE_PROJECT_ID is required for Stagehand configuration');
+  }
+
   return {
     env: 'LOCAL',
     verbose: 1,
-    modelName: 'gemini-flash',
+    modelName: 'openai/gpt-4o', // Updated to use OpenAI model
     modelClientOptions: {
-      apiKey: process.env.GEMINI_API_KEY,
+      apiKey: process.env.OPENAI_API_KEY,
     },
+    apiKey: process.env.BROWSERBASE_API_KEY,
+    projectId: process.env.BROWSERBASE_PROJECT_ID,
   };
 };
 
@@ -545,6 +560,19 @@ app.post('/qa-test', async (req, res) => {
       });
     }
 
+    // Validate API keys before running test
+    const envValidation = validateEnvironment();
+    if (!envValidation.isValid) {
+      return res.status(500).json({
+        success: false,
+        error: "Missing required API keys",
+        details: {
+          missingKeys: envValidation.missingKeys,
+          message: "Please configure the required API keys in your .env file"
+        }
+      });
+    }
+
     console.log(`\n🚀 Starting QA Test for: ${url}`);
     console.log(`📝 Prompt: ${promptContent.substring(0, 100)}...`);
 
@@ -716,12 +744,104 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'QA Testing Service is running' });
 });
 
+app.get('/api-status', (req, res) => {
+  const envValidation = validateEnvironment();
+  res.json({
+    status: envValidation.isValid ? 'READY' : 'MISSING_KEYS',
+    message: envValidation.isValid ? 'All required API keys are configured' : 'Missing required API keys',
+    required: {
+      openai: !!process.env.OPENAI_API_KEY,
+      browserbase: !!process.env.BROWSERBASE_API_KEY,
+      browserbaseProject: !!process.env.BROWSERBASE_PROJECT_ID
+    },
+    optional: {
+      wandb: !!process.env.WANDB_API_KEY
+    },
+    missingKeys: envValidation.missingKeys,
+    warnings: envValidation.warnings
+  });
+});
+
+// Validate required environment variables
+function validateEnvironment(): { isValid: boolean; missingKeys: string[]; warnings: string[] } {
+  const requiredKeys = [
+    'OPENAI_API_KEY',
+    'BROWSERBASE_API_KEY', 
+    'BROWSERBASE_PROJECT_ID'
+  ];
+  
+  const optionalKeys = [
+    'WANDB_API_KEY'
+  ];
+  
+  const missingKeys: string[] = [];
+  const warnings: string[] = [];
+  
+  // Check required keys
+  for (const key of requiredKeys) {
+    if (!process.env[key] || process.env[key]?.trim() === '') {
+      missingKeys.push(key);
+    }
+  }
+  
+  // Check optional keys
+  for (const key of optionalKeys) {
+    if (!process.env[key] || process.env[key]?.trim() === '') {
+      warnings.push(key);
+    }
+  }
+  
+  return {
+    isValid: missingKeys.length === 0,
+    missingKeys,
+    warnings
+  };
+}
+
 // Initialize Weave and start the server
 async function startServer() {
   try {
-    // Initialize Weave
-    await weave.init('qa-testing-workflow');
-    console.log('🌿 Weave initialized successfully.');
+    // Validate environment variables
+    const envValidation = validateEnvironment();
+    
+    if (!envValidation.isValid) {
+      console.error('❌ Missing required environment variables:');
+      envValidation.missingKeys.forEach(key => {
+        console.error(`   - ${key}`);
+      });
+      console.error('');
+      console.error('💡 Please create a .env file with the required API keys:');
+      console.error('   cp env.example .env');
+      console.error('   Then edit .env with your actual API keys');
+      console.error('');
+      console.error('🔑 Required API keys:');
+      console.error('   - OPENAI_API_KEY: Get from https://platform.openai.com/api-keys');
+      console.error('   - BROWSERBASE_API_KEY: Get from https://browserbase.com');
+      console.error('   - BROWSERBASE_PROJECT_ID: Get from https://browserbase.com');
+      process.exit(1);
+    }
+    
+    if (envValidation.warnings.length > 0) {
+      console.log('⚠️  Optional environment variables not set:');
+      envValidation.warnings.forEach(key => {
+        console.log(`   - ${key}`);
+      });
+      console.log('💡 These are optional but enable additional features');
+      console.log('');
+    }
+    
+    console.log('✅ Environment validation passed!');
+    console.log('');
+
+    // Try to initialize Weave (optional - for logging and tracking)
+    try {
+      await weave.init('qa-testing-workflow');
+      console.log('🌿 Weave initialized successfully.');
+    } catch (weaveError) {
+      const errorMessage = weaveError instanceof Error ? weaveError.message : 'Unknown error';
+      console.log('⚠️  Weave initialization failed (running without logging):', errorMessage);
+      console.log('💡 To enable Weave logging, set WANDB_API_KEY in your .env file');
+    }
 
     // Start server
     app.listen(PORT, () => {
@@ -730,7 +850,7 @@ async function startServer() {
       console.log(`🧪 QA Test endpoint: POST http://localhost:${PORT}/qa-test`);
     });
   } catch (error) {
-    console.error('❌ Failed to initialize Weave or start server:', error);
+    console.error('❌ Failed to start server:', error);
     process.exit(1);
   }
 }
