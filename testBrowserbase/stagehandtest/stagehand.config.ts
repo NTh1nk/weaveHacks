@@ -34,6 +34,7 @@ const StagehandConfig: ConstructorParams = {
       width: 1024,
       height: 768,
     },
+    headless: true, // Force headless mode
   } /* Configuration options for the local browser */,
 };
 
