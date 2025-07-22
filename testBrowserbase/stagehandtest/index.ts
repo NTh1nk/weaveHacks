@@ -38,6 +38,9 @@ const stagehandConfig = (): ConstructorParams => {
 		},
 		apiKey: process.env.BROWSERBASE_API_KEY,
 		projectId: process.env.BROWSERBASE_PROJECT_ID,
+		localBrowserLaunchOptions: {
+			headless: true,
+		},
 	};
 };
 
