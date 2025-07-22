@@ -205,17 +205,16 @@ function App() {
             )}
           </div>
         </section>
-        <div id="video-section" className="video-section">
+        <div id="video-section" className="video-section" style={isMobile ? { background: 'none', boxShadow: 'none', padding: 0 } : {}}>
           <h3>See CodeTurtle in Action</h3>
-          <div className="video-placeholder">
+          <div className="video-placeholder" style={isMobile ? { width: '100vw', maxWidth: '100vw', padding: 0, marginLeft: '-8vw', marginRight: '-8vw', borderRadius: 0, position: 'relative', paddingBottom: '56.25%', height: 0 } : {}}>
             <iframe
-              width="560"
-              height="315"
               src="https://www.youtube.com/embed/W0O4atwl7zI"
               title="Code Turtle Demo Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              style={isMobile ? { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0, borderRadius: 0 } : { width: 560, height: 315 }}
             ></iframe>
           </div>
         </div>
