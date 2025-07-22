@@ -32,9 +32,9 @@ const stagehandConfig = (): ConstructorParams => {
 	return {
 		env: "LOCAL",
 		verbose: 1,
-		modelName: "openai/gpt-4o", // Updated to use OpenAI model
+		modelName: "google/gemini-2.5-flash-preview-05-20", // Updated to use OpenAI model
 		modelClientOptions: {
-			apiKey: process.env.OPENAI_API_KEY,
+			apiKey: process.env.GOOGLE_API_KEY,
 		},
 		apiKey: process.env.BROWSERBASE_API_KEY,
 		projectId: process.env.BROWSERBASE_PROJECT_ID,
