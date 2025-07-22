@@ -3,6 +3,12 @@ import './App.css';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 
+// Add a simple mobile detection helper
+function isMobile() {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth <= 600;
+}
+
 function App() {
   const [showBanner, setShowBanner] = useState(true);
   const [waitlistCount, setWaitlistCount] = useState(null);
@@ -10,6 +16,7 @@ function App() {
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
   const [waitlistForm, setWaitlistForm] = useState({ email: '' });
   const [waitlistFormError, setWaitlistFormError] = useState(null);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 600 : false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +36,14 @@ function App() {
       }
     }
     fetchWaitlistCount();
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 600);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleWaitlistChange = (e) => {
@@ -139,17 +154,35 @@ function App() {
               <h3>Join the CodeTurtle Waitlist</h3>
               <p>Coming soon as a <span className="github-bot">GitHub Bot</span> <span role="img" aria-label="robot">🤖</span></p>
               <form onSubmit={handleWaitlistSubmit} className="waitlist-form-inline">
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    value={waitlistForm.email}
-                    onChange={handleWaitlistChange}
-                    placeholder="Enter your email address"
-                    required
-                    className="email-input"
-                  />
-                  <button type="submit" className="main-cta">Join Waitlist 🐢</button>
+                <div className="form-group" style={isMobile ? { flexDirection: 'column', gap: 10, alignItems: 'center' } : {}}>
+                  {isMobile ? (
+                    <>
+                      <input
+                        type="email"
+                        name="email"
+                        value={waitlistForm.email}
+                        onChange={handleWaitlistChange}
+                        placeholder="Enter your email address"
+                        required
+                        className="email-input"
+                        style={isMobile ? { marginBottom: 10, width: '100vw', maxWidth: '100vw', marginLeft: '-8vw', marginRight: '-8vw', borderRadius: 0 } : {}}
+                      />
+                      <button type="submit" className="main-cta" style={{ width: '100%' }}>Join Waitlist 🐢</button>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="email"
+                        name="email"
+                        value={waitlistForm.email}
+                        onChange={handleWaitlistChange}
+                        placeholder="Enter your email address"
+                        required
+                        className="email-input"
+                      />
+                      <button type="submit" className="main-cta">Join Waitlist 🐢</button>
+                    </>
+                  )}
                 </div>
                 {waitlistFormError && <p className="error-message">{waitlistFormError}</p>}
               </form>
