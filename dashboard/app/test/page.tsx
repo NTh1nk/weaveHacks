@@ -9,6 +9,7 @@ interface QASummary {
   totalFeatures: number
   failedFeatures: number
   screenshots: number
+  warningFeatures?: number
 }
 
 interface QAResult {
@@ -163,6 +164,12 @@ export default function TestPage() {
                 </div>
                 <div className="text-gray-600">Screenshots</div>
               </div>
+              <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+                <div className="text-3xl font-bold text-yellow-500">
+                  {summaryData.reduce((sum, item) => sum + (item.warningFeatures || 0), 0)}
+                </div>
+                <div className="text-gray-600">Features Warning</div>
+              </div>
             </div>
 
             {/* Test Cards */}
@@ -197,14 +204,18 @@ export default function TestPage() {
                     </div>
 
                     {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="grid grid-cols-4 gap-4 mb-4">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-gray-800">{item.totalFeatures}</div>
                         <div className="text-xs text-gray-500">Total</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600">{item.totalFeatures - item.failedFeatures}</div>
+                        <div className="text-2xl font-bold text-green-600">{item.totalFeatures - item.failedFeatures - (item.warningFeatures || 0)}</div>
                         <div className="text-xs text-gray-500">Passed</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-yellow-500">{item.warningFeatures || 0}</div>
+                        <div className="text-xs text-gray-500">Warning</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-red-600">{item.failedFeatures}</div>

@@ -290,7 +290,10 @@ Test the features mentioned in the context on the CURRENT WEBSITE you are viewin
 **CRITICAL INSTRUCTIONS:**
 1. Look at the current page you are on.
 2. Test each feature/functionality mentioned in the context systematically.
-3. For each feature, you MUST determine if it: PASSED, FAILED, or NOT_FOUND.
+3. For each feature, you MUST determine if it: PASSED, WARNING, or FAILED.
+   - PASSED: The feature works as expected with no issues.
+   - WARNING: The feature works, but there are minor issues, usability concerns, or non-blocking bugs.
+   - FAILED: The feature does not work or there is a blocking issue.
 4. If a feature doesn't work the first time, mark it as FAILED and move to the next feature or finish the testing process. DO NOT try multiple times.
 5. Document what happened for each feature with clear status.
 6. As you perform actions, create a graph of your steps. Each step is a node. Connect nodes to show the sequence of actions.
@@ -306,7 +309,7 @@ You MUST return ONLY a single JSON object. Do not add any text before or after t
   "features": [
     {
       "featureName": "string",
-      "status": "PASSED" | "FAILED" | "NOT_FOUND",
+      "status": "PASSED" | "WARNING" | "FAILED",
       "whatHappened": "string"
     }
   ],
@@ -320,17 +323,8 @@ You MUST return ONLY a single JSON object. Do not add any text before or after t
   }
 }
 
-**EXAMPLE GRAPH:**
-If you first click a "Login" button and then fill in a username, your graph might look like this:
-"graph": {
-  "nodes": [
-    { "nodeId": "step1", "nodeText": "Clicked Login button" },
-    { "nodeId": "step2", "nodeText": "Filled in username" }
-  ],
-  "edges": [
-    { "source": "step1", "target": "step2" }
-  ]
-}
+**EXAMPLE:**
+A feature that works but has a minor UI issue should be marked as WARNING, with an explanation in 'whatHappened'.
 
 **IMPORTANT:**
 - You are ALREADY on the website ${url}.
@@ -376,11 +370,11 @@ If you first click a "Login" button and then fill in a username, your graph migh
 			url
 		);
 
-		// Step 7: Identify failed features for screenshots
+		// Step 7: Identify failed and warning features for screenshots and reporting
 		const failedFeatures =
-			structuredResult.features?.filter(
-				(f: any) => f.status === "FAILED" || f.status === "NOT_FOUND"
-			) || [];
+			structuredResult.features?.filter((f: any) => f.status === "FAILED") || [];
+		const warningFeatures =
+			structuredResult.features?.filter((f: any) => f.status === "WARNING") || [];
 
 		// Step 8: Capture screenshots for each failed feature
 		if (failedFeatures.length === 0) {
@@ -432,7 +426,7 @@ If you first click a "Login" button and then fill in a username, your graph migh
 					}
 				} else {
 					console.log(
-						`❌ Failed to capture screenshot for: ${failedFeature.featureName}`
+						`❌ Screenshot path not returned for ${failedFeature.featureName}`
 					);
 				}
 			} catch (error) {
@@ -443,13 +437,19 @@ If you first click a "Login" button and then fill in a username, your graph migh
 			}
 		}
 
-		// Step 9: Add screenshots to the structured result
+		// Step 9: Add screenshots and warnings to the structured result
 		structuredResult.screenshots = screenshots;
+		structuredResult.failedFeatures = failedFeatures;
+		structuredResult.warningFeatures = warningFeatures;
 
 		// Step 10: Display results
 		console.log("\n🧪 QA Test Results:");
 		console.log("==================");
 		console.log("Features tested:", structuredResult.features?.length || 0);
+		console.log("Passed features:",
+			structuredResult.features?.filter((f: any) => f.status === "PASSED").length || 0
+		);
+		console.log("Warning features:", warningFeatures.length);
 		console.log("Failed features:", failedFeatures.length);
 		console.log("Screenshots captured:", screenshots.length);
 		if (githubComment) {
@@ -482,11 +482,16 @@ If you first click a "Login" button and then fill in a username, your graph migh
 			testResult: structuredResult,
 			timestamp: new Date().toISOString(),
 			screenshotCount: screenshots.length,
+			failedCount: failedFeatures.length,
+			warningCount: warningFeatures.length,
 		};
 
 		console.log("📋 Payload Summary:");
 		console.log(`   URL: ${payload.url}`);
 		console.log(`   Features: ${structuredResult.features?.length || 0}`);
+		console.log(`   Passed: ${payload.failedCount + payload.warningCount}`);
+		console.log(`   Failed: ${payload.failedCount}`);
+		console.log(`   Warnings: ${payload.warningCount}`);
 		console.log(`   Screenshots: ${payload.screenshotCount}`);
 		console.log(
 			`   GitHub Comment: ${githubComment ? "Generated" : "Not Generated"}`

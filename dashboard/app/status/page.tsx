@@ -44,6 +44,10 @@ export default function StatusPage() {
                 <span className="font-semibold text-red-600">{data.metrics.failedTests}</span>
               </div>
               <div className="flex justify-between">
+                <span>Warnings:</span>
+                <span className="font-semibold text-yellow-500">{data.metrics.warningTests}</span>
+              </div>
+              <div className="flex justify-between">
                 <span>Success Rate:</span>
                 <span className="font-semibold">{data.metrics.successRate.toFixed(1)}%</span>
               </div>

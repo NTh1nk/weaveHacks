@@ -124,11 +124,14 @@ class DataService {
     const totalFeatures = features.length;
     const passedFeatures = features.filter(f => f.status === 'PASSED').length;
     const failedFeatures = features.filter(f => f.status === 'FAILED').length;
+    const warningFeatures = features.filter(f => f.status === 'WARNING').length;
     
     // Calculate overall status
     let overallStatus: 'passed' | 'failed' | 'warning' = 'passed';
     if (failedFeatures > 0) {
       overallStatus = failedFeatures === totalFeatures ? 'failed' : 'warning';
+    } else if (warningFeatures > 0) {
+      overallStatus = 'warning';
     }
     
     // Calculate user experience score (0-100)
@@ -149,7 +152,7 @@ class DataService {
           problemType: 'Functional Issue',
           screenshot: matchingScreenshot?.screenshotBase64,
           timestamp: testSystemData.timestamp
-        };
+        }
       });
     
     // Add warnings for any issues
@@ -181,9 +184,9 @@ class DataService {
         totalTests: totalFeatures,
         passed: passedFeatures,
         failed: failedFeatures,
-        warnings: warnings.length,
+        warnings: warningFeatures,
         userBlockingIssues: failedFeatures,
-        usabilityIssues: warnings.length
+        usabilityIssues: warningFeatures
       },
       errors: allErrors
     };
@@ -319,11 +322,12 @@ class DataService {
       const history = summaryData.summary.map((item: any) => {
         const totalFeatures = item.totalFeatures || 0;
         const failedFeatures = item.failedFeatures || 0;
-        const passedFeatures = totalFeatures - failedFeatures;
+        const warningFeatures = item.warningFeatures || 0;
+        const passedFeatures = totalFeatures - failedFeatures - warningFeatures;
         const score = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
         
         let status: string;
-        if (failedFeatures === 0) status = 'passed';
+        if (failedFeatures === 0 && warningFeatures === 0) status = 'passed';
         else if (failedFeatures === totalFeatures) status = 'failed';
         else status = 'warning';
         
