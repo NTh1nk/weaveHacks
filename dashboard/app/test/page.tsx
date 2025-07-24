@@ -24,6 +24,8 @@ export default function TestPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const { fetchWithFallback } = require('../../lib/api-config');
+
   // Debug state changes
   useEffect(() => {
     console.log('Summary data changed:', summaryData)
@@ -42,7 +44,7 @@ export default function TestPage() {
     setError(null)
     try {
       console.log('Fetching summary from:', 'http://localhost:4000/qa-summary')
-      const response = await fetch('http://localhost:4000/qa-summary')
+      const response = await fetchWithFallback('/qa-summary')
       console.log('Response status:', response.status)
       console.log('Response ok:', response.ok)
       
@@ -76,7 +78,7 @@ export default function TestPage() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`http://localhost:4000/qa-result/${id}`)
+      const response = await fetchWithFallback(`/qa-result/${id}`)
       const data = await response.json()
       if (data.success) {
         setSelectedResult(data)

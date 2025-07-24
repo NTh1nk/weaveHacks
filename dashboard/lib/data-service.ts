@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+const { fetchWithFallback } = require('./api-config');
 
 // Interface for the test system's JSON format
 export interface TestSystemResult {
@@ -104,7 +105,7 @@ class DataService {
   // Test API connectivity
   private async testApiConnectivity() {
     try {
-      const response = await fetch(`${this.apiBaseUrl}/health`);
+      const response = await fetchWithFallback('/health');
       if (response.ok) {
         console.log('✅ Test API is accessible');
       } else {
@@ -131,7 +132,7 @@ class DataService {
     }
     
     // Calculate user experience score (0-100)
-    const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 10 : 0;
+    const userExperienceScore = totalFeatures > 0 ? (passedFeatures / totalFeatures) * 100 : 0;
     
     // Convert features to errors format and include screenshots
     const errors = features
@@ -191,7 +192,7 @@ class DataService {
   async getQATestResults(): Promise<QATestResult | null> {
     try {
       // Get the latest result from the test system
-      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      const summaryResponse = await fetchWithFallback('/qa-summary');
       if (!summaryResponse.ok) {
         console.error('Failed to fetch summary:', summaryResponse.statusText);
         return null;
@@ -205,7 +206,7 @@ class DataService {
       
       // Get the latest result
       const latestResult = summaryData.summary[summaryData.summary.length - 1];
-      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      const resultResponse = await fetchWithFallback(`/qa-result/${latestResult.id}`);
       
       if (!resultResponse.ok) {
         console.error('Failed to fetch latest result:', resultResponse.statusText);
@@ -303,7 +304,7 @@ class DataService {
   async getTestHistory(): Promise<Array<{ timestamp: string; status: string; score: number }>> {
     try {
       // Get all results from the test system
-      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      const summaryResponse = await fetchWithFallback('/qa-summary');
       if (!summaryResponse.ok) {
         console.error('Failed to fetch summary for history:', summaryResponse.statusText);
         return [];
@@ -381,7 +382,7 @@ class DataService {
   }>> {
     try {
       // Get the latest result from the test system
-      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      const summaryResponse = await fetchWithFallback('/qa-summary');
       if (!summaryResponse.ok) {
         console.error('Failed to fetch summary for screenshots:', summaryResponse.statusText);
         return [];
@@ -394,7 +395,7 @@ class DataService {
       
       // Get the latest result
       const latestResult = summaryData.summary[summaryData.summary.length - 1];
-      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      const resultResponse = await fetchWithFallback(`/qa-result/${latestResult.id}`);
       
       if (!resultResponse.ok) {
         console.error('Failed to fetch latest result for screenshots:', resultResponse.statusText);
@@ -455,7 +456,7 @@ class DataService {
   } | null> {
     try {
       // Get the latest result from the test system
-      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      const summaryResponse = await fetchWithFallback('/qa-summary');
       if (!summaryResponse.ok) {
         console.error('Failed to fetch summary:', summaryResponse.statusText);
         return null;
@@ -469,7 +470,7 @@ class DataService {
       
       // Get the latest result
       const latestResult = summaryData.summary[summaryData.summary.length - 1];
-      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${latestResult.id}`);
+      const resultResponse = await fetchWithFallback(`/qa-result/${latestResult.id}`);
       
       if (!resultResponse.ok) {
         console.error('Failed to fetch latest result:', resultResponse.statusText);
@@ -558,7 +559,7 @@ class DataService {
     screenshots: number;
   }>> {
     try {
-      const summaryResponse = await fetch(`${this.apiBaseUrl}/qa-summary`);
+      const summaryResponse = await fetchWithFallback('/qa-summary');
       if (!summaryResponse.ok) {
         console.error('Failed to fetch sessions summary:', summaryResponse.statusText);
         return [];
@@ -595,7 +596,7 @@ class DataService {
   // Get specific session by ID
   async getSessionById(sessionId: number): Promise<QATestResult | null> {
     try {
-      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${sessionId}`);
+      const resultResponse = await fetchWithFallback(`/qa-result/${sessionId}`);
       
       if (!resultResponse.ok) {
         console.error('Failed to fetch session:', resultResponse.statusText);
@@ -633,7 +634,7 @@ class DataService {
     }>;
   } | null> {
     try {
-      const resultResponse = await fetch(`${this.apiBaseUrl}/qa-result/${sessionId}`);
+      const resultResponse = await fetchWithFallback(`/qa-result/${sessionId}`);
       
       if (!resultResponse.ok) {
         console.error('Failed to fetch session for workflow:', resultResponse.statusText);

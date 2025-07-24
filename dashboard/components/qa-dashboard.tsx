@@ -54,11 +54,13 @@ export function QADashboard() {
   const [apiStatus, setApiStatus] = useState<'connected' | 'disconnected' | 'checking'>('checking');
   const [expandedErrorIds, setExpandedErrorIds] = useState<string[]>([]);
 
+  const { fetchWithFallback } = require('../lib/api-config');
+
   // Check API status on component mount
   useEffect(() => {
     const checkApiStatus = async () => {
       try {
-        const response = await fetch('http://localhost:4000/health');
+        const response = await fetchWithFallback('/health');
         setApiStatus(response.ok ? 'connected' : 'disconnected');
       } catch (error) {
         setApiStatus('disconnected');
