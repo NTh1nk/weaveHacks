@@ -71,7 +71,12 @@ export function QADashboard() {
         }
       } catch (error) {
         setApiStatus('disconnected');
-        setApiError(error instanceof Error ? error.message : 'Unknown error');
+        let message = error instanceof Error ? error.message : 'Unknown error';
+        // Detect possible CORS error
+        if (message.includes('Failed to fetch') || message.includes('NetworkError') || message.includes('CORS')) {
+          message = 'Possible CORS error: The API may not be allowing requests from this origin. Check CORS settings on the server.';
+        }
+        setApiError(message);
       }
     };
     
