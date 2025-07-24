@@ -292,8 +292,8 @@ Test the features mentioned in the context on the CURRENT WEBSITE you are viewin
 2. Test each feature/functionality mentioned in the context systematically.
 3. For each feature, you MUST determine if it: PASSED, WARNING, or FAILED.
    - PASSED: The feature works as expected with no issues.
-   - WARNING: The feature works, but there are minor issues, usability concerns, or non-blocking bugs.
-   - FAILED: The feature does not work or there is a blocking issue.
+   - WARNING: Use this for ANY minor issue, usability concern, slow loading, confusing UI, visual glitch, or anything that could impact user experience but does NOT block functionality. Use WARNING liberally for anything that is not perfect but not a full failure. Examples: slow response, unclear button, layout shift, minor error message, partial success, or anything that could confuse or annoy a user.
+   - FAILED: Use this ONLY for CRITICAL, BLOCKING, or SHOWSTOPPER issues. Mark as FAILED only if the feature does NOT work at all, is completely broken, or prevents the user from completing the main task. Examples: login does not work, page does not load, form cannot be submitted, or a crash occurs. All other issues should be marked as WARNING.
 4. If a feature doesn't work the first time, mark it as FAILED and move to the next feature or finish the testing process. DO NOT try multiple times.
 5. Document what happened for each feature with clear status.
 6. As you perform actions, create a graph of your steps. Each step is a node. Connect nodes to show the sequence of actions.
@@ -324,7 +324,10 @@ You MUST return ONLY a single JSON object. Do not add any text before or after t
 }
 
 **EXAMPLE:**
-A feature that works but has a minor UI issue should be marked as WARNING, with an explanation in 'whatHappened'.
+- If a feature works but the button is hard to find, mark as WARNING and explain why.
+- If a page loads slowly but works, mark as WARNING and note the delay.
+- If a feature works but the UI is confusing, mark as WARNING.
+- If a feature does not work at all, the page crashes, or the main task cannot be completed, mark as FAILED.
 
 **IMPORTANT:**
 - You are ALREADY on the website ${url}.
