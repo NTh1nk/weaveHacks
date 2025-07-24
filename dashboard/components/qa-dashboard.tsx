@@ -52,6 +52,7 @@ export function QADashboard() {
     timestamp: string;
   } | null>(null);
   const [apiStatus, setApiStatus] = useState<'connected' | 'disconnected' | 'checking'>('checking');
+  const [apiError, setApiError] = useState<string | null>(null);
   const [expandedErrorIds, setExpandedErrorIds] = useState<string[]>([]);
 
   const { fetchWithFallback } = require('../lib/api-config');
@@ -61,9 +62,16 @@ export function QADashboard() {
     const checkApiStatus = async () => {
       try {
         const response = await fetchWithFallback('/health');
-        setApiStatus(response.ok ? 'connected' : 'disconnected');
+        if (response.ok) {
+          setApiStatus('connected');
+          setApiError(null);
+        } else {
+          setApiStatus('disconnected');
+          setApiError(`Health check failed: ${response.status} ${response.statusText}`);
+        }
       } catch (error) {
         setApiStatus('disconnected');
+        setApiError(error instanceof Error ? error.message : 'Unknown error');
       }
     };
     
@@ -160,6 +168,11 @@ export function QADashboard() {
                         apiStatus === 'checking' ? 'Checking...' : 'Disconnected'}
             </span>
           </div>
+          {apiError && (
+            <div className="bg-red-50 border-l-4 border-red-400 p-2 mb-2 rounded-r-lg text-red-700 text-sm">
+              API Health Check Error: {apiError}
+            </div>
+          )}
           <SessionSelector 
             selectedSessionId={selectedSessionId}
             onSessionSelect={handleSessionSelect}
