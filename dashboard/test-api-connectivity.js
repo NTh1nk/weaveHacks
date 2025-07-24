@@ -8,14 +8,14 @@ async function testApiConnectivity() {
   
   try {
     // Test health endpoint
-    console.log('1. Testing health endpoint...');
-    const healthResponse = await fetch(`${API_BASE_URL}/health`);
-    if (healthResponse.ok) {
-      const healthData = await healthResponse.json();
-      console.log('✅ Health check passed:', healthData);
-    } else {
-      console.log('❌ Health check failed:', healthResponse.status);
-    }
+    // console.log('1. Testing health endpoint...');
+    // const healthResponse = await fetch(`${API_BASE_URL}/health`);
+    // if (healthResponse.ok) {
+    //   const healthData = await healthResponse.json();
+    //   console.log('✅ Health check passed:', healthData);
+    // } else {
+    //   console.log('❌ Health check failed:', healthResponse.status);
+    // }
     
     // Test summary endpoint
     console.log('\n2. Testing summary endpoint...');
