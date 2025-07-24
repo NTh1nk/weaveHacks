@@ -1,7 +1,7 @@
 // Test script to verify API connectivity and data loading
 // This script tests the connection to the test system API
 
-const API_BASE_URL = 'http://localhost:4000';
+const { fetchWithFallback, LOCAL_API_BASE_URL, REMOTE_API_BASE_URL } = require('./lib/api-config');
 
 async function testApiConnectivity() {
   console.log('🔍 Testing API connectivity...\n');
@@ -19,7 +19,7 @@ async function testApiConnectivity() {
     
     // Test summary endpoint
     console.log('\n2. Testing summary endpoint...');
-    const summaryResponse = await fetch(`${API_BASE_URL}/qa-summary`);
+    const summaryResponse = await fetchWithFallback('/qa-summary');
     if (summaryResponse.ok) {
       const summaryData = await summaryResponse.json();
       if (summaryData.success) {
@@ -42,7 +42,7 @@ async function testApiConnectivity() {
         const latestResult = summaryData.summary[summaryData.summary.length - 1];
         
         console.log('\n3. Testing result endpoint...');
-        const resultResponse = await fetch(`${API_BASE_URL}/qa-result/${latestResult.id}`);
+        const resultResponse = await fetchWithFallback(`/qa-result/${latestResult.id}`);
         if (resultResponse.ok) {
           const resultData = await resultResponse.json();
           if (resultData.success) {

@@ -1,7 +1,7 @@
 // Test script to verify session selector functionality
 // This script tests the session-related API endpoints
 
-const API_BASE_URL = 'http://localhost:4000';
+const { fetchWithFallback, LOCAL_API_BASE_URL, REMOTE_API_BASE_URL } = require('./lib/api-config');
 
 async function testSessionSelector() {
   console.log('🧪 Testing Session Selector Functionality...\n');
@@ -9,7 +9,7 @@ async function testSessionSelector() {
   try {
     // Test 1: Get all sessions
     console.log('1. Testing sessions endpoint...');
-    const sessionsResponse = await fetch(`${API_BASE_URL}/qa-summary`);
+    const sessionsResponse = await fetchWithFallback('/qa-summary');
     if (sessionsResponse.ok) {
       const sessionsData = await sessionsResponse.json();
       if (sessionsData.success) {
@@ -31,7 +31,7 @@ async function testSessionSelector() {
           const latestSession = sessionsData.summary[0];
           console.log(`2. Testing specific session endpoint (Session ${latestSession.id})...`);
           
-          const sessionResponse = await fetch(`${API_BASE_URL}/qa-result/${latestSession.id}`);
+          const sessionResponse = await fetchWithFallback(`/qa-result/${latestSession.id}`);
           if (sessionResponse.ok) {
             const sessionData = await sessionResponse.json();
             if (sessionData.success) {

@@ -1,7 +1,7 @@
 // Test script to verify workflow integration
 // This script fetches data from the actual API and tests the workflow data conversion
 
-const API_BASE_URL = 'http://localhost:4000';
+const { fetchWithFallback, LOCAL_API_BASE_URL, REMOTE_API_BASE_URL } = require('./lib/api-config');
 
 // Fetch data from the actual API
 async function fetchTestData() {
@@ -9,7 +9,7 @@ async function fetchTestData() {
     console.log('Fetching test data from API...');
     
     // First get the summary to find the latest result
-    const summaryResponse = await fetch(`${API_BASE_URL}/qa-summary`);
+    const summaryResponse = await fetchWithFallback('/qa-summary');
     if (!summaryResponse.ok) {
       throw new Error(`Failed to fetch summary: ${summaryResponse.statusText}`);
     }
@@ -23,7 +23,7 @@ async function fetchTestData() {
     const latestResult = summaryData.summary[summaryData.summary.length - 1];
     console.log(`Latest result ID: ${latestResult.id}`);
     
-    const resultResponse = await fetch(`${API_BASE_URL}/qa-result/${latestResult.id}`);
+    const resultResponse = await fetchWithFallback(`/qa-result/${latestResult.id}`);
     if (!resultResponse.ok) {
       throw new Error(`Failed to fetch result: ${resultResponse.statusText}`);
     }
