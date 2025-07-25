@@ -99,7 +99,8 @@ class DataService {
     console.log('Using test API at:', this.apiBaseUrl);
     
     // Test API connectivity on startup
-    this.testApiConnectivity();
+    // remove this for now
+    //this.testApiConnectivity();
   }
 
   // Test API connectivity
