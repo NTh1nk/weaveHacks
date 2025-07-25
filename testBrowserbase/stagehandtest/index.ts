@@ -342,6 +342,7 @@ You MUST return ONLY a single JSON object. Do not add any text before or after t
 		// Step 5: Parse the agent's JSON output
 		console.log("\n🔧 Parsing agent result...");
 		let structuredResult;
+		let nodeScreenshots = [];
 		try {
 			let responseContent = agentResult.message;
 			responseContent = responseContent
@@ -353,6 +354,55 @@ You MUST return ONLY a single JSON object. Do not add any text before or after t
 				"Structured result:",
 				JSON.stringify(structuredResult, null, 2)
 			);
+
+			// --- Attach autoscreenshots to graph nodes ---
+			// 1. Find all screenshots in the screenshots/ and qa-screenshots/ directories
+			const screenshotDirs = [
+				path.join(process.cwd(), "screenshots"),
+				path.join(process.cwd(), "qa-screenshots"),
+			];
+			let allScreenshotFiles = [];
+			for (const dir of screenshotDirs) {
+				try {
+					const files = await fs.readdir(dir);
+					allScreenshotFiles.push(...files.map(f => path.join(dir, f)));
+				} catch (e) {
+					// Directory may not exist, skip
+				}
+			}
+			// 2. Sort screenshots by creation time (oldest first)
+			allScreenshotFiles = (await Promise.all(
+				allScreenshotFiles.map(async file => {
+					try {
+						const stat = await fs.stat(file);
+						return { file, ctime: stat.ctime };
+					} catch {
+						return null;
+					}
+				})
+			)).filter((f): f is { file: string; ctime: Date } => f !== null);
+			allScreenshotFiles = allScreenshotFiles.sort((a, b) => a.ctime.getTime() - b.ctime.getTime()).map(f => f.file);
+
+			// 3. Attach screenshots to nodes by order (best effort)
+			if (structuredResult.graph && Array.isArray(structuredResult.graph.nodes)) {
+				for (let i = 0; i < structuredResult.graph.nodes.length; ++i) {
+					const node = structuredResult.graph.nodes[i];
+					const screenshotPath = allScreenshotFiles[i] || null;
+					let screenshotBase64 = null;
+					if (screenshotPath) {
+						try {
+							const imageBuffer = await fs.readFile(screenshotPath);
+							screenshotBase64 = `data:image/png;base64,${imageBuffer.toString("base64")}`;
+						} catch (e) {
+							screenshotBase64 = null;
+						}
+					}
+					node.screenshotBase64 = screenshotBase64;
+					node.screenshotPath = screenshotPath;
+					nodeScreenshots.push({ nodeId: node.nodeId, screenshotPath, screenshotBase64 });
+				}
+			}
+			// --- End attach autoscreenshots ---
 		} catch (error) {
 			console.error("Failed to parse agent JSON response:", error);
 			console.log("Raw agent response:", agentResult.message);

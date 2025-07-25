@@ -15,6 +15,7 @@ interface WorkflowNode {
   y: number
   connections: string[]
   description?: string
+  screenshotBase64?: string
 }
 
 interface Connection {
@@ -554,6 +555,17 @@ export function WorkflowCanvas({ workflows: propWorkflows, defaultWorkflow }: Wo
                   )}
                 </div>
                 <div className="text-xs text-gray-600 mt-1 text-center">{node.duration}</div>
+                {/* Screenshot display */}
+                {node.screenshotBase64 && (
+                  <div className="mt-1 flex justify-center">
+                    <img
+                      src={node.screenshotBase64}
+                      alt={`Screenshot for ${node.name}`}
+                      className="rounded border border-gray-200 max-w-[180px] max-h-[120px] shadow"
+                      style={{ margin: "0 auto" }}
+                    />
+                  </div>
+                )}
               </div>
             ))}
 

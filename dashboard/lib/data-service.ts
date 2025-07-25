@@ -456,6 +456,7 @@ class DataService {
       y: number;
       connections: string[];
       description?: string;
+      screenshotBase64?: string; // <-- add this line
     }>;
   } | null> {
     try {
@@ -497,7 +498,7 @@ class DataService {
       });
       
       // Convert graph nodes to workflow format
-      const nodes = graph.nodes.map((node: { nodeId: string; nodeText: string }, index: number) => {
+      const nodes = graph.nodes.map((node: { nodeId: string; nodeText: string, screenshotBase64?: string }, index: number) => {
         // Find corresponding feature for status
         const feature = features.find((f: { featureName: string; status: string; whatHappened: string }) => 
           f.featureName.toLowerCase().includes(node.nodeText.toLowerCase()) ||
@@ -539,7 +540,8 @@ class DataService {
           x,
           y,
           connections,
-          description: feature?.whatHappened
+          description: feature?.whatHappened,
+          screenshotBase64: node.screenshotBase64 || null, // <-- add this line
         };
       });
       
