@@ -364,7 +364,7 @@ export function QADashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">User Experience Score</p>
-                <p className="text-xl font-bold">{metrics?.userExperienceScore || 0}/10</p>
+                <p className="text-xl font-bold">{metrics?.userExperienceScore || 0}/100</p>
               </div>
               <AlertTriangle className="w-5 h-5 text-orange-500" />
             </div>

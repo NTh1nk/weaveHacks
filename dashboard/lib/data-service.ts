@@ -130,7 +130,7 @@ class DataService {
     let overallStatus: 'passed' | 'failed' | 'warning' = 'passed';
     if (failedFeatures > 0) {
       overallStatus = failedFeatures === totalFeatures ? 'failed' : 'warning';
-    } else if (warningFeatures > 0) {
+    } else if (warningFeatures > 0) { 
       overallStatus = 'warning';
     }
     
