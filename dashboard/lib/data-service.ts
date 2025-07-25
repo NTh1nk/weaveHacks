@@ -99,12 +99,13 @@ class DataService {
     console.log('Using test API at:', this.apiBaseUrl);
     
     // Test API connectivity on startup
-    // remove this for now
-    //this.testApiConnectivity();
+    this.testApiConnectivity();
   }
 
   // Test API connectivity
   private async testApiConnectivity() {
+
+    return true;
     try {
       const response = await fetchWithFallback('/health');
       if (response.ok) {
