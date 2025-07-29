@@ -100,7 +100,7 @@ function App() {
             <div className="hero-cta-row">
               <button className="main-cta" onClick={() => {
                 // Open GitHub App installation URL
-                const githubAppUrl = 'https://github.com/apps/code-turtle-app'; 
+                const githubAppUrl = 'https://github.com/apps/code-turtle-app/installations/new'; 
                 window.open(githubAppUrl, '_blank');
               }}>Try Now - Add to GitHub</button>
               <button className="secondary-cta" onClick={() => document.getElementById('video-section').scrollIntoView({behavior: 'smooth'})}>See a demo</button>
