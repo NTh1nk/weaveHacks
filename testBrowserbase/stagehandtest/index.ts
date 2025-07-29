@@ -145,6 +145,7 @@ async function generateGithubComment(
 				let statusIcon = "❓";
 				if (feature.status === "PASSED") statusIcon = "✅";
 				if (feature.status === "FAILED") statusIcon = "❌";
+				if (feature.status === "WARNING") statusIcon = "⚠️";
 
 				return `- ${statusIcon} **${feature.featureName}**: ${feature.status} - ${feature.whatHappened}`;
 			})
