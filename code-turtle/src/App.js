@@ -98,7 +98,11 @@ function App() {
               Powered by BrowserBase, CrewAI, Supabase, and more.
             </p>
             <div className="hero-cta-row">
-              <button className="main-cta" onClick={() => document.getElementById('waitlist-section').scrollIntoView({behavior: 'smooth'})}>Start VibeTesting</button>
+              <button className="main-cta" onClick={() => {
+                // Open GitHub App installation URL
+                const githubAppUrl = 'https://github.com/apps/code-turtle-app'; 
+                window.open(githubAppUrl, '_blank');
+              }}>Try Now - Add to GitHub</button>
               <button className="secondary-cta" onClick={() => document.getElementById('video-section').scrollIntoView({behavior: 'smooth'})}>See a demo</button>
             </div>
           </div>

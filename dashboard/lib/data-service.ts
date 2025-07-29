@@ -105,6 +105,7 @@ class DataService {
   // Test API connectivity
   private async testApiConnectivity() {
 
+    //made it return true for now because of Core issue
     return true;
     try {
       const response = await fetchWithFallback('/health');
